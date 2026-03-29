@@ -1,37 +1,65 @@
-// Ses dosyası
-var loveSong = new Howl({
-  src: ['assets/ses.mp3'],
-  autoplay: false,
-  loop: true,
-  volume: 0.5
-});
+// Metin yazma
+let text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
+let i = 0;
 
-document.getElementById('playBtn').addEventListener('click', () => {
-  loveSong.play();
-});
-
-// Fotoğraf animasyonu
-gsap.from(".photo", {
-  y: 50,
-  opacity: 0,
-  stagger: 0.3,
-  duration: 1,
-  ease: "power2.out"
-});
-
-<img id="photo" src="foto1.jpeg">
-
-<script>
-  const music = document.getElementById("background-music");
-  music.volume = 0.2; // 0.0 ile 1.0 arası, 0.2 = %20 ses
-</script>
-  
-<script>
+// Fotoğraf slaytı
 let photoIndex = 1;
 
-setInterval(() => {
-  photoIndex++;
-  if(photoIndex > 68) photoIndex = 1;
-  document.getElementById("photo").src = "foto" + photoIndex + ".jpeg";
-}, 2000);
-</script>
+// Başlat butonuna basınca
+function start(){
+  // Başlat ekranını gizle, içeriği göster
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("content").style.display = "block";
+
+  // Sesleri al
+  const konusma = document.getElementById("konusma");
+  const muzik = document.getElementById("muzik");
+
+  // Ses seviyeleri
+  konusma.volume = 1.0;  // konuşma yüksek
+  muzik.volume = 0.2;    // arka plan hafif
+
+  // Çalmayı dene
+  konusma.play().catch(()=>{});
+  muzik.play().catch(()=>{});
+
+  // Metni yazdır
+  typeText();
+
+  // Fotoğraf slaytı
+  startSlideshow();
+
+  // Kalpler
+  hearts();
+}
+
+// Metni yazma fonksiyonu
+function typeText(){
+  if(i < text.length){
+    document.getElementById("text").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeText, 50);
+  }
+}
+
+// Fotoğraf slaytı fonksiyonu
+function startSlideshow(){
+  setInterval(()=>{
+    photoIndex++;
+    if(photoIndex > 68) photoIndex = 1;
+    document.getElementById("photo").src = "foto" + photoIndex + ".jpeg";
+  }, 2000);
+}
+
+// Kalp animasyonu
+function hearts(){
+  setInterval(()=>{
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (Math.random()*20 + 20) + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>{ heart.remove(); }, 5000);
+  }, 300);
+}
