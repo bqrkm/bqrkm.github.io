@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <title>Bizim Hikayemiz</title>
-
 <style>
 body {
   margin:0;
@@ -65,9 +64,7 @@ img {
   100% {transform:translateY(-100vh);}
 }
 </style>
-
 </head>
-
 <body>
 
 <div id="startScreen">
@@ -78,92 +75,12 @@ img {
 <div id="content">
   <div id="text"></div>
   <img id="photo" src="foto1.jpeg">
-  
-  <audio id="music" loop>
-    <source src="ses.mp3" type="audio/mpeg">
-  </audio>
-
 </div>
 
-<script>
-let text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
-let i = 0;
+<!-- SESLER -->
+<audio id="konusma" src="ses.mp3"></audio>
+<audio id="muzik" src="muzik.mp3" loop></audio>
 
-function start(){
-  // Başlat ekranını kaldır, içeriği göster
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("content").style.display = "block";
-
-  // Sesleri al
-  const ses = document.getElementById("ses");
-  const muzik = document.getElementById("muzik");
-
-  // Ses seviyelerini ayarla
-  ses.volume = 1.0;  // konuşma yüksek
-  muzik.volume = 0.2;    // arka plan hafif
-
-  // Çalmayı dene
-  ses.play().catch(()=>{}); 
-  muzik.play().catch(()=>{}); 
-
-  // Diğer fonksiyonları başlat
-  typeText();
-  startSlideshow();
-  hearts();
-}
-  
-function typeText(){
-  if(i < text.length){
-    document.getElementById("text").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeText, 50);
-  }
-}
-
-let photoIndex = 1;
-
-function startSlideshow(){
-  setInterval(()=>{
-    photoIndex++;
-    if(photoIndex > 68) photoIndex = 1;
-    document.getElementById("photo").src = "foto" + photoIndex + ".jpeg";
-  }, 2000);
-}
-
-function hearts(){
-  setInterval(()=>{
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (Math.random()*20 + 20) + "px";
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{ heart.remove(); }, 5000);
-  }, 300);
-}
-</script>
-
-<audio id="muzik" src="audio/muzik.mp3" loop></audio>
-
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const music = document.getElementById('muzik');
-    const konusma = document.getElementById('ses');
-
-    music.volume = 0.2; // arka plan
-    ses.volume = 1.0; // konuşma
-
-    // sayfa yüklendiğinde ikisini de oynat
-    const playAll = () => {
-      ses.play();
-      music.play();
-    }
-
-    // Chrome engellemesi için kullanıcı tıklamasıyla başlat
-    document.body.addEventListener('click', playAll, {once: true});
-  });
-</script>
-  
+<script src="script.js"></script>
 </body>
 </html>
