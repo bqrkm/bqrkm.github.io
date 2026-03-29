@@ -35,7 +35,7 @@ let i = 0;
 let photoIndex = 0;
 const fotos = ["foto1.jpeg","foto2.jpeg","foto3.jpeg","foto4.jpeg","foto5.jpeg","foto6.jpeg","foto7.jpeg","foto8.jpeg","foto9.jpeg","foto10.jpeg","foto11.jpeg","foto12.jpeg","foto13.jpeg"];
 
-document.getElementById("startBtn").addEventListener("click", () => {
+document.getElementById("startBtn").addEventListener("click", async () => {
   document.getElementById("startBtn").disabled = true;
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
@@ -43,12 +43,15 @@ document.getElementById("startBtn").addEventListener("click", () => {
   const konusma = document.getElementById("konusma");
   const muzik = document.getElementById("muzik");
 
-  konusma.volume = 1.0;
-  muzik.volume = 0.2;
+  konusma.volume = 1.0; // konuşma tam ses
+  muzik.volume = 0.2;   // müzik yumuşak
 
-  // Konuşma ve müzik oynat, Chrome engeline takılmasın
-  konusma.play().then(()=>{ console.log("Konuşma başladı"); }).catch(e=>{console.log("Konuşma çalamadı:", e);});
-  muzik.play().then(()=>{ console.log("Müzik başladı"); }).catch(e=>{console.log("Müzik çalamadı:", e);});
+  // Kesin çalmasını garantilemek için async/await
+  try { await konusma.play(); console.log("Konuşma başladı"); }
+  catch(e){ console.log("Konuşma çalmadı:", e); }
+
+  try { await muzik.play(); console.log("Müzik başladı"); }
+  catch(e){ console.log("Müzik çalmadı:", e); }
 
   typeText();
   startSlideshow();
