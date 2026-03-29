@@ -22,6 +22,10 @@ gsap.from(".photo", {
 <img id="photo" src="foto1.jpeg">
 
 <script>
+document.getElementById("music").volume = 0.2;
+</script>
+  
+<script>
 let photoIndex = 1;
 
 setInterval(() => {
