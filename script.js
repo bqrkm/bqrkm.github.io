@@ -8,6 +8,7 @@ document.getElementById("startBtn").addEventListener("click", () => {
   document.getElementById("content").style.display = "block";
 
   const konusma = document.getElementById("konusma");
+konusma.play().catch(e=>console.log("Hala çalmıyor:", e));
   const muzik = document.getElementById("muzik");
 
   konusma.volume = 1.0;
