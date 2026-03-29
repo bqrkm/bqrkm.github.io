@@ -5,19 +5,18 @@ let i = 0;
 // Fotoğraf slaytı
 let photoIndex = 1;
 
-// Başlat butonuna tıklayınca tüm sistem çalışacak
+// Başlat butonuna tıklayınca çalışacak
 document.getElementById("startBtn").addEventListener("click", () => {
-  // Başlat ekranını gizle
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
 
   const konusma = document.getElementById("konusma");
   const muzik = document.getElementById("muzik");
 
-  konusma.volume = 1.0;  // konuşma yüksek
-  muzik.volume = 0.2;    // arka plan hafif
+  konusma.volume = 1.0; // konuşma yüksek
+  muzik.volume = 0.2;   // arka plan hafif
 
-  // Garantili çalma
+  // Çal, tarayıcı engeline karşı catch
   konusma.play().catch(()=>{});
   muzik.play().catch(()=>{});
 
@@ -26,7 +25,7 @@ document.getElementById("startBtn").addEventListener("click", () => {
   hearts();
 });
 
-// Metni yazdır
+// Metin yazdırma fonksiyonu
 function typeText(){
   if(i < text.length){
     document.getElementById("text").innerHTML += text.charAt(i);
