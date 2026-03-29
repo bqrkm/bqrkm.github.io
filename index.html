@@ -135,14 +135,11 @@ function hearts(){
 </script>
 
 <script>
-function start(){
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("content").style.display = "block";
-
+document.body.addEventListener("click", function() {
   let music = document.getElementById("music");
   music.volume = 0.2;
   music.play();
-}
+}, { once: true });
 </script>
   
 </body>
