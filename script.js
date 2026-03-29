@@ -2,6 +2,7 @@ let text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
 let i = 0;
 let photoIndex = 1;
 
+// Başlat butonu
 document.getElementById("startBtn").addEventListener("click", () => {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
@@ -20,6 +21,7 @@ document.getElementById("startBtn").addEventListener("click", () => {
   hearts();
 });
 
+// Metni yazdır
 function typeText(){
   if(i < text.length){
     document.getElementById("text").innerHTML += text.charAt(i);
@@ -28,14 +30,21 @@ function typeText(){
   }
 }
 
+// Fotoğraf slaytı
 function startSlideshow(){
+  const fotos = [
+    "foto1.jpeg","foto2.jpeg","foto3.jpeg","foto4.jpeg","foto5.jpeg",
+    "foto6.jpeg","foto7.jpeg","foto8.jpeg","foto9.jpeg","foto10.jpeg",
+    "foto11.jpeg","foto12.jpeg","foto13.jpeg"
+  ];
   setInterval(()=>{
     photoIndex++;
-    if(photoIndex > 68) photoIndex = 1;
-    document.getElementById("photo").src = "foto" + photoIndex + ".jpeg";
+    if(photoIndex >= fotos.length) photoIndex = 0;
+    document.getElementById("photo").src = fotos[photoIndex];
   }, 2000);
 }
 
+// Kalpler
 function hearts(){
   setInterval(()=>{
     let heart = document.createElement("div");
