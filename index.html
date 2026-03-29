@@ -83,10 +83,6 @@ img {
     <source src="ses.mp3" type="audio/mpeg">
   </audio>
 
-  <audio id="music" loop>
-  <source src="ses1.mp3" type="audio/mpeg">
-  </audio>
-  
 </div>
 
 <script>
@@ -96,12 +92,16 @@ let i = 0;
 function start(){
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
-  document.getElementById("music").play();
+
+  let music = document.getElementById("music");
+  music.volume = 0.2;
+  music.play();
+
   typeText();
   startSlideshow();
   hearts();
 }
-
+  
 function typeText(){
   if(i < text.length){
     document.getElementById("text").innerHTML += text.charAt(i);
@@ -132,14 +132,6 @@ function hearts(){
     setTimeout(()=>{ heart.remove(); }, 5000);
   }, 300);
 }
-</script>
-
-<script>
-document.body.addEventListener("click", function() {
-  let music = document.getElementById("music");
-  music.volume = 0.2;
-  music.play();
-}, { once: true });
 </script>
   
 </body>
