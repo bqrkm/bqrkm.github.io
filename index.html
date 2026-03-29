@@ -2,16 +2,76 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>KARIMMMM</title>
+<title>Bizim Hikayemiz</title>
+
+<style>
+body {
+  margin:0;
+  background:black;
+  color:white;
+  text-align:center;
+  font-family:Arial;
+}
+
+h1 {
+  margin-top:30px;
+}
+
+.slider {
+  width: 80%;
+  height: 400px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius:20px;
+}
+
+.slides {
+  display:flex;
+  width: calc(300px * 68);
+  animation: slide 60s infinite;
+}
+
+.slides img {
+  width:300px;
+  height:400px;
+  object-fit:cover;
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
 </head>
 
-<body style="text-align:center; background:black; color:white;">
+<body>
 
-<h1>1. yılımız kutlu olsun aşkım</h1>
+<h1>Sana Küçük Bir Şey Hazırladım ❤️</h1>
 
-<p>Hazırsan play tuşuna bas...</p>
+<p>İyi ki varsın...</p>
 
-<audio controls>
+<div class="slider">
+  <div class="slides">
+    
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+    <img src="foto4.jpg">
+    <img src="foto5.jpg">
+    <img src="foto6.jpg">
+    <img src="foto7.jpg">
+    <img src="foto8.jpg">
+    <img src="foto9.jpg">
+    <img src="foto10.jpg">
+    <img src="foto11.jpg">
+    <img src="foto12.jpg">
+    <img src="foto13.jpg">
+    <!-- BURAYA KADAR KOPYALA -->
+    
+  </div>
+</div>
+
+<audio autoplay loop>
   <source src="ses.mp3" type="audio/mpeg">
 </audio>
 
