@@ -5,9 +5,9 @@ let i = 0;
 // Fotoğraf slaytı
 let photoIndex = 1;
 
-// Başlat butonuna basınca
-function start(){
-  // Başlat ekranını gizle, içeriği göster
+// Başlat butonu tıklaması ile tüm sistemi çalıştır
+document.getElementById("startBtn").addEventListener("click", () => {
+  // Başlat ekranını gizle
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
 
@@ -19,21 +19,17 @@ function start(){
   konusma.volume = 1.0;  // konuşma yüksek
   muzik.volume = 0.2;    // arka plan hafif
 
-  // Çalmayı dene
+  // Garantili çalma
   konusma.play().catch(()=>{});
   muzik.play().catch(()=>{});
 
-  // Metni yazdır
+  // Metin, fotoğraf ve kalp animasyonlarını başlat
   typeText();
-
-  // Fotoğraf slaytı
   startSlideshow();
-
-  // Kalpler
   hearts();
-}
+});
 
-// Metni yazma fonksiyonu
+// Metni yazdır
 function typeText(){
   if(i < text.length){
     document.getElementById("text").innerHTML += text.charAt(i);
@@ -42,7 +38,7 @@ function typeText(){
   }
 }
 
-// Fotoğraf slaytı fonksiyonu
+// Fotoğraf slaytı
 function startSlideshow(){
   setInterval(()=>{
     photoIndex++;
