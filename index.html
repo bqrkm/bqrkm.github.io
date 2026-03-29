@@ -90,13 +90,23 @@ let text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
 let i = 0;
 
 function start(){
+  // Başlat ekranını kaldır, içeriği göster
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
 
-  let music = document.getElementById("music");
-  music.volume = 0.2;
-  music.play();
+  // Sesleri al
+  const ses = document.getElementById("ses");
+  const muzik = document.getElementById("muzik");
 
+  // Ses seviyelerini ayarla
+  ses.volume = 1.0;  // konuşma yüksek
+  muzik.volume = 0.2;    // arka plan hafif
+
+  // Çalmayı dene
+  ses.play().catch(()=>{}); 
+  muzik.play().catch(()=>{}); 
+
+  // Diğer fonksiyonları başlat
   typeText();
   startSlideshow();
   hearts();
@@ -134,11 +144,6 @@ function hearts(){
 }
 </script>
 
-<audio id="background-music" loop autoplay>
-  <source src="audio/muzik.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="ses" src="audio/ses.mp3"></audio>
 <audio id="muzik" src="audio/muzik.mp3" loop></audio>
 
 <script>
