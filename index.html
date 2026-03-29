@@ -46,12 +46,15 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   konusma.volume = 1.0; // konuşma tam ses
   muzik.volume = 0.2;   // müzik yumuşak
 
-  // Kesin çalmasını garantilemek için async/await
-  try { await konusma.play(); console.log("Konuşma başladı"); }
-  catch(e){ console.log("Konuşma çalmadı:", e); }
-
-  try { await muzik.play(); console.log("Müzik başladı"); }
-  catch(e){ console.log("Müzik çalmadı:", e); }
+  // önce konuşma çalsın, sonra müzik arka plan olarak başlasın
+  try {
+    await konusma.play();
+    console.log("Konuşma başladı");
+    // konuşma başladıktan 0.5 saniye sonra müziği aç
+    setTimeout(()=>{ muzik.play().catch(e=>console.log("Müzik çalamadı", e)); }, 500);
+  } catch(e){
+    console.log("Konuşma çalmadı:", e);
+  }
 
   typeText();
   startSlideshow();
