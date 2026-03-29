@@ -5,17 +5,15 @@ let i = 0;
 // Fotoğraf slaytı
 let photoIndex = 1;
 
-// Başlat butonu tıklaması ile tüm sistemi çalıştır
+// Başlat butonuna tıklayınca tüm sistem çalışacak
 document.getElementById("startBtn").addEventListener("click", () => {
   // Başlat ekranını gizle
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
 
-  // Sesleri al
   const konusma = document.getElementById("konusma");
   const muzik = document.getElementById("muzik");
 
-  // Ses seviyeleri
   konusma.volume = 1.0;  // konuşma yüksek
   muzik.volume = 0.2;    // arka plan hafif
 
@@ -23,7 +21,6 @@ document.getElementById("startBtn").addEventListener("click", () => {
   konusma.play().catch(()=>{});
   muzik.play().catch(()=>{});
 
-  // Metin, fotoğraf ve kalp animasyonlarını başlat
   typeText();
   startSlideshow();
   hearts();
