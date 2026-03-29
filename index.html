@@ -26,11 +26,10 @@ img {width:300px; height:400px; object-fit:cover; border-radius:20px; box-shadow
   <img id="photo" src="foto1.jpeg">
 </div>
 
-<audio id="konusma" src="ses.mp3"></audio>
-<audio id="muzik" src="muzik.mp3" loop></audio>
+<audio id="ses" src="ses.mp3"></audio>
 
 <script>
-let text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
+const text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
 let i = 0;
 let photoIndex = 0;
 const fotos = ["foto1.jpeg","foto2.jpeg","foto3.jpeg","foto4.jpeg","foto5.jpeg","foto6.jpeg","foto7.jpeg","foto8.jpeg","foto9.jpeg","foto10.jpeg","foto11.jpeg","foto12.jpeg","foto13.jpeg"];
@@ -40,21 +39,9 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
 
-  const konusma = document.getElementById("konusma");
-  const muzik = document.getElementById("muzik");
-
-  konusma.volume = 1.0; // konuşma tam ses
-  muzik.volume = 0.2;   // müzik yumuşak
-
-  // önce konuşma çalsın, sonra müzik arka plan olarak başlasın
-  try {
-    await konusma.play();
-    console.log("Konuşma başladı");
-    // konuşma başladıktan 0.5 saniye sonra müziği aç
-    setTimeout(()=>{ muzik.play().catch(e=>console.log("Müzik çalamadı", e)); }, 500);
-  } catch(e){
-    console.log("Konuşma çalmadı:", e);
-  }
+  const ses = document.getElementById("ses");
+  ses.volume = 0.8; // gerekirse ayarla
+  try { await ses.play(); } catch(e){ console.log("Ses çalmadı:", e); }
 
   typeText();
   startSlideshow();
@@ -79,7 +66,7 @@ function startSlideshow(){
 
 function hearts(){
   setInterval(()=>{
-    let heart = document.createElement("div");
+    const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random()*100 + "vw";
@@ -89,5 +76,6 @@ function hearts(){
   }, 300);
 }
 </script>
+
 </body>
 </html>
