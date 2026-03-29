@@ -1,169 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <title>Bizim Hikayemiz</title>
-
 <style>
-body {
-  margin:0;
-  background:black;
-  color:white;
-  font-family:Arial;
-  text-align:center;
-  overflow:hidden;
-}
-
-#startScreen {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  z-index:10;
-}
-
-button {
-  padding:15px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:10px;
-  background:red;
-  color:white;
-  cursor:pointer;
-}
-
-#content {
-  display:none;
-}
-
-img {
-  width:300px;
-  height:400px;
-  object-fit:cover;
-  border-radius:20px;
-  box-shadow:0 0 20px rgba(255,255,255,0.3);
-}
-
-#text {
-  font-size:24px;
-  margin:20px;
-  min-height:40px;
-}
-
-.heart {
-  position:absolute;
-  color:red;
-  animation: float 5s linear infinite;
-}
-
-@keyframes float {
-  0% {transform:translateY(0);}
-  100% {transform:translateY(-100vh);}
-}
+body {margin:0; background:black; color:white; font-family:Arial; text-align:center; overflow:hidden;}
+#content {display:none;}
+img {width:300px; height:400px; object-fit:cover; border-radius:20px; box-shadow:0 0 20px rgba(255,255,255,0.3);}
+#text {font-size:24px; margin:20px; min-height:40px;}
+.heart {position:absolute; color:red; animation: float 5s linear infinite;}
+@keyframes float {0% {transform:translateY(0);} 100% {transform:translateY(-100vh);}}
+button {padding:15px 30px; font-size:18px; border:none; border-radius:10px; background:red; color:white; cursor:pointer;}
 </style>
-
 </head>
-
 <body>
 
-<div id="startScreen">
-  <h1>Senin İçin Bir Şey Hazırladım ❤️</h1>
-  <button onclick="start()">Başlat</button>
+<div id="startScreen" style="width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+<h1>Senin İçin Bir Şey Hazırladım ❤️</h1>
+<button id="startBtn">Başlat</button>
 </div>
 
 <div id="content">
-  <div id="text"></div>
-  <img id="photo" src="foto1.jpeg">
-  
-  <audio id="music" loop>
-    <source src="ses.mp3" type="audio/mpeg">
-  </audio>
-
+<div id="text"></div>
+<img id="photo" src="foto1.jpeg">
 </div>
 
-<script>
-let text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
-let i = 0;
+<audio id="konusma" src="ses.mp3"></audio>
+<audio id="muzik" src="muzik.mp3" loop></audio>
 
-function start(){
-  // Başlat ekranını kaldır, içeriği göster
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("content").style.display = "block";
-
-  // Sesleri al
-  const ses = document.getElementById("ses");
-  const muzik = document.getElementById("muzik");
-
-  // Ses seviyelerini ayarla
-  ses.volume = 1.0;  // konuşma yüksek
-  muzik.volume = 0.2;    // arka plan hafif
-
-  // Çalmayı dene
-  ses.play().catch(()=>{}); 
-  muzik.play().catch(()=>{}); 
-
-  // Diğer fonksiyonları başlat
-  typeText();
-  startSlideshow();
-  hearts();
-}
-  
-function typeText(){
-  if(i < text.length){
-    document.getElementById("text").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeText, 50);
-  }
-}
-
-let photoIndex = 1;
-
-function startSlideshow(){
-  setInterval(()=>{
-    photoIndex++;
-    if(photoIndex > 68) photoIndex = 1;
-    document.getElementById("photo").src = "foto" + photoIndex + ".jpeg";
-  }, 2000);
-}
-
-function hearts(){
-  setInterval(()=>{
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (Math.random()*20 + 20) + "px";
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{ heart.remove(); }, 5000);
-  }, 300);
-}
-</script>
-
-<audio id="muzik" src="audio/muzik.mp3" loop></audio>
-
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const music = document.getElementById('muzik');
-    const konusma = document.getElementById('ses');
-
-    music.volume = 0.2; // arka plan
-    ses.volume = 1.0; // konuşma
-
-    // sayfa yüklendiğinde ikisini de oynat
-    const playAll = () => {
-      ses.play();
-      music.play();
-    }
-
-    // Chrome engellemesi için kullanıcı tıklamasıyla başlat
-    document.body.addEventListener('click', playAll, {once: true});
-  });
-</script>
-  
+<script src="script.js"></script>
 </body>
 </html>
