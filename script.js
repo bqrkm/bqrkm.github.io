@@ -22,7 +22,8 @@ gsap.from(".photo", {
 <img id="photo" src="foto1.jpeg">
 
 <script>
-document.getElementById("music").volume = 0.2;
+  const music = document.getElementById("background-music");
+  music.volume = 0.2; // 0.0 ile 1.0 arası, 0.2 = %20 ses
 </script>
   
 <script>
