@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>Bizim Hikayemiz</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1. Yılımız</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+<body>
+  <div class="intro">
+    <h1>1 Yılımız Kutlu Olsun ❤️</h1>
+    <button id="playBtn">Sesi Başlat</button>
+  </div>
 
-<body style="text-align:center; background:black; color:white;">
+  <div class="photo-gallery">
+    <img class="photo" src="assets/foto1.jpg" alt="Foto 1">
+    <img class="photo" src="assets/foto2.jpg" alt="Foto 2">
+    <!-- İstediğin kadar fotoğraf ekle -->
+  </div>
 
-<h1>Sana küçük bir sürpriz ❤️</h1>
-
-<p>Hazırsan play tuşuna bas...</p>
-
-<audio controls>
-  <source src="ses.mp3" type="audio/mpeg">
-</audio>
-
+  <script src="lib/gsap.min.js"></script>
+  <script src="lib/howler.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
