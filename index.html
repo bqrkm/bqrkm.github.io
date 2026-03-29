@@ -37,7 +37,7 @@ const fotos = ["foto1.jpeg","foto2.jpeg","foto3.jpeg","foto4.jpeg","foto5.jpeg",
 
 document.getElementById("startBtn").addEventListener("click", () => {
   const startBtn = document.getElementById("startBtn");
-  startBtn.disabled = true; // tekrar tıklamayı engelle
+  startBtn.disabled = true;
 
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("content").style.display = "block";
@@ -45,20 +45,17 @@ document.getElementById("startBtn").addEventListener("click", () => {
   const konusma = document.getElementById("konusma");
   const muzik = document.getElementById("muzik");
 
-  // sesi aç
-  konusma.volume = 1.0;
-  muzik.volume = 0.2;
+  konusma.volume = 1.0; // konuşma tam ses
+  muzik.volume = 0.2;   // müzik yumuşak
 
-  // kesin oynat
-  konusma.play().catch(() => { console.log("Konuşma oynatılamadı"); });
-  muzik.play().catch(() => { console.log("Müzik oynatılamadı"); });
+  konusma.play().catch(()=>{ console.log("Konuşma çalmadı"); });
+  muzik.play().catch(()=>{ console.log("Müzik çalmadı"); });
 
   typeText();
   startSlideshow();
   hearts();
 });
 
-// Metni yazdır
 function typeText(){
   if(i < text.length){
     document.getElementById("text").innerHTML += text.charAt(i);
@@ -67,7 +64,6 @@ function typeText(){
   }
 }
 
-// Fotoğraf slaytı
 function startSlideshow(){
   setInterval(()=>{
     photoIndex++;
@@ -76,7 +72,6 @@ function startSlideshow(){
   }, 2000);
 }
 
-// Kalpler
 function hearts(){
   setInterval(()=>{
     let heart = document.createElement("div");
