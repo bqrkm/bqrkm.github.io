@@ -1,208 +1,30 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hayatımın Anlamına ❤️</title>
-<style>
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: black;
-  color: white;
-  font-family: 'Poppins', Arial, sans-serif;
-  text-align: center;
-  overflow-x: hidden;
-}
-
-/* Başlangıç ekranı */
-#intro {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 2s ease-in;
-}
-
-#intro h1 {
-  font-size: 40px;
-  margin-bottom: 40px;
-  color: #ff4b5c;
-}
-
-/* Buton */
-button {
-  padding: 15px 30px;
-  font-size: 18px;
-  border: none;
-  border-radius: 10px;
-  background: red;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-button:hover {
-  background: #ff8080;
-}
-
-/* İçerik */
-#content {
-  display: none;
-}
-
-.scene {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Fotoğraflar */
-img {
-  width: 300px;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(255,255,255,0.4);
-  transition: all 1s ease;
-}
-
-/* Yazılar */
-#text {
-  margin-top: 40px;
-  font-size: 24px;
-  min-height: 40px;
-  color: #ffd4d4;
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
-  animation: fadeText 1.5s ease;
-}
-
-/* Final sahnesi */
-#final h2 {
-  font-size: 30px;
-  color: pink;
-  margin-bottom: 10px;
-}
-#final p {
-  font-size: 22px;
-  color: #ffb6c1;
-}
-
-/* Kalpler */
-.heart {
-  position: absolute;
-  color: red;
-  animation: float 5s linear infinite;
-}
-
-/* Animasyonlar */
-@keyframes float {
-  0% { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fadeText {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Hayatımın Anlamına ❤️</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<div id="intro">
-  <h1>Hazır mısın? 💖</h1>
-  <button onclick="startSite()">Başla</button>
-</div>
-
-<div id="content">
-  <div class="scene">
-    <img id="photo" src="foto1.jpeg" alt="foto" />
-    <div id="text"></div>
+  <div id="intro">
+    <h1>Hazır mısın?</h1>
+    <button onclick="startSite()">Başla</button>
   </div>
 
-  <div class="scene" id="final">
-    <h2>Her anımız bir mucizeydi 💞</h2>
-    <p>Seni seviyorum... Sonsuza dek 💫</p>
+  <div id="content">
+    <div class="scene">
+      <img id="photo" src="foto1.jpeg" alt="fotoğraf">
+      <div id="text"></div>
+    </div>
+
+    <!-- scroll alanı -->
+    <div style="height:300vh"></div>
   </div>
 
-  <div style="height:200vh"></div>
-</div>
+  <audio id="music" src="music.mp3" loop></audio>
 
-<audio id="music" src="music.mp3" loop></audio>
-
-<script>
-// SAHNELER (foto1.jpeg - foto140.jpeg)
-const scenes = [];
-for (let j = 1; j <= 140; j++) {
-  scenes.push({ img: `foto${j}.jpeg`, text: `Bu an, seninle geçen an ${j}` });
-}
-
-let currentIndex = 0;
-
-// BAŞLAT
-function startSite() {
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("content").style.display = "block";
-
-  const music = document.getElementById("music");
-  music.volume = 0.6;
-  music.play().catch(err => console.log("Müzik çalınamadı:", err));
-
-  updateScene();
-  hearts();
-}
-
-// FOTOĞRAF + YAZI DEĞİŞİMİ
-function updateScene() {
-  const photo = document.getElementById("photo");
-  const text = document.getElementById("text");
-
-  photo.src = scenes[currentIndex].img;
-  text.innerText = scenes[currentIndex].text;
-
-  photo.onerror = () => {
-    console.warn("Fotoğraf bulunamadı:", photo.src);
-  };
-}
-
-// SCROLL KONTROLÜ
-window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
-  const maxScroll = document.body.scrollHeight - window.innerHeight;
-  let index = Math.floor((scrollTop / maxScroll) * scenes.length);
-
-  if (index >= scenes.length) index = scenes.length - 1;
-  if (index !== currentIndex) {
-    currentIndex = index;
-    updateScene();
-  }
-});
-
-// KALP YAĞMURU
-function hearts() {
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 20 + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }, 300);
-}
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
