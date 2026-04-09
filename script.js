@@ -1,4 +1,4 @@
-/* ==== Mobile view fix ==== */
+/* ==== viewport için mobil fix ==== */
 function fixMobileVH() {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -6,14 +6,15 @@ function fixMobileVH() {
 fixMobileVH();
 window.addEventListener("resize", fixMobileVH);
 
-/* ==== Global değişkenler ==== */
+/* ==== değişkenler ==== */
 const TOTAL_IMAGES = 140;
 const GROUP_SIZE = 10;
 const TOTAL_SCENES = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
+
 let slideTimers = [];
 let currentVisible = -1;
 
-/* ==== BAŞLAT ==== */
+/* ==== BAŞLA ==== */
 function startSite() {
   document.getElementById("intro").style.display = "none";
   document.getElementById("content").style.display = "block";
@@ -22,21 +23,22 @@ function startSite() {
   music.volume = 1.0;
   music.play().catch(() => {});
 
-  hearts();
   createScenes();
+  hearts();            // ❤️ kalpler fonksiyonu artık aktif
   window.addEventListener("scroll", checkVisibleScenes);
   checkVisibleScenes();
 }
 
-/* ==== SAHNELERİ OLUŞTUR ==== */
+/* ==== sahneleri oluştur ==== */
 function createScenes() {
   const container = document.getElementById("scene-container");
   if (!container) return;
-  container.innerHTML = "";
 
+  container.innerHTML = "";
   for (let i = 0; i < TOTAL_SCENES; i++) {
     const start = i * GROUP_SIZE + 1;
     const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
+
     const div = document.createElement("div");
     div.className = "scene";
     div.innerHTML = `
@@ -47,22 +49,21 @@ function createScenes() {
   }
 }
 
-/* ==== GÖRÜNÜR OLMA KONTROLÜ ==== */
+/* ==== scroll görünürlük === */
 function checkVisibleScenes() {
   const scenes = document.querySelectorAll(".scene");
   scenes.forEach((scene, i) => {
     const rect = scene.getBoundingClientRect();
-    const inView =
+    const visible =
       rect.top < window.innerHeight * 0.6 &&
       rect.bottom > window.innerHeight * 0.3;
-    if (inView && currentVisible !== i) {
-      activateScene(i);
-    }
-    scene.classList.toggle("active", inView);
+
+    scene.classList.toggle("active", visible);
+    if (visible && currentVisible !== i) activateScene(i);
   });
 }
 
-/* ==== FOTOĞRAF FADE GEÇİŞİ ==== */
+/* ==== sahne slayt ve fade === */
 function activateScene(index) {
   clearAllTimers();
   currentVisible = index;
@@ -74,35 +75,33 @@ function activateScene(index) {
   const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
   let cur = start;
 
-  const fade = () => {
+  const fadeNext = () => {
     const nextSrc = `foto${cur}.jpeg`;
     const nextImg = new Image();
     nextImg.src = nextSrc;
-
     nextImg.onload = () => {
       img.style.transition = "opacity 1s ease";
-      img.style.opacity = 0.7; // hafif kararma
+      img.style.opacity = 0.7;
       setTimeout(() => {
         img.src = nextSrc;
         img.style.opacity = 1;
       }, 500);
     };
-
     cur++;
     if (cur > end) cur = start;
   };
 
-  fade(); // ilki hemen başlasın
-  slideTimers[index] = setInterval(fade, 4000);
+  fadeNext();
+  slideTimers[index] = setInterval(fadeNext, 4000);
 }
 
-/* ==== TIMER TEMİZLİĞİ ==== */
+/* ==== zamanlayıcı kontrol ==== */
 function clearAllTimers() {
-  slideTimers.forEach(t => clearInterval(t));
+  slideTimers.forEach((t) => clearInterval(t));
   slideTimers = [];
 }
 
-/* ==== KALPLER ==== */
+/* ==== kalpler ==== */
 function hearts() {
   setInterval(() => {
     const heart = document.createElement("div");
@@ -110,7 +109,9 @@ function hearts() {
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    heart.style.top = "100vh"; // 👈 alta başlat
     document.body.appendChild(heart);
+
     setTimeout(() => heart.remove(), 5000);
   }, 300);
 }
