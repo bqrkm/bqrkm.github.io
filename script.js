@@ -1,4 +1,3 @@
-// FOTO + YAZI
 const scenes = [
   { img: "foto1.jpeg", text: "Her şey burada başladı..." },
   { img: "foto2.jpeg", text: "Seni ilk gördüğüm an..." },
@@ -7,67 +6,35 @@ const scenes = [
   { img: "foto5.jpeg", text: "İyi ki varsın ❤️" }
 ];
 
-{ img: "https://picsum.photos/400/600", text: "Test" }
-
 let currentIndex = 0;
-let isScrolling = false;
 
 // BAŞLAT
 function startSite(){
   document.getElementById("intro").style.display = "none";
+  document.getElementById("content").style.display = "block";
 
-  const music = document.getElementById("music");
-  const ses = document.getElementById("ses");
+  document.getElementById("music").play().catch(()=>{});
 
-  if(music) music.play().catch(()=>{});
-  if(ses) ses.play().catch(()=>{});
-
-  // 🔥 KRİTİK: İLK FOTOYU ZORLA AYARLA
   updateScene();
-
-  hearts();
 }
 
-// SAHNE GÜNCELLE
+// SAHNE
 function updateScene(){
-  const photo = document.getElementById("photo");
-  const text = document.getElementById("text");
-
-  if(!photo || !text) return;
-
-  photo.src = scenes[currentIndex].img;
-  text.innerHTML = scenes[currentIndex].text;
+  document.getElementById("photo").src = scenes[currentIndex].img;
+  document.getElementById("text").innerText = scenes[currentIndex].text;
 }
 
 // SCROLL
-window.addEventListener("wheel", (e) => {
-  if(isScrolling) return;
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
 
-  isScrolling = true;
+  let index = Math.floor((scrollTop / maxScroll) * scenes.length);
 
-  if(e.deltaY > 0){
-    currentIndex++;
-  } else {
-    currentIndex--;
+  if(index >= scenes.length) index = scenes.length - 1;
+
+  if(index !== currentIndex){
+    currentIndex = index;
+    updateScene();
   }
-
-  if(currentIndex < 0) currentIndex = 0;
-  if(currentIndex >= scenes.length) currentIndex = scenes.length - 1;
-
-  updateScene();
-
-  setTimeout(()=>{ isScrolling = false; }, 700);
 });
-
-// KALPLER
-function hearts(){
-  setInterval(()=>{
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (Math.random()*20 + 20) + "px";
-    document.body.appendChild(heart);
-    setTimeout(()=>{ heart.remove(); }, 5000);
-  }, 300);
-}
