@@ -65,14 +65,16 @@ button {
 
 /* Görseller */
 .scene img {
-  width: 320px;
-  height: 430px;
+  width: 80vw;              /* 👈 ekranın %80 ini kapla */
+  max-width: 400px;         /* çok büyük ekranlarda 400px'den fazla olmasın */
+  height: auto;             /* 👈 oran korunsun */
   border-radius: 20px;
   object-fit: cover;
   box-shadow: 0 0 20px rgba(255,255,255,0.4);
   margin-bottom: 20px;
   transition: opacity 1s ease;
 }
+
 
 /* Yazılar */
 .scene p {
