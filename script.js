@@ -1,87 +1,108 @@
+/* ==== Mobile view fix ==== */
+function fixMobileVH() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+}
+fixMobileVH();
+window.addEventListener("resize", fixMobileVH);
+
+/* ==== Global değişkenler ==== */
 const TOTAL_IMAGES = 140;
 const GROUP_SIZE = 10;
 const TOTAL_SCENES = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
 let slideTimers = [];
 let currentVisible = -1;
 
-// ==== MOBİLDE DOĞRU YÜKSEKLİK İÇİN ==== 
-function fixMobileVH() {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-}
-fixMobileVH();
-window.addEventListener('resize', fixMobileVH);
-
-
+/* ==== BAŞLAT ==== */
 function startSite() {
-  document.getElementById('intro').style.display = 'none';
-  document.getElementById('content').style.display = 'block';
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("content").style.display = "block";
 
-  const music = document.getElementById('music');
+  const music = document.getElementById("music");
   music.volume = 1.0;
-  music.play().catch(()=>{});
+  music.play().catch(() => {});
 
   hearts();
   createScenes();
-  window.addEventListener('scroll', checkVisibleScenes);
+  window.addEventListener("scroll", checkVisibleScenes);
   checkVisibleScenes();
 }
 
+/* ==== SAHNELERİ OLUŞTUR ==== */
 function createScenes() {
-  const container = document.getElementById('scene-container');
-  container.innerHTML = '';
+  const container = document.getElementById("scene-container");
+  if (!container) return;
+  container.innerHTML = "";
 
   for (let i = 0; i < TOTAL_SCENES; i++) {
     const start = i * GROUP_SIZE + 1;
     const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
-    container.innerHTML += `
-      <div class="scene">
-        <img src="foto${start}.jpeg" id="img${i}" alt="">
-        <p>Seninle geçen güzel anlardan biri 💫 (${i + 1})</p>
-      </div>`;
+    const div = document.createElement("div");
+    div.className = "scene";
+    div.innerHTML = `
+      <img src="foto${start}.jpeg" id="img${i}" alt="">
+      <p>Seninle geçen güzel anlardan biri 💫 (${i + 1})</p>
+    `;
+    container.appendChild(div);
   }
 }
 
+/* ==== GÖRÜNÜR OLMA KONTROLÜ ==== */
 function checkVisibleScenes() {
-  document.querySelectorAll('.scene').forEach((scene, i) => {
+  const scenes = document.querySelectorAll(".scene");
+  scenes.forEach((scene, i) => {
     const rect = scene.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.3;
-    scene.classList.toggle('active', inView);
-    if (inView && currentVisible !== i) activateScene(i);
+    const inView =
+      rect.top < window.innerHeight * 0.6 &&
+      rect.bottom > window.innerHeight * 0.3;
+    if (inView && currentVisible !== i) {
+      activateScene(i);
+    }
+    scene.classList.toggle("active", inView);
   });
 }
 
+/* ==== FOTOĞRAF FADE GEÇİŞİ ==== */
 function activateScene(index) {
-  slideTimers.forEach(t=>clearInterval(t));
-  slideTimers = [];
+  clearAllTimers();
   currentVisible = index;
 
   const img = document.getElementById(`img${index}`);
+  if (!img) return;
+
   const start = index * GROUP_SIZE + 1;
   const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
   let cur = start;
 
- slideTimers[index] = setInterval(() => {
-  const nextSrc = `foto${cur}.jpeg`;
-  const nextImg = new Image();
-  nextImg.src = nextSrc;
+  const fade = () => {
+    const nextSrc = `foto${cur}.jpeg`;
+    const nextImg = new Image();
+    nextImg.src = nextSrc;
 
-  nextImg.onload = () => {
-    // yeni foto hazır olduğunda fade geçiş başlasın
-    img.style.transition = "opacity 1s ease";
-    img.style.opacity = 0.5;
+    nextImg.onload = () => {
+      img.style.transition = "opacity 1s ease";
+      img.style.opacity = 0.7; // hafif kararma
+      setTimeout(() => {
+        img.src = nextSrc;
+        img.style.opacity = 1;
+      }, 500);
+    };
 
-    setTimeout(() => {
-      img.src = nextSrc;
-      img.style.opacity = 1;
-    }, 500);
+    cur++;
+    if (cur > end) cur = start;
   };
 
-  cur++;
-  if (cur > end) cur = start;
-}, 1900); // 4 saniyede bir geçiş
+  fade(); // ilki hemen başlasın
+  slideTimers[index] = setInterval(fade, 4000);
+}
 
+/* ==== TIMER TEMİZLİĞİ ==== */
+function clearAllTimers() {
+  slideTimers.forEach(t => clearInterval(t));
+  slideTimers = [];
+}
 
+/* ==== KALPLER ==== */
 function hearts() {
   setInterval(() => {
     const heart = document.createElement("div");
@@ -93,4 +114,3 @@ function hearts() {
     setTimeout(() => heart.remove(), 5000);
   }, 300);
 }
-
