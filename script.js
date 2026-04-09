@@ -4,6 +4,15 @@ const TOTAL_SCENES = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
 let slideTimers = [];
 let currentVisible = -1;
 
+// ==== MOBİLDE DOĞRU YÜKSEKLİK İÇİN ==== 
+function fixMobileVH() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+fixMobileVH();
+window.addEventListener('resize', fixMobileVH);
+
+
 function startSite() {
   document.getElementById('intro').style.display = 'none';
   document.getElementById('content').style.display = 'block';
