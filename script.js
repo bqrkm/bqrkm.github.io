@@ -90,6 +90,7 @@ function hearts() {
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.fontSize = Math.random() * 20 + 20 + "px";
     document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(), 5000);
+    setTimeout(() => heart.remove(), 5000);
   }, 300);
 }
+
