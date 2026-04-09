@@ -1,9 +1,7 @@
-/* === Genel Ayarlar === */
 html {
   scroll-behavior: smooth;
 }
 
-/* 👇 Eklendi */
 html, body {
   height: 100%;
 }
@@ -15,8 +13,6 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   overflow-x: hidden;
-
-  /* 👇 Küçük ek: mobil zoom & text autoscale kapatma */
   -webkit-text-size-adjust: none;
 }
 
@@ -40,14 +36,10 @@ button {
   cursor: pointer;
 }
 
-/* Asıl içerik */
-#content {
-  display: none;
-}
+#content { display: none; }
 
-/* === Sahne (her bölüm) === */
+/* Tam ekran sahne */
 .scene {
-  /* 👇 Düzeltme: 100vh yerine 100dvh */
   height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -63,26 +55,27 @@ button {
   transform: translateY(0);
 }
 
-/* Görseller */
+/* 🔥 tam ekran büyük fotoğraflar */
 .scene img {
-  width: 100vw;       /* ekran genişliğini tamamen kapla  */
-  height: 85dvh;      /* yüksekliği ekranın %85'i kadar */
-  object-fit: cover;  /* ekranı taşmadan doldur */
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  width: 100vw;
+  height: 88dvh;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: 0 0 25px rgba(255,255,255,0.25);
   margin-bottom: 10px;
   transition: opacity 1s ease;
 }
 
-
-/* Yazılar */
+/* alt yazı */
 .scene p {
-  font-size: 22px;
+  font-size: clamp(18px, 4vw, 26px);
   color: pink;
   text-shadow: 0 0 10px rgba(255,0,0,0.4);
+  position: absolute;
+  bottom: 5vh;
 }
 
-/* === Kalpler === */
+/* kalpler */
 .heart {
   position: fixed;
   color: red;
