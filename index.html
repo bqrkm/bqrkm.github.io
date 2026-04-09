@@ -4,30 +4,23 @@
 <meta charset="UTF-8">
 <title>Hayatımın Anlamına ❤️</title>
 
-<!-- AOS ANİMASYON -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
 <style>
 body {
   margin:0;
-  background:linear-gradient(135deg,#000,#1a1a2e);
+  background:black;
   color:white;
   font-family:Arial;
   text-align:center;
   overflow-x:hidden;
 }
 
-/* GİRİŞ */
 #intro {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
+  width:100vw;
+  height:100vh;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
   align-items:center;
-  z-index:999;
+  justify-content:center;
+  flex-direction:column;
 }
 
 button {
@@ -40,7 +33,10 @@ button {
   cursor:pointer;
 }
 
-/* CONTENT */
+#content {
+  display:none;
+}
+
 .scene {
   height:100vh;
   display:flex;
@@ -49,125 +45,41 @@ button {
   align-items:center;
 }
 
-<div style="height:300vh"></div>
-
 img {
-  width:320px;
-  height:520px;
-  object-fit:cover;
+  width:300px;
   border-radius:20px;
-  box-shadow:0 0 25px rgba(255,255,255,0.3);
 }
 
-/* TEXT */
 #text {
   font-size:24px;
-  margin:20px;
-  min-height:40px;
+  margin-top:20px;
 }
 
-/* HEART */
-.heart {
-  position:fixed;
-  color:red;
-  animation: float 5s linear infinite;
-}
-
-@keyframes float {
-  0% {transform:translateY(0);}
-  100% {transform:translateY(-100vh);}
-}
 </style>
 </head>
 
 <body>
 
-<!-- GİRİŞ -->
 <div id="intro">
   <h1>Hazır mısın?</h1>
   <button onclick="startSite()">Başla</button>
 </div>
 
-<!-- MÜZİK -->
-<audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+<div id="content">
 
-<audio id="ses" src="ses.mp3"></audio>
+  <div class="scene">
+    <img id="photo" src="foto1.jpeg">
+    <div id="text"></div>
+  </div>
 
-<!-- SAHNE 1 -->
-<section class="scene">
-  <h2 data-aos="fade-up">Her şey burada başladı...</h2>
-</section>
+  <!-- Scroll alanı -->
+  <div style="height:200vh"></div>
 
-<!-- SAHNE 2 -->
-<section class="scene">
-  <img id="photo" src="foto1.jpeg" data-aos="zoom-in">
-  <div id="text"></div>
-</section>
+</div>
 
-<!-- SAHNE 3 -->
-<section class="scene">
-  <h2 data-aos="fade-up">Seninle her şey daha güzel ❤️</h2>
-</section>
+<audio id="music" src="music.mp3" loop></audio>
 
 <script src="script.js"></script>
-
-<script>
-AOS.init();
-
-// TEXT
-const text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
-let i = 0;
-
-// FOTO
-let photoIndex = 0;
-const fotos = [];
-for(let j=1; j<=140; j++){
-  fotos.push(`foto${j}.jpeg`);
-}
-
-// BAŞLAT
-function startSite(){
-  document.getElementById("intro").style.display = "none";
-
-  document.getElementById("music").play().catch(()=>{});
-  document.getElementById("ses").play().catch(()=>{});
-
-  hearts();
-}
-
-// YAZI EFEKT
-function typeText(){
-  if(i < text.length){
-    document.getElementById("text").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeText, 50);
-  }
-}
-
-// FOTO SLAYT
-function startSlideshow(){
-  setInterval(()=>{
-    photoIndex++;
-    if(photoIndex >= fotos.length) photoIndex = 0;
-    document.getElementById("photo").src = fotos[photoIndex];
-  }, 2000);
-}
-
-// KALPLER
-function hearts(){
-  setInterval(()=>{
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (Math.random()*20 + 20) + "px";
-    document.body.appendChild(heart);
-    setTimeout(()=>{ heart.remove(); }, 5000);
-  }, 300);
-}
-</script>
 
 </body>
 </html>
