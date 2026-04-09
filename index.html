@@ -2,93 +2,180 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hayatımın Anlamına ❤️</title>
 
+<link rel="stylesheet" href="styles.css">
 <style>
-body {
-  margin:0;
-  background:black;
-  color:white;
-  font-family:Arial;
-  text-align:center;
-  overflow-x:hidden;
+html {
   scroll-behavior: smooth;
 }
 
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: 'Poppins', Arial, sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+}
+
 #intro {
-  width:100vw;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 2s ease-in;
+}
+
+#intro h1 {
+  font-size: 40px;
+  margin-bottom: 40px;
+  color: #ff4b5c;
 }
 
 button {
-  padding:15px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:10px;
-  background:red;
-  color:white;
-  cursor:pointer;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: red;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover {
+  background: #ff8080;
 }
 
 #content {
-  display:none;
+  display: none;
 }
 
 .scene {
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 img {
-  width:300px;
-  height:400px;
-  object-fit:cover;
-  border-radius:20px;
-  box-shadow:0 0 20px rgba(255,255,255,0.3);
-  transition: all 0.5s ease;
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.4);
+  transition: all 1s ease;
 }
 
 #text {
-  font-size:24px;
-  margin:20px;
-  min-height:40px;
-  transition: all 0.5s ease;
+  margin-top: 40px;
+  font-size: 24px;
+  min-height: 40px;
+  color: #ffd4d4;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+  animation: fadeText 1.5s ease;
 }
 
 .heart {
-  position:absolute;
-  color:red;
+  position: absolute;
+  color: red;
   animation: float 5s linear infinite;
 }
 
-@keyframes float {0% {transform:translateY(0);} 100% {transform:translateY(-100vh);}}
+@keyframes float {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeText {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
 
 <body>
 
 <div id="intro">
-  <h1>Hazır mısın?</h1>
+  <h1>Hazır mısın? 💖</h1>
   <button onclick="startSite()">Başla</button>
 </div>
 
 <div id="content">
   <div class="scene">
-    <img id="photo" src="foto1.jpeg">
+    <img id="photo" src="foto1.jpeg" alt="foto">
     <div id="text"></div>
   </div>
-  <div style="height:300vh"></div> <!-- scroll alanı -->
+
+  <!-- Ek sahneler için ekstra boşluk -->
+  <div class="scene" id="final">
+    <h2>Her anımız bir mucizeydi 💞</h2>
+    <p>Seni seviyorum... Sonsuza dek 💫</p>
+  </div>
+
+  <div style="height:200vh"></div>
 </div>
 
 <audio id="music" src="music.mp3" loop></audio>
 
-<script src="script.js"></script>
+<script>
+const scenes = [];
+for (let j = 1; j <= 140; j++) {
+  scenes.push({ img:`foto${j}.jpeg`, text:`Bu an, seninle geçen an ${j}` });
+}
+
+let currentIndex = 0;
+
+function startSite() {
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("content").style.display = "block";
+  const music = document.getElementById("music");
+  music.volume = 0.6;
+  music.play().catch(err => console.log("Müzik engellendi:", err));
+  updateScene();
+  hearts();
+}
+
+function updateScene() {
+  const photo = document.getElementById("photo");
+  const text = document.getElementById("text");
+  photo.src = scenes[currentIndex].img;
+  text.innerText = scenes[currentIndex].text;
+}
+
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+  let index = Math.floor((scrollTop / maxScroll) * scenes.length);
+  if(index >= scenes.length) index = scenes.length - 1;
+
+  if(index !== currentIndex){
+    currentIndex = index;
+    updateScene();
+  }
+});
+
+function hearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+}
+</script>
+
 </body>
 </html>
