@@ -1,28 +1,30 @@
-let text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
+// TEXT
+const text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
 let i = 0;
-let photoIndex = 1;
 
-// Başlat butonu
-document.getElementById("startBtn").addEventListener("click", () => {
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("content").style.display = "block";
+// FOTO
+let photoIndex = 0;
+const fotos = [];
+for(let j=1; j<=140; j++){
+  fotos.push(`foto${j}.jpeg`);
+}
 
-  const konusma = document.getElementById("konusma");
-konusma.play().catch(e=>console.log("Hala çalmıyor:", e));
-  const muzik = document.getElementById("muzik");
+// BAŞLAT
+function startSite(){
+  document.getElementById("intro").style.display = "none";
 
-  konusma.volume = 1.0;
-  muzik.volume = 0.2;
+  const music = document.getElementById("music");
+  const ses = document.getElementById("ses");
 
-  konusma.play().catch(()=>{});
-  muzik.play().catch(()=>{});
+  if(music) music.play().catch(()=>{});
+  if(ses) ses.play().catch(()=>{});
 
   typeText();
   startSlideshow();
   hearts();
-});
+}
 
-// Metni yazdır
+// YAZI EFEKT
 function typeText(){
   if(i < text.length){
     document.getElementById("text").innerHTML += text.charAt(i);
@@ -31,13 +33,8 @@ function typeText(){
   }
 }
 
-// Fotoğraf slaytı
+// FOTO SLAYT
 function startSlideshow(){
-  const fotos = [
-    "foto1.jpeg","foto2.jpeg","foto3.jpeg","foto4.jpeg","foto5.jpeg",
-    "foto6.jpeg","foto7.jpeg","foto8.jpeg","foto9.jpeg","foto10.jpeg",
-    "foto11.jpeg","foto12.jpeg","foto13.jpeg","foto14.jpeg","foto15.jpeg","foto16.jpeg","foto17.jpeg","foto18.jpeg","foto19.jpeg","foto20.jpeg","foto21.jpeg","foto22.jpeg","foto23.jpeg","foto14.jpeg"
-  ];
   setInterval(()=>{
     photoIndex++;
     if(photoIndex >= fotos.length) photoIndex = 0;
@@ -45,10 +42,10 @@ function startSlideshow(){
   }, 2000);
 }
 
-// Kalpler
+// KALPLER
 function hearts(){
   setInterval(()=>{
-    let heart = document.createElement("div");
+    const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random()*100 + "vw";
