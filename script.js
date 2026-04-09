@@ -1,14 +1,25 @@
+// toplam fotoğraf sayısı
+const TOTAL_IMAGES = 140;
+const GROUP_SIZE = 10; // her sahnede 10 fotoğraf
+
+const totalGroups = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
+
+// sahne dizisi: her 10 foto + 1 söz
 const scenes = [];
 
-// 140 fotoğraf için döngü
-for (let j = 1; j <= 140; j++) {
+for (let i = 0; i < totalGroups; i++) {
+  const start = i * GROUP_SIZE + 1;
+  const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
   scenes.push({
-    img: `foto${j}.jpeg`,
-    text: `Bu an, seninle geçen an ${j}`,
+    start,
+    end,
+    text: `Bu an, seninle geçen güzel anlardan biri (#${i + 1})`
   });
 }
 
-let currentIndex = 0;
+let currentScene = 0;
+let slideInterval;
+let slideIndex = 0;
 
 // BAŞLAT
 function startSite() {
@@ -16,15 +27,9 @@ function startSite() {
   document.getElementById("content").style.display = "block";
 
   const music = document.getElementById("music");
-
-  // müzik oynatımı (tarayıcı korumalarıyla uyumlu)
   setTimeout(() => {
-    music.volume = 1;
-    music.play().then(() => {
-      console.log("Müzik çalıyor 🎶");
-    }).catch((err) => {
-      console.warn("Müzik oynatılamadı:", err);
-    });
+    music.volume = 1.0;
+    music.play().catch(() => {});
   }, 200);
 
   updateScene();
@@ -33,11 +38,20 @@ function startSite() {
 
 // SAHNE GÜNCELLE
 function updateScene() {
+  const scene = scenes[currentScene];
   const photo = document.getElementById("photo");
   const text = document.getElementById("text");
+  text.innerText = scene.text;
 
-  photo.src = scenes[currentIndex].img;
-  text.innerText = scenes[currentIndex].text;
+  clearInterval(slideInterval);
+  slideIndex = scene.start;
+
+  // O 10'luk grup arasındaki fotoğrafları döndür
+  slideInterval = setInterval(() => {
+    if (slideIndex > scene.end) slideIndex = scene.start; // yeniden başla
+    photo.src = `foto${slideIndex}.jpeg`;
+    slideIndex++;
+  }, 600); // geçiş süresi (0.6 sn)
 }
 
 // SCROLL
@@ -46,13 +60,13 @@ window.addEventListener("scroll", () => {
   const maxScroll = document.body.scrollHeight - window.innerHeight;
   let index = Math.floor((scrollTop / maxScroll) * scenes.length);
   if (index >= scenes.length) index = scenes.length - 1;
-  if (index !== currentIndex) {
-    currentIndex = index;
+  if (index !== currentScene) {
+    currentScene = index;
     updateScene();
   }
 });
 
-// KALPLER
+// KALPLER (değişmedi)
 function hearts() {
   setInterval(() => {
     const heart = document.createElement("div");
