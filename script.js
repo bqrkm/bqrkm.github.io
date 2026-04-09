@@ -1,27 +1,26 @@
-// === Slayt + Scroll Yapısı ===
+// === Scroll ile slayt tetikleme ===
 
 // toplam fotoğraf sayısı
 const TOTAL_IMAGES = 140;
-const GROUP_SIZE = 10; // her sahnede 10 fotoğraf
+const GROUP_SIZE = 10; // her slaytta 10 fotoğraf
 const scenes = [];
 const totalGroups = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
 
-// sahneleri oluştur (örneğin 14 sahne)
+// sahneleri oluştur
 for (let i = 0; i < totalGroups; i++) {
   const start = i * GROUP_SIZE + 1;
   const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
   scenes.push({
     start,
     end,
-    text: `${i + 1}. bölüm: Seninle geçen güzel anlar 💫`
+    text: `Seninle geçen o güzel anlardan biri 💫 (${i + 1})`
   });
 }
 
-let currentScene = 0;
-let slideIndex = 0;
+let currentScene = -1;
 let slideTimer;
 
-// BAŞLAT
+// başlat
 function startSite() {
   document.getElementById("intro").style.display = "none";
   document.getElementById("content").style.display = "block";
@@ -32,38 +31,46 @@ function startSite() {
     music.play().catch(() => {});
   }, 200);
 
-  updateScene();
   hearts();
+  updateScene(0); // ilk sahneyi başlat
 }
 
-// SAHNEYİ GÜNCELLE (her scroll değiştiğinde çağrılır)
-function updateScene() {
-  const scene = scenes[currentScene];
+// SAHNEYİ GÜNCELLE (her bölgeye girince bir defa çalışır)
+function updateScene(index) {
+  if (index === currentScene) return;
+  currentScene = index;
+
+  const scene = scenes[index];
   const photo = document.getElementById("photo");
   const text = document.getElementById("text");
 
   text.innerText = scene.text;
   clearInterval(slideTimer);
-  slideIndex = scene.start;
 
-  // 10'luk grup içinde fotoğrafları döndür
+  let slide = scene.start;
+  photo.src = `foto${slide}.jpeg`;
+
+  // o sahnedeki 10 fotoğrafı sırayla göster
   slideTimer = setInterval(() => {
-    photo.src = `foto${slideIndex}.jpeg`;
-    slideIndex++;
-    if (slideIndex > scene.end) slideIndex = scene.start;
-  }, 700); // her 0.7 saniyede foto değişir
+    slide++;
+    if (slide > scene.end) {
+      slide = scene.start; // döngü yap (istersen kapatabilirim)
+    }
+    photo.src = `foto${slide}.jpeg`;
+  }, 700); // geçiş süresi (ms)
 }
 
-// SCROLL OLAYI
+// SCROLL alımını “kademeli sahneye” dönüştür
 window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
   const maxScroll = document.body.scrollHeight - window.innerHeight;
-  let index = Math.floor((scrollTop / maxScroll) * scenes.length);
+  const sectionHeight = maxScroll / scenes.length;
+  let index = Math.floor(scrollTop / sectionHeight);
+
+  if (index < 0) index = 0;
   if (index >= scenes.length) index = scenes.length - 1;
-  if (index !== currentScene) {
-    currentScene = index;
-    updateScene();
-  }
+
+  updateScene(index);
 });
 
 // KALPLER
