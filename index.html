@@ -2,66 +2,142 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Hayatımın Anlamına <3</title>
+<title>Hayatımın Anlamına ❤️</title>
+
+<!-- AOS ANİMASYON -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
 <style>
-body {margin:0; background:black; color:white; font-family:Arial; text-align:center; overflow:hidden;}
-#content {display:none;}
-#startScreen {width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;}
-button {padding:15px 30px; font-size:18px; border:none; border-radius:10px; background:red; color:white; cursor:pointer;}
-img {width:540px; height:860px; object-fit:cover; border-radius:20px; box-shadow:0 0 20px rgba(255,255,255,0.3);}
-#text {font-size:24px; margin:20px; min-height:40px;}
-.heart {position:absolute; color:red; animation: float 5s linear infinite;}
-@keyframes float {0% {transform:translateY(0);} 100% {transform:translateY(-100vh);}}
+body {
+  margin:0;
+  background:linear-gradient(135deg,#000,#1a1a2e);
+  color:white;
+  font-family:Arial;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* GİRİŞ */
+#intro {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+button {
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+  background:red;
+  color:white;
+  cursor:pointer;
+}
+
+/* CONTENT */
+.scene {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+img {
+  width:320px;
+  height:520px;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(255,255,255,0.3);
+}
+
+/* TEXT */
+#text {
+  font-size:24px;
+  margin:20px;
+  min-height:40px;
+}
+
+/* HEART */
+.heart {
+  position:fixed;
+  color:red;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0% {transform:translateY(0);}
+  100% {transform:translateY(-100vh);}
+}
 </style>
 </head>
+
 <body>
 
+<!-- GİRİŞ -->
 <div id="intro">
   <h1>Hazır mısın?</h1>
   <button onclick="startSite()">Başla</button>
 </div>
 
+<!-- MÜZİK -->
 <audio id="music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
-  
-<div id="startScreen">
-  <h1>Tıkla bakalım Hatun' um ❤️</h1>
-  <button id="startBtn">Başlat</button>
-</div>
-
-<div id="content">
-  <div id="text"></div>
-  <img id="photo" src="foto1.jpeg">
-</div>
 
 <audio id="ses" src="ses.mp3"></audio>
 
-<script>
-const text = "Seninle geçen her an, hayatımın en güzel parçası oldu. Umarım bu parçalar her zaman benimle kalır. İyi ki varsın.";
-let i = 0;
-let photoIndex = 0;
+<!-- SAHNE 1 -->
+<section class="scene">
+  <h2 data-aos="fade-up">Her şey burada başladı...</h2>
+</section>
 
-// 140 fotoğrafı dinamik oluşturuyoruz
+<!-- SAHNE 2 -->
+<section class="scene">
+  <img id="photo" src="foto1.jpeg" data-aos="zoom-in">
+  <div id="text"></div>
+</section>
+
+<!-- SAHNE 3 -->
+<section class="scene">
+  <h2 data-aos="fade-up">Seninle her şey daha güzel ❤️</h2>
+</section>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+AOS.init();
+
+// TEXT
+const text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
+let i = 0;
+
+// FOTO
+let photoIndex = 0;
 const fotos = [];
 for(let j=1; j<=140; j++){
   fotos.push(`foto${j}.jpeg`);
 }
 
-document.getElementById("startBtn").addEventListener("click", async () => {
-  document.getElementById("startBtn").disabled = true;
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("content").style.display = "block";
+// BAŞLAT
+function startSite(){
+  document.getElementById("intro").style.display = "none";
 
-  const ses = document.getElementById("ses");
-  ses.volume = 0.8; // gerekirse ayarla
-  try { await ses.play(); } catch(e){ console.log("Ses çalmadı:", e); }
+  document.getElementById("music").play().catch(()=>{});
+  document.getElementById("ses").play().catch(()=>{});
 
   typeText();
   startSlideshow();
   hearts();
-});
+}
 
+// YAZI EFEKT
 function typeText(){
   if(i < text.length){
     document.getElementById("text").innerHTML += text.charAt(i);
@@ -70,6 +146,7 @@ function typeText(){
   }
 }
 
+// FOTO SLAYT
 function startSlideshow(){
   setInterval(()=>{
     photoIndex++;
@@ -78,6 +155,7 @@ function startSlideshow(){
   }, 2000);
 }
 
+// KALPLER
 function hearts(){
   setInterval(()=>{
     const heart = document.createElement("div");
