@@ -1,5 +1,5 @@
 const TOTAL_IMAGES = 140;
-const GROUP_SIZE = 10; // her sahnede 10 foto
+const GROUP_SIZE = 10;
 const TOTAL_SCENES = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
 let slideTimers = [];
 let currentVisible = -1;
@@ -10,7 +10,7 @@ function startSite() {
 
   const music = document.getElementById('music');
   music.volume = 1.0;
-  music.play().catch(() => {});
+  music.play().catch(()=>{});
 
   hearts();
   createScenes();
@@ -18,7 +18,6 @@ function startSite() {
   checkVisibleScenes();
 }
 
-// Her 10'luk grup için bir sahne oluştur
 function createScenes() {
   const container = document.getElementById('scene-container');
   container.innerHTML = '';
@@ -26,58 +25,44 @@ function createScenes() {
   for (let i = 0; i < TOTAL_SCENES; i++) {
     const start = i * GROUP_SIZE + 1;
     const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
-
-    const div = document.createElement('div');
-    div.className = 'scene';
-    div.innerHTML = `
-      <img src="foto${start}.jpeg" id="img${i}" alt="">
-      <p>Seninle geçen güzel anlardan biri 💫 (${i + 1})</p>
-    `;
-    container.appendChild(div);
+    container.innerHTML += `
+      <div class="scene">
+        <img src="foto${start}.jpeg" id="img${i}" alt="">
+        <p>Seninle geçen güzel anlardan biri 💫 (${i + 1})</p>
+      </div>`;
   }
 }
 
-// Scroll görünürlük kontrolü
 function checkVisibleScenes() {
-  const scenes = document.querySelectorAll('.scene');
-  scenes.forEach((scene, i) => {
+  document.querySelectorAll('.scene').forEach((scene, i) => {
     const rect = scene.getBoundingClientRect();
-    const visibleArea = rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.3;
-
-    if (visibleArea && currentVisible !== i) {
-      activateScene(i);
-    }
-    scene.classList.toggle('active', visibleArea);
+    const inView = rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.3;
+    scene.classList.toggle('active', inView);
+    if (inView && currentVisible !== i) activateScene(i);
   });
 }
 
-// Aktif sahnede slayt oynat
 function activateScene(index) {
-  clearTimers();
+  slideTimers.forEach(t=>clearInterval(t));
+  slideTimers = [];
   currentVisible = index;
 
-  const scene = document.getElementById(`img${index}`);
+  const img = document.getElementById(`img${index}`);
   const start = index * GROUP_SIZE + 1;
   const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
-
   let cur = start;
+
   slideTimers[index] = setInterval(() => {
-    scene.style.opacity = 0;
+    img.style.opacity = 0;
     setTimeout(() => {
-      scene.src = `foto${cur}.jpeg`;
-      scene.style.opacity = 1;
-    }, 400);
+      img.src = `foto${cur}.jpeg`;
+      img.style.opacity = 1;
+    }, 500);
     cur++;
     if (cur > end) cur = start;
-  }, 1700); // hız
+  }, 1900);  // ⏳ her 4 saniyede 1 fotoğraf
 }
 
-function clearTimers() {
-  slideTimers.forEach(t => clearInterval(t));
-  slideTimers = [];
-}
-
-// kalpler
 function hearts() {
   setInterval(() => {
     const heart = document.createElement("div");
@@ -86,6 +71,6 @@ function hearts() {
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.fontSize = Math.random() * 20 + 20 + "px";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
+    setTimeout(()=>heart.remove(), 5000);
   }, 300);
 }
