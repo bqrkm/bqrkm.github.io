@@ -1,12 +1,10 @@
-// FOTO + YAZI LİSTESİ
+// FOTO + YAZI
 const scenes = [
   { img: "foto1.jpeg", text: "Her şey burada başladı..." },
   { img: "foto2.jpeg", text: "Seni ilk gördüğüm an..." },
-  { img: "foto3.jpeg", text: "Kalbim biraz hızlı attı" },
-  { img: "foto4.jpeg", text: "Sonra alıştım sana..." },
-  { img: "foto5.jpeg", text: "Ama aslında bağımlı oldum ❤️" },
-  { img: "foto6.jpeg", text: "Seninle her şey daha güzel" },
-  { img: "foto7.jpeg", text: "İyi ki varsın..." }
+  { img: "foto3.jpeg", text: "Kalbim hızlandı..." },
+  { img: "foto4.jpeg", text: "Senle her şey değişti" },
+  { img: "foto5.jpeg", text: "İyi ki varsın ❤️" }
 ];
 
 let currentIndex = 0;
@@ -22,7 +20,9 @@ function startSite(){
   if(music) music.play().catch(()=>{});
   if(ses) ses.play().catch(()=>{});
 
+  // 🔥 KRİTİK: İLK FOTOYU ZORLA AYARLA
   updateScene();
+
   hearts();
 }
 
@@ -31,11 +31,13 @@ function updateScene(){
   const photo = document.getElementById("photo");
   const text = document.getElementById("text");
 
+  if(!photo || !text) return;
+
   photo.src = scenes[currentIndex].img;
   text.innerHTML = scenes[currentIndex].text;
 }
 
-// SCROLL KONTROL
+// SCROLL
 window.addEventListener("wheel", (e) => {
   if(isScrolling) return;
 
@@ -47,13 +49,12 @@ window.addEventListener("wheel", (e) => {
     currentIndex--;
   }
 
-  // sınır kontrol
   if(currentIndex < 0) currentIndex = 0;
   if(currentIndex >= scenes.length) currentIndex = scenes.length - 1;
 
   updateScene();
 
-  setTimeout(()=>{ isScrolling = false; }, 800);
+  setTimeout(()=>{ isScrolling = false; }, 700);
 });
 
 // KALPLER
