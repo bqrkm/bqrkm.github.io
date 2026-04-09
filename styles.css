@@ -11,13 +11,14 @@ body {
   overflow-x: hidden;
 }
 
+/* Giriş ekranı */
 #intro {
   width: 100vw;
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
@@ -34,7 +35,15 @@ button {
   display: none;
 }
 
+/* tüm sahnelerin kapsayıcısı */
+#scenesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* her sahne tüm ekran kadar yer kaplasın */
 .scene {
+  position: relative;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -42,20 +51,33 @@ button {
   align-items: center;
 }
 
-img {
-  width: 300px;
-  height: 400px;
+/* fotoğraflar görünür şekilde ortalanmış */
+.scene img {
+  width: 320px;
+  height: 430px;
   object-fit: cover;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(255,255,255,0.3);
-  transition: all 0.5s ease;
+  margin-bottom: 20px;
+  transition: transform 1s ease, opacity 1s ease;
 }
 
+/* ekrana girerken yukarıdan aşağı kaymak için animasyon */
+.fadeMove {
+  transform: translateY(30px);
+  opacity: 0;
+}
+.fadeMove.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* yazı */
 #text {
   font-size: 24px;
-  margin: 20px;
-  min-height: 40px;
-  transition: all 0.5s ease;
+  color: pink;
+  text-shadow: 0 0 10px rgba(255,0,0,0.4);
+  transition: opacity 1s;
 }
 
 /* kalpler */
@@ -63,9 +85,10 @@ img {
   position: absolute;
   color: red;
   animation: float 5s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes float {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-100vh); }
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
 }
