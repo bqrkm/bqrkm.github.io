@@ -65,13 +65,12 @@ button {
 
 /* Görseller */
 .scene img {
-  width: 80vw;              /* 👈 ekranın %80 ini kapla */
-  max-width: 400px;         /* çok büyük ekranlarda 400px'den fazla olmasın */
-  height: auto;             /* 👈 oran korunsun */
-  border-radius: 20px;
-  object-fit: cover;
+  width: 100vw;       /* ekran genişliğini tamamen kapla  */
+  height: 85dvh;      /* yüksekliği ekranın %85'i kadar */
+  object-fit: cover;  /* ekranı taşmadan doldur */
+  border-radius: 10px;
   box-shadow: 0 0 20px rgba(255,255,255,0.4);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   transition: opacity 1s ease;
 }
 
