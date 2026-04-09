@@ -84,7 +84,7 @@ button {
   color: red;
   animation: float 5s linear infinite;
   pointer-events: none;
-  z-index: -1;
+  z-index: 9999; /* 👈 fotoların üstüne gelsin */
 }
 
 @keyframes float {
