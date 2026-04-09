@@ -57,14 +57,16 @@ button {
 
 /* 🔥 tam ekran büyük fotoğraflar */
 .scene img {
-  width: 100vw;
-  height: calc(var(--vh, 1vh) * 90);   /* 👈 yeni ölçü: gerçek ekranın %90’ı */
-  object-fit: cover;
-  border-radius: 0;
+  width: 100vw;        /* genişliği telefona göre ayarla */
+  height: auto;        /* oranı KORU, dikey kalır */
+  max-height: 100vh;   /* ekranı taşmasın */
+  object-fit: contain; /* orana zarar verme */
+  border-radius: 10px;
   box-shadow: 0 0 25px rgba(255,255,255,0.25);
   margin-bottom: 10px;
   transition: opacity 1s ease;
 }
+
 
 
 /* alt yazı */
