@@ -61,16 +61,26 @@ function activateScene(index) {
   const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
   let cur = start;
 
-  slideTimers[index] = setInterval(() => {
-    img.style.opacity = 0;
+ slideTimers[index] = setInterval(() => {
+  const nextSrc = `foto${cur}.jpeg`;
+  const nextImg = new Image();
+  nextImg.src = nextSrc;
+
+  nextImg.onload = () => {
+    // yeni foto hazır olduğunda fade geçiş başlasın
+    img.style.transition = "opacity 1s ease";
+    img.style.opacity = 0.5;
+
     setTimeout(() => {
-      img.src = `foto${cur}.jpeg`;
+      img.src = nextSrc;
       img.style.opacity = 1;
     }, 500);
-    cur++;
-    if (cur > end) cur = start;
-  }, 1900);  // ⏳ her 4 saniyede 1 fotoğraf
-}
+  };
+
+  cur++;
+  if (cur > end) cur = start;
+}, 1900); // 4 saniyede bir geçiş
+
 
 function hearts() {
   setInterval(() => {
