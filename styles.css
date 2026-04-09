@@ -31,61 +31,50 @@ button {
   cursor: pointer;
 }
 
+/* Asıl içerik */
 #content {
   display: none;
 }
 
-/* tüm sahnelerin kapsayıcısı */
-#scenesContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-/* her sahne tüm ekran kadar yer kaplasın */
 .scene {
-  position: relative;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.8s ease;
 }
 
-/* fotoğraflar görünür şekilde ortalanmış */
+.scene.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .scene img {
   width: 320px;
   height: 430px;
-  object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  object-fit: cover;
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
   margin-bottom: 20px;
-  transition: transform 1s ease, opacity 1s ease;
+  transition: opacity 1s ease;
 }
 
-/* ekrana girerken yukarıdan aşağı kaymak için animasyon */
-.fadeMove {
-  transform: translateY(30px);
-  opacity: 0;
-}
-.fadeMove.show {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* yazı */
-#text {
-  font-size: 24px;
+.scene p {
+  font-size: 22px;
   color: pink;
   text-shadow: 0 0 10px rgba(255,0,0,0.4);
-  transition: opacity 1s;
 }
 
-/* kalpler */
+/* Kalpler */
 .heart {
-  position: absolute;
+  position: fixed;
   color: red;
   animation: float 5s linear infinite;
   pointer-events: none;
+  z-index: -1;
 }
 
 @keyframes float {
