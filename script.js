@@ -7,6 +7,8 @@ const scenes = [
   { img: "foto5.jpeg", text: "İyi ki varsın ❤️" }
 ];
 
+{ img: "https://picsum.photos/400/600", text: "Test" }
+
 let currentIndex = 0;
 let isScrolling = false;
 
