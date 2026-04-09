@@ -69,7 +69,7 @@ function activateScene(index) {
     }, 400);
     cur++;
     if (cur > end) cur = start;
-  }, 900); // hız
+  }, 3000); // hız
 }
 
 function clearTimers() {
