@@ -6,3 +6,6 @@ img {width:300px; height:400px; object-fit:cover; border-radius:20px; box-shadow
 #text {font-size:24px; margin:20px; min-height:40px;}
 .heart {position:absolute; color:red; animation: float 5s linear infinite;}
 @keyframes float {0% {transform:translateY(0);} 100% {transform:translateY(-100vh);}}
+#photo, #text {
+  transition: all 0.5s ease;
+}
