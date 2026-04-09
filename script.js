@@ -1,87 +1,80 @@
 const TOTAL_IMAGES = 140;
-const GROUP_SIZE = 10;
-const scenes = [];
-const totalGroups = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
-
-for (let i = 0; i < totalGroups; i++) {
-  const start = i * GROUP_SIZE + 1;
-  const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
-  scenes.push({
-    start,
-    end,
-    text: `Seninle geçen o güzel anlardan biri 💫 (${i + 1})`
-  });
-}
-
-let currentScene = -1;
-let slideTimer;
+const GROUP_SIZE = 10; // her sahnede 10 foto
+const TOTAL_SCENES = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
+let slideTimers = [];
+let currentVisible = -1;
 
 function startSite() {
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("content").style.display = "block";
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
 
-  const music = document.getElementById("music");
-  setTimeout(() => {
-    music.volume = 1.0;
-    music.play().catch(() => {});
-  }, 200);
+  const music = document.getElementById('music');
+  music.volume = 1.0;
+  music.play().catch(() => {});
 
-  createScenes();
   hearts();
+  createScenes();
+  window.addEventListener('scroll', checkVisibleScenes);
+  checkVisibleScenes();
 }
 
-// Her grup için sayfa içinde sahne oluştur
+// Her 10'luk grup için bir sahne oluştur
 function createScenes() {
-  const container = document.getElementById("scenesContainer");
-  container.innerHTML = "";
+  const container = document.getElementById('scene-container');
+  container.innerHTML = '';
 
-  scenes.forEach((scene, i) => {
-    const div = document.createElement("div");
-    div.className = "scene";
+  for (let i = 0; i < TOTAL_SCENES; i++) {
+    const start = i * GROUP_SIZE + 1;
+    const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
+
+    const div = document.createElement('div');
+    div.className = 'scene';
     div.innerHTML = `
-      <img class="fadeMove" id="photo${i}" src="foto${scene.start}.jpeg" alt="">
-      <div class="text fadeMove" id="text${i}">${scene.text}</div>
+      <img src="foto${start}.jpeg" id="img${i}" alt="">
+      <p>Seninle geçen güzel anlardan biri 💫 (${i + 1})</p>
     `;
     container.appendChild(div);
-  });
-
-  // scroll animasyonu izleme
-  window.addEventListener("scroll", handleScroll);
-  handleScroll();
+  }
 }
 
-// slayt + görünürlük kontrolü
-function handleScroll() {
-  const scenesEl = document.querySelectorAll(".scene");
-  scenesEl.forEach((sceneEl, i) => {
-    const rect = sceneEl.getBoundingClientRect();
+// Scroll görünürlük kontrolü
+function checkVisibleScenes() {
+  const scenes = document.querySelectorAll('.scene');
+  scenes.forEach((scene, i) => {
+    const rect = scene.getBoundingClientRect();
+    const visibleArea = rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.3;
 
-    // ekranın ortasına geldiğinde aktif
-    if (rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25) {
-      if (i !== currentScene) {
-        startSlide(i);
-      }
-      sceneEl.querySelectorAll(".fadeMove").forEach(el => el.classList.add("show"));
-    } else {
-      sceneEl.querySelectorAll(".fadeMove").forEach(el => el.classList.remove("show"));
+    if (visibleArea && currentVisible !== i) {
+      activateScene(i);
     }
+    scene.classList.toggle('active', visibleArea);
   });
 }
 
-// active sahnenin 10 fotoğrafını sırayla oynat
-function startSlide(index) {
-  clearInterval(slideTimer);
-  currentScene = index;
+// Aktif sahnede slayt oynat
+function activateScene(index) {
+  clearTimers();
+  currentVisible = index;
 
-  const scene = scenes[index];
-  let slide = scene.start;
-  const photoEl = document.getElementById(`photo${index}`);
+  const scene = document.getElementById(`img${index}`);
+  const start = index * GROUP_SIZE + 1;
+  const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
 
-  slideTimer = setInterval(() => {
-    photoEl.src = `foto${slide}.jpeg`;
-    slide++;
-    if (slide > scene.end) slide = scene.start;
-  }, 700);
+  let cur = start;
+  slideTimers[index] = setInterval(() => {
+    scene.style.opacity = 0;
+    setTimeout(() => {
+      scene.src = `foto${cur}.jpeg`;
+      scene.style.opacity = 1;
+    }, 400);
+    cur++;
+    if (cur > end) cur = start;
+  }, 900); // hız
+}
+
+function clearTimers() {
+  slideTimers.forEach(t => clearInterval(t));
+  slideTimers = [];
 }
 
 // kalpler
