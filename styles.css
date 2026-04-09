@@ -1,16 +1,74 @@
-body {margin:0; background:black; color:white; font-family:Arial; text-align:center; overflow-x:hidden;}
-#content {display:none;}
-#startScreen {width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;}
-button {padding:15px 30px; font-size:18px; border:none; border-radius:10px; background:red; color:white; cursor:pointer;}
-img {width:300px; height:400px; object-fit:cover; border-radius:20px; box-shadow:0 0 20px rgba(255,255,255,0.3);}
-#text {font-size:24px; margin:20px; min-height:40px;}
-.heart {position:absolute; color:red; animation: float 5s linear infinite;}
-@keyframes float {0% {transform:translateY(0);} 100% {transform:translateY(-100vh);}}
 html {
   scroll-behavior: smooth;
 }
 
-#photo, #text {
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* intro (ilk ekran) */
+#intro {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: red;
+  color: white;
+  cursor: pointer;
+}
+
+#content {
+  display: none;
+}
+
+.scene {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* fotoğraf stili */
+img {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
   transition: all 0.5s ease;
 }
 
+/* text alanı */
+#text {
+  font-size: 24px;
+  margin: 20px;
+  min-height: 40px;
+  transition: all 0.5s ease;
+}
+
+/* kalpler */
+.heart {
+  position: absolute;
+  color: red;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100vh); }
+}
