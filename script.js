@@ -106,12 +106,19 @@ function hearts() {
   setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 20 + "px";
-    heart.style.top = "100vh"; // 👈 alta başlat
+    heart.textContent = "❤️";
+
+    // rastgele yatay pozisyon
+    const randomX = Math.random() * 100;
+    heart.style.setProperty("--x", randomX + "vw");
+
+    // rastgele boyut
+    const size = Math.random() * 20 + 20;
+    heart.style.fontSize = size + "px";
+
     document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 5000);
+    // 5 saniye sonra kalbi kaldır
+    setTimeout(() => heart.remove(), 5200);
   }, 300);
 }
