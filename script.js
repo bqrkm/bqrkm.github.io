@@ -1,13 +1,16 @@
-// TEXT
-const text = "Seninle geçen her an, hayatımın en güzel parçası oldu...";
-let i = 0;
+// FOTO + YAZI LİSTESİ
+const scenes = [
+  { img: "foto1.jpeg", text: "Her şey burada başladı..." },
+  { img: "foto2.jpeg", text: "Seni ilk gördüğüm an..." },
+  { img: "foto3.jpeg", text: "Kalbim biraz hızlı attı" },
+  { img: "foto4.jpeg", text: "Sonra alıştım sana..." },
+  { img: "foto5.jpeg", text: "Ama aslında bağımlı oldum ❤️" },
+  { img: "foto6.jpeg", text: "Seninle her şey daha güzel" },
+  { img: "foto7.jpeg", text: "İyi ki varsın..." }
+];
 
-// FOTO
-let photoIndex = 0;
-const fotos = [];
-for(let j=1; j<=140; j++){
-  fotos.push(`foto${j}.jpeg`);
-}
+let currentIndex = 0;
+let isScrolling = false;
 
 // BAŞLAT
 function startSite(){
@@ -19,28 +22,39 @@ function startSite(){
   if(music) music.play().catch(()=>{});
   if(ses) ses.play().catch(()=>{});
 
-  typeText();
-  startSlideshow();
+  updateScene();
   hearts();
 }
 
-// YAZI EFEKT
-function typeText(){
-  if(i < text.length){
-    document.getElementById("text").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeText, 50);
-  }
+// SAHNE GÜNCELLE
+function updateScene(){
+  const photo = document.getElementById("photo");
+  const text = document.getElementById("text");
+
+  photo.src = scenes[currentIndex].img;
+  text.innerHTML = scenes[currentIndex].text;
 }
 
-// FOTO SLAYT
-function startSlideshow(){
-  setInterval(()=>{
-    photoIndex++;
-    if(photoIndex >= fotos.length) photoIndex = 0;
-    document.getElementById("photo").src = fotos[photoIndex];
-  }, 2000);
-}
+// SCROLL KONTROL
+window.addEventListener("wheel", (e) => {
+  if(isScrolling) return;
+
+  isScrolling = true;
+
+  if(e.deltaY > 0){
+    currentIndex++;
+  } else {
+    currentIndex--;
+  }
+
+  // sınır kontrol
+  if(currentIndex < 0) currentIndex = 0;
+  if(currentIndex >= scenes.length) currentIndex = scenes.length - 1;
+
+  updateScene();
+
+  setTimeout(()=>{ isScrolling = false; }, 800);
+});
 
 // KALPLER
 function hearts(){
