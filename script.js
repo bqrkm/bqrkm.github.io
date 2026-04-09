@@ -19,7 +19,7 @@ function startSite() {
 
   // müzik oynatımı (tarayıcı korumalarıyla uyumlu)
   setTimeout(() => {
-    music.volume = 0.6;
+    music.volume = 1;
     music.play().then(() => {
       console.log("Müzik çalıyor 🎶");
     }).catch((err) => {
