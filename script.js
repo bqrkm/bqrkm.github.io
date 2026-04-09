@@ -1,25 +1,25 @@
+// === Slayt + Scroll Yapısı ===
+
 // toplam fotoğraf sayısı
 const TOTAL_IMAGES = 140;
 const GROUP_SIZE = 10; // her sahnede 10 fotoğraf
-
+const scenes = [];
 const totalGroups = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
 
-// sahne dizisi: her 10 foto + 1 söz
-const scenes = [];
-
+// sahneleri oluştur (örneğin 14 sahne)
 for (let i = 0; i < totalGroups; i++) {
   const start = i * GROUP_SIZE + 1;
   const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
   scenes.push({
     start,
     end,
-    text: `Bu an, seninle geçen güzel anlardan biri (#${i + 1})`
+    text: `${i + 1}. bölüm: Seninle geçen güzel anlar 💫`
   });
 }
 
 let currentScene = 0;
-let slideInterval;
 let slideIndex = 0;
+let slideTimer;
 
 // BAŞLAT
 function startSite() {
@@ -36,25 +36,25 @@ function startSite() {
   hearts();
 }
 
-// SAHNE GÜNCELLE
+// SAHNEYİ GÜNCELLE (her scroll değiştiğinde çağrılır)
 function updateScene() {
   const scene = scenes[currentScene];
   const photo = document.getElementById("photo");
   const text = document.getElementById("text");
-  text.innerText = scene.text;
 
-  clearInterval(slideInterval);
+  text.innerText = scene.text;
+  clearInterval(slideTimer);
   slideIndex = scene.start;
 
-  // O 10'luk grup arasındaki fotoğrafları döndür
-  slideInterval = setInterval(() => {
-    if (slideIndex > scene.end) slideIndex = scene.start; // yeniden başla
+  // 10'luk grup içinde fotoğrafları döndür
+  slideTimer = setInterval(() => {
     photo.src = `foto${slideIndex}.jpeg`;
     slideIndex++;
-  }, 600); // geçiş süresi (0.6 sn)
+    if (slideIndex > scene.end) slideIndex = scene.start;
+  }, 700); // her 0.7 saniyede foto değişir
 }
 
-// SCROLL
+// SCROLL OLAYI
 window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
   const maxScroll = document.body.scrollHeight - window.innerHeight;
@@ -66,7 +66,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// KALPLER (değişmedi)
+// KALPLER
 function hearts() {
   setInterval(() => {
     const heart = document.createElement("div");
