@@ -1,12 +1,8 @@
-// === Scroll ile slayt tetikleme ===
-
-// toplam fotoğraf sayısı
 const TOTAL_IMAGES = 140;
-const GROUP_SIZE = 10; // her slaytta 10 fotoğraf
+const GROUP_SIZE = 10;
 const scenes = [];
 const totalGroups = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
 
-// sahneleri oluştur
 for (let i = 0; i < totalGroups; i++) {
   const start = i * GROUP_SIZE + 1;
   const end = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
@@ -20,7 +16,6 @@ for (let i = 0; i < totalGroups; i++) {
 let currentScene = -1;
 let slideTimer;
 
-// başlat
 function startSite() {
   document.getElementById("intro").style.display = "none";
   document.getElementById("content").style.display = "block";
@@ -31,49 +26,65 @@ function startSite() {
     music.play().catch(() => {});
   }, 200);
 
+  createScenes();
   hearts();
-  updateScene(0); // ilk sahneyi başlat
 }
 
-// SAHNEYİ GÜNCELLE (her bölgeye girince bir defa çalışır)
-function updateScene(index) {
-  if (index === currentScene) return;
+// Her grup için sayfa içinde sahne oluştur
+function createScenes() {
+  const container = document.getElementById("scenesContainer");
+  container.innerHTML = "";
+
+  scenes.forEach((scene, i) => {
+    const div = document.createElement("div");
+    div.className = "scene";
+    div.innerHTML = `
+      <img class="fadeMove" id="photo${i}" src="foto${scene.start}.jpeg" alt="">
+      <div class="text fadeMove" id="text${i}">${scene.text}</div>
+    `;
+    container.appendChild(div);
+  });
+
+  // scroll animasyonu izleme
+  window.addEventListener("scroll", handleScroll);
+  handleScroll();
+}
+
+// slayt + görünürlük kontrolü
+function handleScroll() {
+  const scenesEl = document.querySelectorAll(".scene");
+  scenesEl.forEach((sceneEl, i) => {
+    const rect = sceneEl.getBoundingClientRect();
+
+    // ekranın ortasına geldiğinde aktif
+    if (rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25) {
+      if (i !== currentScene) {
+        startSlide(i);
+      }
+      sceneEl.querySelectorAll(".fadeMove").forEach(el => el.classList.add("show"));
+    } else {
+      sceneEl.querySelectorAll(".fadeMove").forEach(el => el.classList.remove("show"));
+    }
+  });
+}
+
+// active sahnenin 10 fotoğrafını sırayla oynat
+function startSlide(index) {
+  clearInterval(slideTimer);
   currentScene = index;
 
   const scene = scenes[index];
-  const photo = document.getElementById("photo");
-  const text = document.getElementById("text");
-
-  text.innerText = scene.text;
-  clearInterval(slideTimer);
-
   let slide = scene.start;
-  photo.src = `foto${slide}.jpeg`;
+  const photoEl = document.getElementById(`photo${index}`);
 
-  // o sahnedeki 10 fotoğrafı sırayla göster
   slideTimer = setInterval(() => {
+    photoEl.src = `foto${slide}.jpeg`;
     slide++;
-    if (slide > scene.end) {
-      slide = scene.start; // döngü yap (istersen kapatabilirim)
-    }
-    photo.src = `foto${slide}.jpeg`;
-  }, 700); // geçiş süresi (ms)
+    if (slide > scene.end) slide = scene.start;
+  }, 700);
 }
 
-// SCROLL alımını “kademeli sahneye” dönüştür
-window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
-  const maxScroll = document.body.scrollHeight - window.innerHeight;
-  const sectionHeight = maxScroll / scenes.length;
-  let index = Math.floor(scrollTop / sectionHeight);
-
-  if (index < 0) index = 0;
-  if (index >= scenes.length) index = scenes.length - 1;
-
-  updateScene(index);
-});
-
-// KALPLER
+// kalpler
 function hearts() {
   setInterval(() => {
     const heart = document.createElement("div");
