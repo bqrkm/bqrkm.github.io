@@ -301,15 +301,14 @@
       to   { opacity:1; transform:translateY(0); }
     }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-    .mem-photo {
-  width: 100%;
-  max-width: 280px;
+    
+.mem-photo {
+  width: 200px;
   height: 200px;
   object-fit: cover;
-  border-radius: 4px;
   margin-top: 1rem;
-  box-shadow: 0 0 30px rgba(200, 98, 122, 0.2);
-  opacity: 0.9;
+  clip-path: path('M100,30 C60,0 0,40 0,90 C0,140 50,170 100,200 C150,170 200,140 200,90 C200,40 140,0 100,30 Z');
+  box-shadow: 0 0 30px rgba(200, 98, 122, 0.3);
 }
   </style>
 </head>
