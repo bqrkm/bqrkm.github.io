@@ -92,7 +92,7 @@ function activateScene(index) {
   };
 
   fadeNext();
-  slideTimers[index] = setInterval(fadeNext, 1500);
+  slideTimers[index] = setInterval(fadeNext, 1000);
 }
 
 /* ==== zamanlayıcı kontrol ==== */
