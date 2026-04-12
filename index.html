@@ -4,31 +4,376 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hayatımın Anlamına ❤️</title>
-  <link rel="stylesheet" href="styles.css"/>
-  <audio id="music" loop>
-    <source src="muzik.mp3" type="audio/mpeg"/>
-  </audio>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <audio id="music" loop><source src="ses.mp3" type="audio/mpeg"/></audio>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --rose:       #c8627a;
+      --rose-light: #e8a0b0;
+      --gold:       #c9a96e;
+      --cream:      #fdf6f0;
+      --dark:       #0d0a0b;
+      --muted:      #6a5058;
+    }
+
+    html { scroll-behavior: smooth; }
+    html, body { height: 100%; -webkit-text-size-adjust: none; }
+
+    body {
+      margin: 0;
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* grain */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.5;
+    }
+
+    /* ── INTRO ── */
+    #intro {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #intro::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,98,122,0.18) 0%, transparent 70%);
+      top: -200px; left: -200px;
+      animation: blobDrift 10s ease-in-out infinite;
+      pointer-events: none;
+    }
+    #intro::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
+      bottom: -150px; right: -150px;
+      animation: blobDrift 12s ease-in-out infinite reverse;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes blobDrift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%      { transform: translate(40px,-40px) scale(1.1); }
+    }
+
+    .intro-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--rose-light);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.4s forwards;
+      position: relative; z-index: 1;
+    }
+
+    .intro-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 11vw, 6.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.7s forwards;
+      position: relative; z-index: 1;
+    }
+    .intro-title em { font-style: italic; color: var(--rose-light); }
+
+    .intro-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 3.5vw, 1.4rem);
+      color: var(--muted);
+      margin-bottom: 3.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 1s forwards;
+      position: relative; z-index: 1;
+    }
+
+    button {
+      display: inline-block;
+      padding: 1rem 3.2rem;
+      border: 1px solid rgba(200,98,122,0.45);
+      border-radius: 0;
+      background: rgba(200,98,122,0.1);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      position: relative; z-index: 1;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.3s forwards;
+    }
+    button:hover {
+      background: rgba(200,98,122,0.28);
+      border-color: var(--rose);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 50px rgba(200,98,122,0.25);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 2.2s forwards;
+      z-index: 1;
+    }
+    .scroll-hint span {
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-line {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, var(--rose), transparent);
+      animation: linePulse 2s ease-in-out infinite;
+    }
+    @keyframes linePulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+    /* ── CONTENT ── */
+    #content { display: none; }
+
+    /* ── SCENES ── */
+    .scene {
+      height: 100dvh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      opacity: 0;
+      transform: translateY(60px) scale(0.98);
+      transition: opacity 0.9s cubic-bezier(.4,0,.2,1), transform 0.9s cubic-bezier(.4,0,.2,1);
+      position: relative; overflow: hidden;
+    }
+    .scene::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(13,10,11,0.6) 100%);
+      pointer-events: none; z-index: 1;
+    }
+    .scene.active { opacity: 1; transform: translateY(0) scale(1); }
+
+    .scene img {
+      width: 100vw;
+      height: auto;
+      max-height: 100vh;
+      object-fit: contain;
+      box-shadow: 0 0 80px rgba(200,98,122,0.15), 0 0 20px rgba(0,0,0,0.8);
+      transition: opacity 0.8s ease;
+      display: block;
+    }
+
+    .scene p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 3.5vw, 1.4rem);
+      color: rgba(232,160,176,0.9);
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(200,98,122,0.3);
+      position: absolute;
+      bottom: 5vh; left: 50%;
+      transform: translateX(-50%);
+      width: 90%; z-index: 2;
+      letter-spacing: 0.02em; line-height: 1.5;
+    }
+
+    .scene-num {
+      position: absolute;
+      top: 2rem; right: 2rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: rgba(232,160,176,0.4);
+      z-index: 2;
+    }
+
+    /* ── HEARTS ── */
+    .heart {
+      position: fixed;
+      bottom: -60px;
+      pointer-events: none;
+      animation: floatUp 5.2s cubic-bezier(.2,.6,.4,1) forwards;
+      z-index: 99999;
+      filter: drop-shadow(0 0 6px rgba(200,98,122,0.5));
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(-10deg) scale(0.8); opacity: 0.9; left: var(--x); }
+      20%  { transform: translateY(-20vh) rotate(8deg) scale(1); opacity: 1; }
+      60%  { transform: translateY(-65vh) rotate(-5deg) scale(0.95); opacity: 0.7; }
+      100% { transform: translateY(-115vh) rotate(12deg) scale(0.7); opacity: 0; left: calc(var(--x) + 3vw); }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(24px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity:0; } to { opacity:1; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ══ GİRİŞ EKRANI ══ -->
+  <!-- GİRİŞ -->
   <div id="intro">
     <p class="intro-eyebrow">Sana özel bir şey var</p>
     <h1 class="intro-title">Hayatımın<br/><em>Anlamısın</em></h1>
     <p class="intro-sub">ve bunu hiç unutma…</p>
     <button onclick="startSite()">Hazır mısın? ❤️</button>
-
     <div class="scroll-hint">
       <span>Aşağı kaydır</span>
       <div class="scroll-line"></div>
     </div>
   </div>
 
-  <!-- ══ İÇERİK (fotoğraf sahneleri) ══ -->
+  <!-- FOTOĞRAFLAR -->
   <div id="content">
     <div id="scene-container"></div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    /* mobil vh fix */
+    function fixVH() {
+      document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+    }
+    fixVH();
+    window.addEventListener("resize", fixVH);
+
+    const TOTAL_IMAGES = 140;
+    const GROUP_SIZE   = 10;
+    const TOTAL_SCENES = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
+    let slideTimers    = [];
+    let currentVisible = -1;
+
+    function startSite() {
+      const intro   = document.getElementById("intro");
+      const content = document.getElementById("content");
+      intro.style.transition = "opacity 0.8s ease";
+      intro.style.opacity = "0";
+      setTimeout(() => {
+        intro.style.display = "none";
+        content.style.display = "block";
+        content.style.opacity = "0";
+        content.style.transition = "opacity 0.6s ease";
+        requestAnimationFrame(() => requestAnimationFrame(() => content.style.opacity = "1"));
+      }, 800);
+
+      const music = document.getElementById("music");
+      if (music) {
+        music.volume = 0; music.play().catch(()=>{});
+        let v = 0;
+        const fi = setInterval(() => { v = Math.min(v+0.05,1); music.volume=v; if(v>=1) clearInterval(fi); }, 100);
+      }
+
+      createScenes();
+      hearts();
+      window.addEventListener("scroll", checkVisible, { passive: true });
+      setTimeout(checkVisible, 100);
+    }
+
+    const captions = [
+      "Seninle her an özel… 💫","Bu gülüşünü hiç unutamam 🌸",
+      "En güzel anım, seninle olan 🤍","Seni görmek her şeyi güzelleştiriyor ✨",
+      "Seninle geçen her saniye değerli 💕","Bu bakışlar… kalbimi çalıyor 🥀",
+      "Seninle olmak ev gibi hissettiriyor 🏡","Her fotoğrafta daha çok seviyorum seni 💞",
+      "Anılarımızın en güzelleri bunlar 🌙","Seni sevmek en güzel şeyim 💗",
+      "Seninle geçen güzel anlardan biri 💫","Her gülüşün bir hediye 🎁",
+      "Kalbimde bir yerin var, hep 🌹","Seni seviyorum — dünden fazla 💝",
+    ];
+
+    function createScenes() {
+      const c = document.getElementById("scene-container");
+      c.innerHTML = "";
+      for (let i = 0; i < TOTAL_SCENES; i++) {
+        const start = i * GROUP_SIZE + 1;
+        const div = document.createElement("div");
+        div.className = "scene";
+        div.innerHTML = `
+          <span class="scene-num">${String(i+1).padStart(2,"0")} / ${String(TOTAL_SCENES).padStart(2,"0")}</span>
+          <img src="foto${start}.jpeg" id="img${i}" alt="" loading="lazy"/>
+          <p>${captions[i % captions.length]}</p>`;
+        c.appendChild(div);
+      }
+    }
+
+    function checkVisible() {
+      document.querySelectorAll(".scene").forEach((scene, i) => {
+        const r = scene.getBoundingClientRect();
+        const vis = r.top < window.innerHeight * 0.65 && r.bottom > window.innerHeight * 0.35;
+        scene.classList.toggle("active", vis);
+        if (vis && currentVisible !== i) activateScene(i);
+      });
+    }
+
+    function activateScene(index) {
+      clearAllTimers();
+      currentVisible = index;
+      const img = document.getElementById(`img${index}`);
+      if (!img) return;
+      const start = index * GROUP_SIZE + 1;
+      const end   = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
+      let cur = start;
+      const fadeNext = () => {
+        const src = `foto${cur}.jpeg`;
+        const ni = new Image(); ni.src = src;
+        ni.onload = () => {
+          img.style.transition = "opacity 0.8s ease";
+          img.style.opacity = "0";
+          setTimeout(() => { img.src = src; img.style.opacity = "1"; }, 400);
+        };
+        cur++; if (cur > end) cur = start;
+      };
+      fadeNext();
+      slideTimers[index] = setInterval(fadeNext, 2200);
+    }
+
+    function clearAllTimers() { slideTimers.forEach(t => clearInterval(t)); slideTimers = []; }
+
+    function hearts() {
+      const emojis = ["❤️","🤍","💕","🌸","✨","💗","🌹","💞"];
+      setInterval(() => {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        const x = Math.random() * 96;
+        h.style.setProperty("--x", x + "vw");
+        h.style.left = x + "vw";
+        h.style.fontSize = (Math.random() * 18 + 14) + "px";
+        const dur = (Math.random() * 2 + 4).toFixed(1);
+        h.style.animationDuration = dur + "s";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), parseFloat(dur) * 1000 + 200);
+      }, 350);
+    }
+  </script>
 </body>
 </html>
