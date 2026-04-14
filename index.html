@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- ✅ CACHE ÖNLEME -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  
   <title>Hayatımın Anlamına ❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
   <audio id="music" loop><source src="ses.mp3" type="audio/mpeg"/></audio>
@@ -39,7 +45,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       🌟 1. YILDIZLAR (Arka plan süsleme)
+       🌟 1. YILDIZLAR
     ═══════════════════════════════════════════════ */
     .stars {
       position: fixed;
@@ -61,7 +67,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       🎵 2. MÜZİK KONTROLÜ (Sağ üst köşe)
+       🎵 2. MÜZİK KONTROLÜ
     ═══════════════════════════════════════════════ */
     .music-toggle {
       position: fixed;
@@ -95,7 +101,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       💕 3. HERO BÖLÜMÜ (Açılış sayfası)
+       💕 3. HERO BÖLÜMÜ
     ═══════════════════════════════════════════════ */
     #hero {
       width: 100vw;
@@ -214,7 +220,7 @@
     @keyframes linePulse { 0%,100%{opacity:.3} 50%{opacity:1} }
 
     /* ═══════════════════════════════════════════════
-       📅 4. ANI/TİMELİNE BÖLÜMÜ (Ortadaki anılar)
+       📅 4. ANI/TİMELİNE
     ═══════════════════════════════════════════════ */
     #memories {
       padding: 6rem 2rem 4rem;
@@ -394,7 +400,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       💬 6. ÖZEL SÖZLER BÖLÜMÜ
+       💬 6. ÖZEL SÖZLER
     ═══════════════════════════════════════════════ */
     .quotes-section {
       padding: 6rem 2rem;
@@ -535,7 +541,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       📸 8. POLAROİD FOTOĞRAFLAR
+       📸 8. POLAROİD FOTOĞRAFLAR + LIGHTBOX
     ═══════════════════════════════════════════════ */
     .polaroid-section {
       padding: 6rem 2rem;
@@ -558,6 +564,7 @@
       transform: rotate(-2deg);
       transition: all 0.3s ease;
       cursor: pointer;
+      position: relative;
     }
 
     .polaroid:nth-child(even) {
@@ -568,6 +575,21 @@
       transform: rotate(0deg) scale(1.05);
       box-shadow: 0 15px 50px rgba(0,0,0,0.5);
       z-index: 10;
+    }
+
+    /* ✨ YENİ: Tıklama işareti */
+    .polaroid::after {
+      content: '🔍';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .polaroid:hover::after {
+      opacity: 0.7;
     }
 
     .polaroid img {
@@ -584,6 +606,125 @@
       text-align: center;
       margin-top: 15px;
       font-size: 1rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       🖼️ LIGHTBOX (Büyüyen Fotoğraf Modali)
+    ═══════════════════════════════════════════════ */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.5) rotate(10deg);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 80px rgba(200,98,122,0.5);
+    }
+
+    /* Kapatma butonu */
+    .lightbox-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: var(--rose);
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(200,98,122,0.4);
+    }
+
+    .lightbox-close:hover {
+      background: #b85668;
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    /* Alt yazı */
+    .lightbox-caption {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--rose-light);
+    }
+
+    /* Ok tuşları (Önceki/Sonraki) */
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(200,98,122,0.8);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-nav:hover {
+      background: var(--rose);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-prev {
+      left: 20px;
+    }
+
+    .lightbox-next {
+      right: 20px;
     }
 
     /* ═══════════════════════════════════════════════
@@ -784,6 +925,13 @@
       .message-bubble {
         max-width: 85%;
       }
+      .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+      .lightbox-prev { left: 10px; }
+      .lightbox-next { right: 10px; }
     }
   </style>
 </head>
@@ -795,9 +943,7 @@
   <!-- 🎵 MÜZİK KONTROLÜ -->
   <div class="music-toggle" id="musicToggle" title="Müziği aç/kapa"></div>
 
-  <!-- ═════════════════════════════════════════════════════════
-       💕 1. HERO - AÇILIŞ SAYFASI
-  ═════════════════════════════════════════════════════════ -->
+  <!-- 💕 HERO -->
   <div id="hero">
     <div class="blob2"></div>
     <div class="big-heart">💕</div>
@@ -810,16 +956,13 @@
     </div>
   </div>
 
-  <!-- ═════════════════════════════════════════════════════════
-       📅 2. ANI/TİMELİNE - GEÇİRDİĞİNİZ ANLAR
-  ═════════════════════════════════════════════════════════ -->
+  <!-- 📅 ANI/TİMELİNE -->
   <section id="memories">
     <p class="mem-label">Bizim hikayemiz</p>
     <h2 class="mem-heading">Birlikte <em>geçirdiğimiz</em><br/>en güzel anlar</h2>
 
     <div class="timeline">
 
-      <!-- ANI 1 -->
       <div class="mem-item">
         <span class="mem-emoji">🌟</span>
         <p class="mem-date">20 Mart 2025</p>
@@ -827,7 +970,6 @@
         <p class="mem-desc">O akşam iyi ki ameliyattan dolayı kötü hissedip elime telefonu almışım. Sana her şerde hayır vardır dememin sebebi bu. İlk defa ameliyata girmiştim. Çok ağrım vardı kafayı yiyordum. Ama sonrasında durdum ve dedim ki, bu ameliyat olmasaydı hayatımın aşkıyla tanışamazdım. O günden beri hayatımda her kötü giden şeyin iyi bir şeye yol açtığına inanıyorum.</p>
       </div>
 
-      <!-- ANI 2 -->
       <div class="mem-item">
         <span class="mem-emoji">☕</span>
         <p class="mem-date">28 Mart 2025</p>
@@ -836,7 +978,6 @@
         <img src="foto1.jpeg" class="mem-photo" alt="">
       </div>
 
-      <!-- ✏️ ANI 3 - BURAYA YENİ ANI EKLE -->
       <div class="mem-item">
         <span class="mem-emoji">💋</span>
         <p class="mem-date">TARİHİ YAZ</p>
@@ -844,7 +985,6 @@
         <p class="mem-desc">Buraya o anı anlat... Kalbim o an nasıl çarptığını hala hatırlıyorum.</p>
       </div>
 
-      <!-- ✏️ ANI 4 - BURAYA YENİ ANI EKLE -->
       <div class="mem-item">
         <span class="mem-emoji">💕</span>
         <p class="mem-date">TARİHİ YAZ</p>
@@ -852,7 +992,6 @@
         <p class="mem-desc">O kelimeleri söylemek en doğal şeydi...</p>
       </div>
 
-      <!-- ✏️ ANI 5 - BURAYA YENİ ANI EKLE -->
       <div class="mem-item">
         <span class="mem-emoji">🎁</span>
         <p class="mem-date">TARİHİ YAZ</p>
@@ -860,7 +999,6 @@
         <p class="mem-desc">Bana verdiğin o hediyeyi hala saklıyorum...</p>
       </div>
 
-      <!-- SON ANI -->
       <div class="mem-item">
         <span class="mem-emoji">♾️</span>
         <p class="mem-date">Her gün</p>
@@ -871,9 +1009,7 @@
     </div>
   </section>
 
-  <!-- ═════════════════════════════════════════════════════════
-       💝 3. SENDEN SEVDİĞİM ŞEYLER
-  ═════════════════════════════════════════════════════════ -->
+  <!-- 💝 SENDEN SEVDİĞİM ŞEYLER -->
   <section class="love-section">
     <p class="mem-label">Seni tanımlayanlar</p>
     <h2 class="mem-heading">Sende <em>sevdiğim</em><br/>10 şey</h2>
@@ -943,9 +1079,7 @@
     </div>
   </section>
 
-  <!-- ═════════════════════════════════════════════════════════
-       💬 4. ÖZEL SÖZLER
-  ═════════════════════════════════════════════════════════ -->
+  <!-- 💬 ÖZEL SÖZLER -->
   <section class="quotes-section">
     <p class="mem-label">Sana söylediklerim</p>
     <h2 class="mem-heading">Kalbimdeki <em>kelimeler</em></h2>
@@ -975,9 +1109,7 @@
     </div>
   </section>
 
-  <!-- ═════════════════════════════════════════════════════════
-       🎁 5. İNTERAKTİF KARTLAR
-  ═════════════════════════════════════════════════════════ -->
+  <!-- 🎁 İNTERAKTİF KARTLAR -->
   <section class="cards-section">
     <p class="mem-label">Sürpriz mesajlar</p>
     <h2 class="mem-heading">Sana <em>özel</em><br/>sürprizler</h2>
@@ -1066,8 +1198,8 @@
   </section>
 
   <!-- ═════════════════════════════════════════════════════════
-       📸 6. POLAROİD FOTOĞRAFLAR
-       ✏️ Buraya fotoğraflarını ekle!
+       📸 POLAROİD FOTOĞRAFLAR - TIKLA BÜYÜT!
+       ✏️ Fotoğrafları buraya ekle
   ═════════════════════════════════════════════════════════ -->
   <section class="polaroid-section">
     <p class="mem-label">Anılarımızdan kareler</p>
@@ -1076,31 +1208,42 @@
     <div class="polaroid-grid">
       
       <!-- ✏️ FOTOĞRAF 1 -->
-      <div class="polaroid">
-        <img src="foto1.jpeg" alt="">
+      <div class="polaroid" onclick="openLightbox(0)">
+        <img src="foto1.jpeg" alt="İlk buluşmamız 💕">
         <p class="polaroid-caption">İlk buluşmamız 💕</p>
       </div>
 
       <!-- ✏️ FOTOĞRAF 2 -->
-      <div class="polaroid">
-        <img src="foto2.jpeg" alt="">
+      <div class="polaroid" onclick="openLightbox(1)">
+        <img src="foto2.jpeg" alt="O güzel günden bir kare ✨">
         <p class="polaroid-caption">O güzel günden bir kare ✨</p>
       </div>
 
       <!-- ✏️ FOTOĞRAF 3 -->
-      <div class="polaroid">
-        <img src="foto3.jpeg" alt="">
+      <div class="polaroid" onclick="openLightbox(2)">
+        <img src="foto3.jpeg" alt="Seninle her an özel 🌸">
         <p class="polaroid-caption">Seninle her an özel 🌸</p>
       </div>
 
-      <!-- ✏️ İSTERSEN DAHA FAZLA EKLE - Aynı şablonu kopyala-yapıştır -->
+      <!-- ✏️ İSTERSEN DAHA FAZLA EKLE -->
       
     </div>
   </section>
 
   <!-- ═════════════════════════════════════════════════════════
-       💌 7. MESAJ BALONLARI
+       🖼️ LIGHTBOX (Büyük Fotoğraf Görüntüleyici)
   ═════════════════════════════════════════════════════════ -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()">×</button>
+      <button class="lightbox-nav lightbox-prev" onclick="changePhoto(-1)">‹</button>
+      <img id="lightbox-img" src="" alt="">
+      <button class="lightbox-nav lightbox-next" onclick="changePhoto(1)">›</button>
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <!-- 💌 MESAJ BALONLARI -->
   <section class="messages-section">
     <p class="mem-label">Aramızdaki mesajlar</p>
     <h2 class="mem-heading">İlk <em>konuşmalarımız</em></h2>
@@ -1158,9 +1301,7 @@
     </div>
   </section>
 
-  <!-- ═════════════════════════════════════════════════════════
-       ⏱️ 8. SAYAÇ
-  ═════════════════════════════════════════════════════════ -->
+  <!-- ⏱️ SAYAÇ -->
   <section class="counter-section">
     <p class="mem-label">Birlikte geçen zamanımız</p>
     <h2 class="mem-heading">Seninle geçen her <em>saniye</em> değerli</h2>
@@ -1185,9 +1326,7 @@
     </div>
   </section>
 
-  <!-- ═════════════════════════════════════════════════════════
-       💝 9. SON MESAJ
-  ═════════════════════════════════════════════════════════ -->
+  <!-- 💝 SON MESAJ -->
   <section class="final-message">
     <h2>Sen benim her şeyimsin 💕</h2>
     <p>Her sabah uyandığımda, seni düşünmek güne başlamanın en güzel yolu. Her gülüşün, her bakışın hayatıma anlam katıyor.</p>
@@ -1213,8 +1352,8 @@
     }
     createStars();
 
-    /* ═══ SAYAÇ - ✏️ TARİHİ BURADAN DEĞİŞTİR ═══ */
-    const startDate = new Date('2025-03-20T00:00:00'); // ← İLK TANIŞMA TARİHİNİZ
+    /* ═══ SAYAÇ ═══ */
+    const startDate = new Date('2025-03-20T00:00:00');
     
     function updateCounter() {
       const now = new Date();
@@ -1273,6 +1412,74 @@
     }
     window.addEventListener("scroll", tryMusic, { once: true });
     window.addEventListener("click", tryMusic, { once: true });
+
+    /* ═══════════════════════════════════════════════════════════════
+       🖼️ LIGHTBOX FONKSİYONLARI (Fotoğraf büyütme)
+    ═══════════════════════════════════════════════════════════════ */
+    
+    // Fotoğrafları diziye al
+    const photos = [];
+    document.querySelectorAll('.polaroid img').forEach(img => {
+      photos.push({
+        src: img.src,
+        caption: img.alt
+      });
+    });
+
+    let currentPhotoIndex = 0;
+
+    // Lightbox'ı aç
+    function openLightbox(index) {
+      currentPhotoIndex = index;
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      const caption = document.getElementById('lightbox-caption');
+      
+      img.src = photos[index].src;
+      caption.textContent = photos[index].caption;
+      
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Scroll kilitle
+    }
+
+    // Lightbox'ı kapat
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // Scroll'u geri aç
+    }
+
+    // Fotoğraf değiştir (önceki/sonraki)
+    function changePhoto(direction) {
+      currentPhotoIndex += direction;
+      
+      // Döngü sağla
+      if (currentPhotoIndex < 0) {
+        currentPhotoIndex = photos.length - 1;
+      } else if (currentPhotoIndex >= photos.length) {
+        currentPhotoIndex = 0;
+      }
+      
+      const img = document.getElementById('lightbox-img');
+      const caption = document.getElementById('lightbox-caption');
+      
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = photos[currentPhotoIndex].src;
+        caption.textContent = photos[currentPhotoIndex].caption;
+        img.style.opacity = '1';
+      }, 200);
+    }
+
+    // Klavye kontrolleri
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox.classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') changePhoto(-1);
+        if (e.key === 'ArrowRight') changePhoto(1);
+      }
+    });
 
     /* ═══ SCROLL ANİMASYONLARI ═══ */
     function checkVisible() {
