@@ -38,6 +38,26 @@
       pointer-events: none; z-index: 9999; opacity: 0.5;
     }
 
+    /* ═══ YENİ: Yıldızlar Animasyonu ═══ */
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
     /* ══ HERO ══ */
     #hero {
       width: 100vw;
@@ -54,7 +74,7 @@
       content: '';
       position: absolute;
       width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(200,98,122,0.18) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(200,98,122,0.25) 0%, transparent 70%);
       top: -200px; left: -200px;
       animation: blobDrift 10s ease-in-out infinite;
       pointer-events: none;
@@ -62,7 +82,7 @@
     #hero .blob2 {
       position: absolute;
       width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%);
       bottom: -150px; right: -150px;
       animation: blobDrift 12s ease-in-out infinite reverse;
       pointer-events: none;
@@ -70,6 +90,21 @@
     @keyframes blobDrift {
       0%,100% { transform: translate(0,0) scale(1); }
       50%      { transform: translate(40px,-40px) scale(1.1); }
+    }
+
+    /* ═══ YENİ: Büyük kalp animasyonu ═══ */
+    .big-heart {
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0;
+      animation: heartBeat 2s ease-in-out 1.5s infinite;
+      z-index: 0;
+      filter: blur(1px);
+    }
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); opacity: 0.05; }
+      14% { transform: scale(1.1); opacity: 0.1; }
+      28% { transform: scale(1); opacity: 0.05; }
     }
 
     .hero-eyebrow {
@@ -94,7 +129,16 @@
       animation: fadeUp 1s ease 0.7s forwards;
       position: relative; z-index: 1;
     }
-    .hero-title em { font-style: italic; color: var(--rose-light); }
+    .hero-title em { 
+      font-style: italic; 
+      color: var(--rose-light);
+      /* ═══ YENİ: Parlayan efekt ═══ */
+      animation: glow 3s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 10px rgba(232,160,176,0.3); }
+      50% { text-shadow: 0 0 20px rgba(232,160,176,0.6), 0 0 30px rgba(200,98,122,0.4); }
+    }
 
     .hero-sub {
       font-family: 'Cormorant Garamond', serif;
@@ -107,6 +151,38 @@
       position: relative; z-index: 1;
     }
 
+    /* ═══ YENİ: Müzik kontrolü ═══ */
+    .music-toggle {
+      position: fixed;
+      top: 2rem; right: 2rem;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: rgba(200,98,122,0.2);
+      border: 1px solid rgba(232,160,176,0.3);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      z-index: 10000;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .music-toggle:hover {
+      background: rgba(200,98,122,0.3);
+      transform: scale(1.1);
+    }
+    .music-toggle::before {
+      content: '🎵';
+      font-size: 1.5rem;
+      animation: musicNote 1s ease-in-out infinite;
+    }
+    .music-toggle.paused::before {
+      content: '🔇';
+      animation: none;
+    }
+    @keyframes musicNote {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
     .scroll-hint {
       position: absolute;
       bottom: 2.5rem; left: 50%;
@@ -115,6 +191,10 @@
       opacity: 0;
       animation: fadeIn 1s ease 1.8s forwards;
       z-index: 1; cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .scroll-hint:hover {
+      transform: translateX(-50%) translateY(5px);
     }
     .scroll-hint span {
       font-size: 0.55rem;
@@ -173,6 +253,13 @@
       opacity: 0;
       transform: translateX(-16px);
       transition: opacity 0.7s ease, transform 0.7s ease;
+      padding: 1.5rem;
+      border-radius: 12px;
+      /* ═══ YENİ: Hover efekti ═══ */
+    }
+    .mem-item:hover {
+      background: rgba(200,98,122,0.05);
+      transform: translateX(8px);
     }
     .mem-item.visible { opacity: 1; transform: translateX(0); }
 
@@ -186,9 +273,25 @@
       background: var(--rose);
       box-shadow: 0 0 0 4px rgba(200,98,122,0.15), 0 0 16px rgba(200,98,122,0.4);
       transform: translateX(-3px);
+      /* ═══ YENİ: Pulse animasyonu ═══ */
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-3px) scale(1); }
+      50% { transform: translateX(-3px) scale(1.3); box-shadow: 0 0 0 8px rgba(200,98,122,0.1), 0 0 20px rgba(200,98,122,0.6); }
     }
 
-    .mem-emoji { font-size: 1.4rem; display: block; margin-bottom: 0.4rem; }
+    .mem-emoji { 
+      font-size: 1.8rem; 
+      display: block; 
+      margin-bottom: 0.4rem;
+      /* ═══ YENİ: Emoji animasyonu ═══ */
+      animation: bounceEmoji 2s ease-in-out infinite;
+    }
+    @keyframes bounceEmoji {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(10deg); }
+    }
 
     .mem-date {
       font-size: 0.6rem;
@@ -255,8 +358,12 @@
       max-height: 100vh;
       object-fit: contain;
       box-shadow: 0 0 80px rgba(200,98,122,0.15), 0 0 20px rgba(0,0,0,0.8);
-      transition: opacity 0.8s ease;
+      transition: opacity 0.8s ease, transform 0.3s ease;
       display: block;
+      /* ═══ YENİ: Hover zoom ═══ */
+    }
+    .scene img:hover {
+      transform: scale(1.02);
     }
 
     .scene p {
@@ -270,6 +377,12 @@
       transform: translateX(-50%);
       width: 90%; z-index: 2;
       letter-spacing: 0.02em; line-height: 1.5;
+      /* ═══ YENİ: Fade in animasyonu ═══ */
+      animation: fadeInCaption 1s ease;
+    }
+    @keyframes fadeInCaption {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
 
     .scene-num {
@@ -302,23 +415,119 @@
     }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
     
-.mem-photo {
-  width: 260px;
-  height: 260px;
-  object-fit: cover;
-  margin-top: 1.2rem;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  clip-path: path('M130,40 C78,0 0,52 0,117 C0,182 65,221 130,260 C195,221 260,182 260,117 C260,52 182,0 130,40 Z');
-}
+    .mem-photo {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      margin-top: 1.2rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      clip-path: path('M130,40 C78,0 0,52 0,117 C0,182 65,221 130,260 C195,221 260,182 260,117 C260,52 182,0 130,40 Z');
+      /* ═══ YENİ: Hover efektleri ═══ */
+      transition: all 0.5s ease;
+      filter: brightness(0.95);
+      box-shadow: 0 10px 40px rgba(200,98,122,0.3);
+    }
+    .mem-photo:hover {
+      transform: scale(1.05) rotate(2deg);
+      filter: brightness(1);
+      box-shadow: 0 15px 60px rgba(200,98,122,0.5);
+    }
+
+    /* ═══ YENİ: Sayaç (Birlikte geçirdiğiniz süre) ═══ */
+    .counter-section {
+      padding: 6rem 2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .counter-item {
+      background: rgba(200,98,122,0.08);
+      border: 1px solid rgba(232,160,176,0.15);
+      border-radius: 16px;
+      padding: 2rem 1rem;
+      transition: all 0.3s ease;
+    }
+    .counter-item:hover {
+      background: rgba(200,98,122,0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(200,98,122,0.2);
+    }
+    .counter-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--rose-light);
+      font-weight: 300;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .counter-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ═══ YENİ: Son mesaj kutusu ═══ */
+    .final-message {
+      padding: 8rem 2rem 6rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .final-message h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+    .final-message p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .signature {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.8rem;
+      color: var(--rose-light);
+      margin-top: 3rem;
+    }
+
+    /* ═══ Responsive iyileştirmeleri ═══ */
+    @media (max-width: 768px) {
+      .mem-photo {
+        width: 220px;
+        height: 220px;
+      }
+      .counter-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- ═══ YENİ: Yıldızlar ═══ -->
+  <div class="stars" id="stars"></div>
+
+  <!-- ═══ YENİ: Müzik kontrolü ═══ -->
+  <div class="music-toggle" id="musicToggle" title="Müziği aç/kapa"></div>
+
   <!-- ══ HERO ══ -->
   <div id="hero">
     <div class="blob2"></div>
+    <div class="big-heart">💕</div>
     <p class="hero-eyebrow">Sana özel bir şey var</p>
     <h1 class="hero-title">Seni<br/><em>Seviyorum</em></h1>
     <p class="hero-sub">ve bunu hiç unutma…</p>
@@ -335,40 +544,35 @@
 
     <div class="timeline">
 
-      <!-- ✏️ ANI 1 — buradan düzenle -->
       <div class="mem-item">
         <span class="mem-emoji">🌟</span>
-        <p class="mem-date">20 Mart 2025</p>           <!-- 📅 TARİH -->
-        <h3 class="mem-title">İlk tanışma</h3>   <!-- 📝 BAŞLIK -->
-        <p class="mem-desc">O akşam iyi ki ameliyattan dolayı kötü hissedip elime telefonu almışım. Sana her şerde hayır vardır dememin sebebi bu. İlk defa ameliyata girmiştim. Çok ağrım vardı kafayı yiyordum. Ama sonrasında durdum ve dedim ki, bu ameliyat olmasaydı hayatımın aşkıyla tanışamazdım. O günden beri hayatımda her kötü giden şeyin iyi bir şeye yol açtığına inanıyorum. </p> <!-- 💬 AÇIKLAMA -->
+        <p class="mem-date">20 Mart 2025</p>
+        <h3 class="mem-title">İlk tanışma</h3>
+        <p class="mem-desc">O akşam iyi ki ameliyattan dolayı kötü hissedip elime telefonu almışım. Sana her şerde hayır vardır dememin sebebi bu. İlk defa ameliyata girmiştim. Çok ağrım vardı kafayı yiyordum. Ama sonrasında durdum ve dedim ki, bu ameliyat olmasaydı hayatımın aşkıyla tanışamazdım. O günden beri hayatımda her kötü giden şeyin iyi bir şeye yol açtığına inanıyorum.</p>
       </div>
 
-      <!-- ✏️ ANI 2 -->
       <div class="mem-item">
         <span class="mem-emoji">☕</span>
         <p class="mem-date">28 Mart 2025</p>
         <h3 class="mem-title">İlk buluşmamız</h3>
-        <p class="mem-desc">Normalde kendimden taviz vermezken, senin; hayatımın kadını için ağrılarımı umursamadan dışarı çıktım. Eğer bilseydim hayatımda böylesine yer edineceğini, tanıştığımız gece evine gelirdim. Hayatta asla pişman olmayacağım şeyi, seninle beraber olmayı seçtim. Dünyada daha güzel bir gün yaşamamıştım. </p>
-       <img src="foto1.jpeg" class="mem-photo" alt="">
+        <p class="mem-desc">Normalde kendimden taviz vermezken, senin; hayatımın kadını için ağrılarımı umursamadan dışarı çıktım. Eğer bilseydim hayatımda böylesine yer edineceğini, tanıştığımız gece evine gelirdim. Hayatta asla pişman olmayacağım şeyi, seninle beraber olmayı seçtim. Dünyada daha güzel bir gün yaşamamıştım.</p>
+        <img src="foto1.jpeg" class="mem-photo" alt="">
       </div>
 
-      <!-- ✏️ ANI 3 -->
       <div class="mem-item">
         <span class="mem-emoji">🌙</span>
-        <p class="mem-date">20 Mayıs 2023</p>
+        <p class="mem-date">Nisan 2025</p>
         <h3 class="mem-title">İlk gezemiz</h3>
         <p class="mem-desc">Seninle konuşurken saatler geçti, fark etmedik bile. O geceyi hep hatırlayacağım.</p>
       </div>
 
-      <!-- ✏️ ANI 4 -->
       <div class="mem-item">
-        <span class="mem-emoji">💍</span>
-        <p class="mem-date">14 Şubat 2024</p>
-        <h3 class="mem-title">Sevgililer günümüz</h3>
-        <p class="mem-desc">O gün ne kadar şanslı olduğumu bir kez daha anladım. Seninle her yıl daha güzel.</p>
+        <span class="mem-emoji">🎬</span>
+        <p class="mem-date">Her hafta</p>
+        <h3 class="mem-title">Beraber film izlediklerimiz</h3>
+        <p class="mem-desc">Kollarımda, başın omzumda... Film ne olursa olsun, o anlar mükemmeldi.</p>
       </div>
 
-      <!-- ✏️ ANI 5 — istersen daha fazla ekle, aynı şablonla -->
       <div class="mem-item">
         <span class="mem-emoji">❤️</span>
         <p class="mem-date">Her gün</p>
@@ -379,13 +583,99 @@
     </div>
   </section>
 
+  <!-- ═══ YENİ: Sayaç Bölümü ═══ -->
+  <section class="counter-section">
+    <p class="mem-label">Birlikte geçen zamanımız</p>
+    <h2 class="mem-heading">Seninle geçen her <em>saniye</em> değerli</h2>
+    
+    <div class="counter-grid">
+      <div class="counter-item">
+        <span class="counter-number" id="days">0</span>
+        <span class="counter-label">Gün</span>
+      </div>
+      <div class="counter-item">
+        <span class="counter-number" id="hours">0</span>
+        <span class="counter-label">Saat</span>
+      </div>
+      <div class="counter-item">
+        <span class="counter-number" id="minutes">0</span>
+        <span class="counter-label">Dakika</span>
+      </div>
+      <div class="counter-item">
+        <span class="counter-number" id="seconds">0</span>
+        <span class="counter-label">Saniye</span>
+      </div>
+    </div>
+  </section>
+
   <div class="divider"><span>✦</span></div>
   <p class="photos-label">Birlikte geçirdiğimiz anlardan</p>
 
   <!-- ══ FOTOĞRAFLAR ══ -->
   <div id="scene-container"></div>
 
+  <!-- ═══ YENİ: Son Mesaj ═══ -->
+  <section class="final-message">
+    <h2>Sen benim her şeyimsin 💕</h2>
+    <p>Her sabah uyandığımda, seni düşünmek güne başlamanın en güzel yolu. Her gülüşün, her bakışın hayatıma anlam katıyor.</p>
+    <p>Seninle geçirdiğim her an, bir sonraki anı dört gözle beklememe sebep oluyor. Biliyorum ki yanında olduğum sürece her şey güzel olacak.</p>
+    <p>Bu site sadece küçük bir hediye, ama içindeki her kelime kalbimden geliyor. Seni sonsuza kadar seveceğim.</p>
+    <p class="signature">Seni çok ama çok seviyorum ❤️</p>
+  </section>
+
   <script>
+    /* ═══ YENİ: Yıldız oluşturma ═══ */
+    function createStars() {
+      const container = document.getElementById('stars');
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        container.appendChild(star);
+      }
+    }
+    createStars();
+
+    /* ═══ YENİ: Sayaç ═══ */
+    const startDate = new Date('2025-03-20T00:00:00'); // İlk tanışma tarihiniz
+    
+    function updateCounter() {
+      const now = new Date();
+      const diff = now - startDate;
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+    
+    updateCounter();
+    setInterval(updateCounter, 1000);
+
+    /* ═══ YENİ: Müzik kontrolü ═══ */
+    const music = document.getElementById("music");
+    const musicToggle = document.getElementById("musicToggle");
+    let isPlaying = false;
+
+    musicToggle.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        musicToggle.classList.add('paused');
+      } else {
+        music.play().catch(() => {});
+        musicToggle.classList.remove('paused');
+      }
+      isPlaying = !isPlaying;
+    });
+
     /* mobil vh */
     function fixVH() {
       document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
@@ -393,22 +683,25 @@
     fixVH();
     window.addEventListener("resize", fixVH);
 
-    /* müzik — sayfa açılınca başlat (kullanıcı etkileşimi gerekiyor, scroll yeterli) */
+    /* müzik — sayfa açılınca başlat */
     let musicStarted = false;
     function tryMusic() {
       if (musicStarted) return;
       musicStarted = true;
-      const music = document.getElementById("music");
       if (!music) return;
       music.volume = 0;
-      music.play().catch(() => {});
+      music.play().then(() => {
+        isPlaying = true;
+        musicToggle.classList.remove('paused');
+      }).catch(() => {});
       let v = 0;
-      const fi = setInterval(() => { v = Math.min(v + 0.05, 1); music.volume = v; if (v >= 1) clearInterval(fi); }, 120);
+      const fi = setInterval(() => { v = Math.min(v + 0.05, 0.5); music.volume = v; if (v >= 0.5) clearInterval(fi); }, 120);
     }
     window.addEventListener("scroll", tryMusic, { once: true });
+    window.addEventListener("click", tryMusic, { once: true });
 
     /* fotoğraflar */
-    const TOTAL_IMAGES = 140;   /* ← kaç fotoğrafın varsa */
+    const TOTAL_IMAGES = 140;
     const GROUP_SIZE   = 10;
     const TOTAL_SCENES = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
     let slideTimers    = [];
@@ -447,7 +740,6 @@
         scene.classList.toggle("active", vis);
         if (vis && currentVisible !== i) activateScene(i);
       });
-      /* timeline animate */
       document.querySelectorAll(".mem-item").forEach(el => {
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight * 0.85) el.classList.add("visible");
@@ -482,7 +774,7 @@
     checkVisible();
 
     /* kalpler */
-    const emojis = ["❤️","🤍","💕","🌸","✨","💗","🌹","💞"];
+    const emojis = ["❤️","🤍","💕","🌸","✨","💗","🌹","💞","💝","🌺"];
     setInterval(() => {
       const h = document.createElement("div");
       h.className = "heart";
