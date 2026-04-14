@@ -38,7 +38,9 @@
       pointer-events: none; z-index: 9999; opacity: 0.5;
     }
 
-    /* ═══ YENİ: Yıldızlar Animasyonu ═══ */
+    /* ═══════════════════════════════════════════════
+       🌟 1. YILDIZLAR (Arka plan süsleme)
+    ═══════════════════════════════════════════════ */
     .stars {
       position: fixed;
       top: 0; left: 0;
@@ -58,7 +60,43 @@
       50% { opacity: 1; transform: scale(1.5); }
     }
 
-    /* ══ HERO ══ */
+    /* ═══════════════════════════════════════════════
+       🎵 2. MÜZİK KONTROLÜ (Sağ üst köşe)
+    ═══════════════════════════════════════════════ */
+    .music-toggle {
+      position: fixed;
+      top: 2rem; right: 2rem;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: rgba(200,98,122,0.2);
+      border: 1px solid rgba(232,160,176,0.3);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      z-index: 10000;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .music-toggle:hover {
+      background: rgba(200,98,122,0.3);
+      transform: scale(1.1);
+    }
+    .music-toggle::before {
+      content: '🎵';
+      font-size: 1.5rem;
+      animation: musicNote 1s ease-in-out infinite;
+    }
+    .music-toggle.paused::before {
+      content: '🔇';
+      animation: none;
+    }
+    @keyframes musicNote {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       💕 3. HERO BÖLÜMÜ (Açılış sayfası)
+    ═══════════════════════════════════════════════ */
     #hero {
       width: 100vw;
       height: 100vh;
@@ -92,7 +130,6 @@
       50%      { transform: translate(40px,-40px) scale(1.1); }
     }
 
-    /* ═══ YENİ: Büyük kalp animasyonu ═══ */
     .big-heart {
       position: absolute;
       font-size: 8rem;
@@ -132,7 +169,6 @@
     .hero-title em { 
       font-style: italic; 
       color: var(--rose-light);
-      /* ═══ YENİ: Parlayan efekt ═══ */
       animation: glow 3s ease-in-out infinite;
     }
     @keyframes glow {
@@ -149,38 +185,6 @@
       opacity: 0;
       animation: fadeUp 1s ease 1s forwards;
       position: relative; z-index: 1;
-    }
-
-    /* ═══ YENİ: Müzik kontrolü ═══ */
-    .music-toggle {
-      position: fixed;
-      top: 2rem; right: 2rem;
-      width: 50px; height: 50px;
-      border-radius: 50%;
-      background: rgba(200,98,122,0.2);
-      border: 1px solid rgba(232,160,176,0.3);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      z-index: 10000;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    .music-toggle:hover {
-      background: rgba(200,98,122,0.3);
-      transform: scale(1.1);
-    }
-    .music-toggle::before {
-      content: '🎵';
-      font-size: 1.5rem;
-      animation: musicNote 1s ease-in-out infinite;
-    }
-    .music-toggle.paused::before {
-      content: '🔇';
-      animation: none;
-    }
-    @keyframes musicNote {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
     }
 
     .scroll-hint {
@@ -209,7 +213,9 @@
     }
     @keyframes linePulse { 0%,100%{opacity:.3} 50%{opacity:1} }
 
-    /* ══ MEMORIES / TIMELINE ══ */
+    /* ═══════════════════════════════════════════════
+       📅 4. ANI/TİMELİNE BÖLÜMÜ (Ortadaki anılar)
+    ═══════════════════════════════════════════════ */
     #memories {
       padding: 6rem 2rem 4rem;
       max-width: 680px;
@@ -233,7 +239,6 @@
     }
     .mem-heading em { font-style: italic; color: var(--rose-light); }
 
-    /* timeline track */
     .timeline {
       position: relative;
       padding-left: 2rem;
@@ -255,7 +260,6 @@
       transition: opacity 0.7s ease, transform 0.7s ease;
       padding: 1.5rem;
       border-radius: 12px;
-      /* ═══ YENİ: Hover efekti ═══ */
     }
     .mem-item:hover {
       background: rgba(200,98,122,0.05);
@@ -263,7 +267,6 @@
     }
     .mem-item.visible { opacity: 1; transform: translateX(0); }
 
-    /* dot */
     .mem-item::before {
       content: '';
       position: absolute;
@@ -273,7 +276,6 @@
       background: var(--rose);
       box-shadow: 0 0 0 4px rgba(200,98,122,0.15), 0 0 16px rgba(200,98,122,0.4);
       transform: translateX(-3px);
-      /* ═══ YENİ: Pulse animasyonu ═══ */
       animation: pulse 2s ease-in-out infinite;
     }
     @keyframes pulse {
@@ -285,7 +287,6 @@
       font-size: 1.8rem; 
       display: block; 
       margin-bottom: 0.4rem;
-      /* ═══ YENİ: Emoji animasyonu ═══ */
       animation: bounceEmoji 2s ease-in-out infinite;
     }
     @keyframes bounceEmoji {
@@ -314,7 +315,398 @@
       line-height: 1.75;
     }
 
-    /* divider */
+    .mem-photo {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      margin-top: 1.2rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      clip-path: path('M130,40 C78,0 0,52 0,117 C0,182 65,221 130,260 C195,221 260,182 260,117 C260,52 182,0 130,40 Z');
+      transition: all 0.5s ease;
+      filter: brightness(0.95);
+      box-shadow: 0 10px 40px rgba(200,98,122,0.3);
+    }
+    .mem-photo:hover {
+      transform: scale(1.05) rotate(2deg);
+      filter: brightness(1);
+      box-shadow: 0 15px 60px rgba(200,98,122,0.5);
+    }
+
+    /* ═══════════════════════════════════════════════
+       💝 5. SENDEN SEVDİĞİM ŞEYLER (Yeni bölüm!)
+    ═══════════════════════════════════════════════ */
+    .love-section {
+      padding: 6rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .love-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .love-card {
+      background: rgba(200,98,122,0.08);
+      border: 1px solid rgba(232,160,176,0.15);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    .love-card:hover {
+      background: rgba(200,98,122,0.15);
+      transform: translateY(-8px) rotate(2deg);
+      box-shadow: 0 15px 40px rgba(200,98,122,0.3);
+    }
+
+    .love-emoji {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .love-card:nth-child(even) .love-emoji {
+      animation-delay: 0.5s;
+    }
+
+    .love-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--rose-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .love-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════
+       💬 6. ÖZEL SÖZLER BÖLÜMÜ (Romantik alıntılar)
+    ═══════════════════════════════════════════════ */
+    .quotes-section {
+      padding: 6rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .quote-container {
+      margin-top: 4rem;
+    }
+
+    .quote-card {
+      background: linear-gradient(135deg, rgba(200,98,122,0.1) 0%, rgba(201,169,110,0.05) 100%);
+      border-left: 3px solid var(--rose);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.6s ease;
+    }
+    .quote-card.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .quote-card:hover {
+      background: linear-gradient(135deg, rgba(200,98,122,0.15) 0%, rgba(201,169,110,0.08) 100%);
+      transform: translateX(10px);
+    }
+
+    .quote-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 5rem;
+      color: rgba(232,160,176,0.2);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      line-height: 1.7;
+      color: var(--cream);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════
+       🎁 7. İNTERAKTİF KARTLAR (Tıkla-aç kartlar)
+    ═══════════════════════════════════════════════ */
+    .cards-section {
+      padding: 6rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .flip-card {
+      perspective: 1000px;
+      height: 300px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .flip-card-front {
+      background: linear-gradient(135deg, rgba(200,98,122,0.2) 0%, rgba(201,169,110,0.1) 100%);
+      border: 2px solid rgba(232,160,176,0.3);
+    }
+
+    .flip-card-back {
+      background: linear-gradient(135deg, var(--rose) 0%, #b85668 100%);
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front .card-emoji {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .flip-card-front .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--rose-light);
+      text-align: center;
+    }
+
+    .flip-card-front .card-hint {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .flip-card-back p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: white;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════════════════
+       📸 8. POLAROİD FOTOĞRAFLAR (Eski fotoğraf efekti)
+    ═══════════════════════════════════════════════ */
+    .polaroid-section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 15px;
+      padding-bottom: 60px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      transform: rotate(-2deg);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .polaroid:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .polaroid-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #333;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 1rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       💌 9. MESAJ BALONU (WhatsApp tarzı)
+    ═══════════════════════════════════════════════ */
+    .messages-section {
+      padding: 6rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .chat-container {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.8rem;
+      opacity: 0;
+      animation: slideIn 0.5s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.sent {
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .message-bubble {
+      max-width: 70%;
+      padding: 1rem 1.3rem;
+      border-radius: 18px;
+      position: relative;
+    }
+
+    .message.received .message-bubble {
+      background: rgba(200,98,122,0.2);
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.sent .message-bubble {
+      background: var(--rose);
+      border-bottom-right-radius: 4px;
+    }
+
+    .message-text {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--cream);
+    }
+
+    .message.sent .message-text {
+      color: white;
+    }
+
+    .message-time {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    /* ═══════════════════════════════════════════════
+       ⏱️ 10. SAYAÇ (Birlikte geçen süre)
+    ═══════════════════════════════════════════════ */
+    .counter-section {
+      padding: 6rem 2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .counter-item {
+      background: rgba(200,98,122,0.08);
+      border: 1px solid rgba(232,160,176,0.15);
+      border-radius: 16px;
+      padding: 2rem 1rem;
+      transition: all 0.3s ease;
+    }
+    .counter-item:hover {
+      background: rgba(200,98,122,0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(200,98,122,0.2);
+    }
+
+    .counter-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--rose-light);
+      font-weight: 300;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .counter-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ═══════════════════════════════════════════════
+       🎬 11. FOTOĞRAF SLIDESHOW BÖLÜMÜ
+    ═══════════════════════════════════════════════ */
     .divider {
       display: flex; align-items: center; gap: 1.5rem;
       max-width: 680px; margin: 2rem auto 0;
@@ -326,7 +718,6 @@
       background: rgba(255,255,255,0.07);
     }
 
-    /* photos start label */
     .photos-label {
       padding: 3rem 2rem 1rem;
       font-size: 0.6rem;
@@ -335,7 +726,6 @@
       color: var(--rose);
     }
 
-    /* ══ SCENES ══ */
     .scene {
       height: 100dvh;
       display: flex; flex-direction: column;
@@ -360,7 +750,6 @@
       box-shadow: 0 0 80px rgba(200,98,122,0.15), 0 0 20px rgba(0,0,0,0.8);
       transition: opacity 0.8s ease, transform 0.3s ease;
       display: block;
-      /* ═══ YENİ: Hover zoom ═══ */
     }
     .scene img:hover {
       transform: scale(1.02);
@@ -377,7 +766,6 @@
       transform: translateX(-50%);
       width: 90%; z-index: 2;
       letter-spacing: 0.02em; line-height: 1.5;
-      /* ═══ YENİ: Fade in animasyonu ═══ */
       animation: fadeInCaption 1s ease;
     }
     @keyframes fadeInCaption {
@@ -394,7 +782,42 @@
       z-index: 2;
     }
 
-    /* ══ HEARTS ══ */
+    /* ═══════════════════════════════════════════════
+       💝 12. SON MESAJ (Kapanış bölümü)
+    ═══════════════════════════════════════════════ */
+    .final-message {
+      padding: 8rem 2rem 6rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .final-message h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .final-message p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .signature {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.8rem;
+      color: var(--rose-light);
+      margin-top: 3rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       ❤️ 13. KALP ANİMASYONLARI (Uçan kalpler)
+    ═══════════════════════════════════════════════ */
     .heart {
       position: fixed; bottom: -60px;
       pointer-events: none;
@@ -414,96 +837,10 @@
       to   { opacity:1; transform:translateY(0); }
     }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-    
-    .mem-photo {
-      width: 280px;
-      height: 280px;
-      object-fit: cover;
-      margin-top: 1.2rem;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      clip-path: path('M130,40 C78,0 0,52 0,117 C0,182 65,221 130,260 C195,221 260,182 260,117 C260,52 182,0 130,40 Z');
-      /* ═══ YENİ: Hover efektleri ═══ */
-      transition: all 0.5s ease;
-      filter: brightness(0.95);
-      box-shadow: 0 10px 40px rgba(200,98,122,0.3);
-    }
-    .mem-photo:hover {
-      transform: scale(1.05) rotate(2deg);
-      filter: brightness(1);
-      box-shadow: 0 15px 60px rgba(200,98,122,0.5);
-    }
 
-    /* ═══ YENİ: Sayaç (Birlikte geçirdiğiniz süre) ═══ */
-    .counter-section {
-      padding: 6rem 2rem;
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .counter-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    .counter-item {
-      background: rgba(200,98,122,0.08);
-      border: 1px solid rgba(232,160,176,0.15);
-      border-radius: 16px;
-      padding: 2rem 1rem;
-      transition: all 0.3s ease;
-    }
-    .counter-item:hover {
-      background: rgba(200,98,122,0.15);
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(200,98,122,0.2);
-    }
-    .counter-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      color: var(--rose-light);
-      font-weight: 300;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    .counter-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ═══ YENİ: Son mesaj kutusu ═══ */
-    .final-message {
-      padding: 8rem 2rem 6rem;
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .final-message h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 300;
-      margin-bottom: 2rem;
-      line-height: 1.2;
-    }
-    .final-message p {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-    .signature {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.8rem;
-      color: var(--rose-light);
-      margin-top: 3rem;
-    }
-
-    /* ═══ Responsive iyileştirmeleri ═══ */
+    /* ═══════════════════════════════════════════════
+       📱 14. RESPONSİVE (Mobil uyumlu)
+    ═══════════════════════════════════════════════ */
     @media (max-width: 768px) {
       .mem-photo {
         width: 220px;
@@ -513,18 +850,33 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
       }
+      .love-grid {
+        grid-template-columns: 1fr;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .polaroid-grid {
+        grid-template-columns: 1fr;
+      }
+      .message-bubble {
+        max-width: 85%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══ YENİ: Yıldızlar ═══ -->
+  <!-- 🌟 YILDIZLAR -->
   <div class="stars" id="stars"></div>
 
-  <!-- ═══ YENİ: Müzik kontrolü ═══ -->
+  <!-- 🎵 MÜZİK KONTROLÜ -->
   <div class="music-toggle" id="musicToggle" title="Müziği aç/kapa"></div>
 
-  <!-- ══ HERO ══ -->
+  <!-- ═════════════════════════════════════════════════════════
+       💕 1. HERO - AÇILIŞ SAYFASI
+       Burası sitenin ilk gördüğü sayfa, değiştirmene gerek yok
+  ═════════════════════════════════════════════════════════ -->
   <div id="hero">
     <div class="blob2"></div>
     <div class="big-heart">💕</div>
@@ -537,13 +889,18 @@
     </div>
   </div>
 
-  <!-- ══ ANI / TİMELİNE ══ -->
+  <!-- ═════════════════════════════════════════════════════════
+       📅 2. ANI/TİMELİNE - GEÇİRDİĞİNİZ ANLAR
+       ✏️ Burayı düzenle! Tarih, başlık, açıklama değiştir
+       📸 Fotoğraf eklemek için: <img src="foto1.jpeg" class="mem-photo" alt="">
+  ═════════════════════════════════════════════════════════ -->
   <section id="memories">
     <p class="mem-label">Bizim hikayemiz</p>
     <h2 class="mem-heading">Birlikte <em>geçirdiğimiz</em><br/>en güzel anlar</h2>
 
     <div class="timeline">
 
+      <!-- ANI 1 -->
       <div class="mem-item">
         <span class="mem-emoji">🌟</span>
         <p class="mem-date">20 Mart 2025</p>
@@ -551,6 +908,7 @@
         <p class="mem-desc">O akşam iyi ki ameliyattan dolayı kötü hissedip elime telefonu almışım. Sana her şerde hayır vardır dememin sebebi bu. İlk defa ameliyata girmiştim. Çok ağrım vardı kafayı yiyordum. Ama sonrasında durdum ve dedim ki, bu ameliyat olmasaydı hayatımın aşkıyla tanışamazdım. O günden beri hayatımda her kötü giden şeyin iyi bir şeye yol açtığına inanıyorum.</p>
       </div>
 
+      <!-- ANI 2 -->
       <div class="mem-item">
         <span class="mem-emoji">☕</span>
         <p class="mem-date">28 Mart 2025</p>
@@ -559,22 +917,34 @@
         <img src="foto1.jpeg" class="mem-photo" alt="">
       </div>
 
+      <!-- ✏️ ANI 3 - BURAYA YENİ ANI EKLE -->
       <div class="mem-item">
-        <span class="mem-emoji">🌙</span>
-        <p class="mem-date">Nisan 2025</p>
-        <h3 class="mem-title">İlk gezemiz</h3>
-        <p class="mem-desc">Seninle konuşurken saatler geçti, fark etmedik bile. O geceyi hep hatırlayacağım.</p>
+        <span class="mem-emoji">💋</span>
+        <p class="mem-date">TARİHİ YAZ</p>
+        <h3 class="mem-title">İlk öpücüğümüz</h3>
+        <p class="mem-desc">Buraya o anı anlat... Kalbim o an nasıl çarptığını hala hatırlıyorum.</p>
+        <!-- İSTERSEN FOTOĞRAF EKLE: <img src="foto2.jpeg" class="mem-photo" alt=""> -->
       </div>
 
+      <!-- ✏️ ANI 4 - BURAYA YENİ ANI EKLE -->
       <div class="mem-item">
-        <span class="mem-emoji">🎬</span>
-        <p class="mem-date">Her hafta</p>
-        <h3 class="mem-title">Beraber film izlediklerimiz</h3>
-        <p class="mem-desc">Kollarımda, başın omzumda... Film ne olursa olsun, o anlar mükemmeldi.</p>
+        <span class="mem-emoji">💕</span>
+        <p class="mem-date">TARİHİ YAZ</p>
+        <h3 class="mem-title">İlk "seni seviyorum" dediğim an</h3>
+        <p class="mem-desc">O kelimeleri söylemek en doğal şeydi...</p>
       </div>
 
+      <!-- ✏️ ANI 5 - BURAYA YENİ ANI EKLE -->
       <div class="mem-item">
-        <span class="mem-emoji">❤️</span>
+        <span class="mem-emoji">🎁</span>
+        <p class="mem-date">TARİHİ YAZ</p>
+        <h3 class="mem-title">İlk hediye aldığım gün</h3>
+        <p class="mem-desc">Bana verdiğin o hediyeyi hala saklıyorum...</p>
+      </div>
+
+      <!-- SON ANI -->
+      <div class="mem-item">
+        <span class="mem-emoji">♾️</span>
         <p class="mem-date">Her gün</p>
         <h3 class="mem-title">Bugün ve her zaman</h3>
         <p class="mem-desc">Seninle olmak hep böyle güzel kalacak. Bu hikayenin sonu yok.</p>
@@ -583,7 +953,304 @@
     </div>
   </section>
 
-  <!-- ═══ YENİ: Sayaç Bölümü ═══ -->
+  <!-- ═════════════════════════════════════════════════════════
+       💝 3. SENDEN SEVDİĞİM ŞEYLER
+       ✏️ Her kartı kendin düzenle! Emoji, başlık, açıklama değiştir
+  ═════════════════════════════════════════════════════════ -->
+  <section class="love-section">
+    <p class="mem-label">Seni tanımlayanlar</p>
+    <h2 class="mem-heading">Sende <em>sevdiğim</em><br/>10 şey</h2>
+
+    <div class="love-grid">
+      
+      <div class="love-card">
+        <span class="love-emoji">😊</span>
+        <h3 class="love-title">Gülüşün</h3>
+        <p class="love-desc">Gülüşün benim için güneş gibi, her şeyi aydınlatıyor.</p>
+      </div>
+
+      <div class="love-card">
+        <span class="love-emoji">👁️</span>
+        <h3 class="love-title">Bakışların</h3>
+        <p class="love-desc">Gözlerinin içinde kaybolmayı seviyorum.</p>
+      </div>
+
+      <div class="love-card">
+        <span class="love-emoji">💭</span>
+        <h3 class="love-title">Düşünceliliğin</h3>
+        <p class="love-desc">Beni her zaman düşünmen, değerli hissettiriyor.</p>
+      </div>
+
+      <div class="love-card">
+        <span class="love-emoji">🎵</span>
+        <h3 class="love-title">Sesin</h3>
+        <p class="love-desc">Sesini duymak günümü güzelleştiriyor.</p>
+      </div>
+
+      <div class="love-card">
+        <span class="love-emoji">🤗</span>
+        <h3 class="love-title">Sarılışların</h3>
+        <p class="love-desc">Kollarında olmak ev gibi hissettiriyor.</p>
+      </div>
+
+      <div class="love-card">
+        <span class="love-emoji">💪</span>
+        <h3 class="love-title">Güçlü oluşun</h3>
+        <p class="love-desc">Hayatta her zaman yanımda duruyorsun.</p>
+      </div>
+
+      <div class="love-card">
+        <span class="love-emoji">🌟</span>
+        <h3 class="love-title">Pozitif enerjin</h3>
+        <p class="love-desc">Kötü günlerimde bile beni güldürebiliyorsun.</p>
+      </div>
+
+      <div class="love-card">
+        <span class="love-emoji">💝</span>
+        <h3 class="love-title">İçten oluşun</h3>
+        <p class="love-desc">Samimiyetin seni özel yapıyor.</p>
+      </div>
+
+      <div class="love-card">
+        <span class="love-emoji">🧠</span>
+        <h3 class="love-title">Zekân</h3>
+        <p class="love-desc">Seninle konuşmak her zaman keyifli.</p>
+      </div>
+
+      <div class="love-card">
+        <span class="love-emoji">❤️</span>
+        <h3 class="love-title">Beni sevmen</h3>
+        <p class="love-desc">En çok da beni sevmen için seni seviyorum.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════════════
+       💬 4. ÖZEL SÖZLER - ROMANTİK ALIATILAR
+       ✏️ Her quote'u kendi kelimelerinle değiştir
+  ═════════════════════════════════════════════════════════ -->
+  <section class="quotes-section">
+    <p class="mem-label">Sana söylediklerim</p>
+    <h2 class="mem-heading">Kalbimdeki <em>kelimeler</em></h2>
+
+    <div class="quote-container">
+      
+      <div class="quote-card">
+        <p class="quote-text">Sen benim için sadece bir insan değilsin, evimsin. Nerede olursam olayım, yanında olduğumda huzur buluyorum.</p>
+      </div>
+
+      <div class="quote-card">
+        <p class="quote-text">Seninle geçen her an, bir ömür değerinde. Zamanın nasıl geçtiğini anlamıyorum yanındayken.</p>
+      </div>
+
+      <div class="quote-card">
+        <p class="quote-text">Seni sevmek, hayatımda aldığım en doğru karar. Her gün daha çok seviyorum seni.</p>
+      </div>
+
+      <div class="quote-card">
+        <p class="quote-text">Gözlerinin içine baktığımda geleceğimizi görüyorum. Ve o gelecek çok güzel.</p>
+      </div>
+
+      <div class="quote-card">
+        <p class="quote-text">Sen benim eksik parçamsın. Seninle tamamlanmış hissediyorum kendimi.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════════════
+       🎁 5. İNTERAKTİF KARTLAR - TIKLA AÇ
+       ✏️ Her kartın ön yüzünü (başlık) ve arka yüzünü (mesaj) değiştir
+       💡 Kartlara tıklayınca döner ve mesaj görünür
+  ═════════════════════════════════════════════════════════ -->
+  <section class="cards-section">
+    <p class="mem-label">Sürpriz mesajlar</p>
+    <h2 class="mem-heading">Sana <em>özel</em><br/>sürprizler</h2>
+
+    <div class="cards-grid">
+      
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-emoji">💌</div>
+            <h3 class="card-title">İlk Mesajın</h3>
+            <p class="card-hint">Tıkla & Oku</p>
+          </div>
+          <div class="flip-card-back">
+            <p>İlk mesajını attığında kalbim çarpmıştı. O günden beri her mesajın beni mutlu ediyor.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-emoji">🌙</div>
+            <h3 class="card-title">Gece Konuşmaları</h3>
+            <p class="card-hint">Tıkla & Oku</p>
+          </div>
+          <div class="flip-card-back">
+            <p>Seninle sabaha kadar konuşmak, uyumaktan daha güzeldi. Her gece seni düşünüyorum.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-emoji">☀️</div>
+            <h3 class="card-title">Sabah Mesajların</h3>
+            <p class="card-hint">Tıkla & Oku</p>
+          </div>
+          <div class="flip-card-back">
+            <p>Günaydın mesajınla uyandığım her sabah, dünyanın en güzel sabahı oluyor.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-emoji">🎁</div>
+            <h3 class="card-title">Sürprizlerin</h3>
+            <p class="card-hint">Tıkla & Oku</p>
+          </div>
+          <div class="flip-card-back">
+            <p>Bana verdiğin küçük sürprizler, büyük mutluluklar yaratıyor kalbimde.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-emoji">🌹</div>
+            <h3 class="card-title">Gelecek Hayallerimiz</h3>
+            <p class="card-hint">Tıkla & Oku</p>
+          </div>
+          <div class="flip-card-back">
+            <p>Seninle hayal ettiğim gelecek çok güzel. Birlikte her şeyin üstesinden geleceğiz.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-emoji">♾️</div>
+            <h3 class="card-title">Sonsuz Sevgim</h3>
+            <p class="card-hint">Tıkla & Oku</p>
+          </div>
+          <div class="flip-card-back">
+            <p>Seni sonsuza kadar seveceğim. Bu bir söz değil, bir gerçek.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════════════
+       📸 6. POLAROİD FOTOĞRAFLAR
+       ✏️ src="fotoADI.jpeg" kısmını değiştir
+       ✏️ Alt yazıyı değiştir
+  ═════════════════════════════════════════════════════════ -->
+  <section class="polaroid-section">
+    <p class="mem-label">Anılarımızdan kareler</p>
+    <h2 class="mem-heading">Birlikte <em>çektiğimiz</em><br/>fotoğraflar</h2>
+
+    <div class="polaroid-grid">
+      
+      <div class="polaroid">
+        <img src="foto1.jpeg" alt="">
+        <p class="polaroid-caption">İlk buluşmamız 💕</p>
+      </div>
+
+      <div class="polaroid">
+        <img src="foto2.jpeg" alt="">
+        <p class="polaroid-caption">O güzel günden bir kare ✨</p>
+      </div>
+
+      <div class="polaroid">
+        <img src="foto3.jpeg" alt="">
+        <p class="polaroid-caption">Seninle her an özel 🌸</p>
+      </div>
+
+      <!-- İSTERSEN DAHA FAZLA EKLE -->
+      
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════════════
+       💌 7. MESAJ BALONLARI (WhatsApp tarzı)
+       ✏️ Her mesajı gerçek konuşmalarınızla değiştir
+       💡 class="message received" = O yazdı
+       💡 class="message sent" = Sen yazdın
+  ═════════════════════════════════════════════════════════ -->
+  <section class="messages-section">
+    <p class="mem-label">Aramızdaki mesajlar</p>
+    <h2 class="mem-heading">İlk <em>konuşmalarımız</em></h2>
+
+    <div class="chat-container">
+      
+      <div class="message received">
+        <div class="message-avatar">👩</div>
+        <div class="message-bubble">
+          <p class="message-text">Merhaba 😊</p>
+          <span class="message-time">20 Mart, 20:15</span>
+        </div>
+      </div>
+
+      <div class="message sent">
+        <div class="message-avatar">👨</div>
+        <div class="message-bubble">
+          <p class="message-text">Merhaba! Nasılsın? 💕</p>
+          <span class="message-time">20 Mart, 20:16</span>
+        </div>
+      </div>
+
+      <div class="message received">
+        <div class="message-avatar">👩</div>
+        <div class="message-bubble">
+          <p class="message-text">İyiyim, sen nasılsın? 🌸</p>
+          <span class="message-time">20 Mart, 20:17</span>
+        </div>
+      </div>
+
+      <div class="message sent">
+        <div class="message-avatar">👨</div>
+        <div class="message-bubble">
+          <p class="message-text">Şimdi daha iyiyim 😊 Seninle konuşmak çok güzel</p>
+          <span class="message-time">20 Mart, 20:18</span>
+        </div>
+      </div>
+
+      <div class="message received">
+        <div class="message-avatar">👩</div>
+        <div class="message-bubble">
+          <p class="message-text">Benimle konuşmak mı? Neden? 😄</p>
+          <span class="message-time">20 Mart, 20:19</span>
+        </div>
+      </div>
+
+      <div class="message sent">
+        <div class="message-avatar">👨</div>
+        <div class="message-bubble">
+          <p class="message-text">Çünkü sen özelsin ❤️</p>
+          <span class="message-time">20 Mart, 20:21</span>
+        </div>
+      </div>
+
+      <!-- İSTERSEN DAHA FAZLA MESAJ EKLE -->
+
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════════════
+       ⏱️ 8. SAYAÇ - BİRLİKTE GEÇİRDİĞİNİZ SÜRE
+       ✏️ JavaScript'teki tarihi değiştir (en altta)
+  ═════════════════════════════════════════════════════════ -->
   <section class="counter-section">
     <p class="mem-label">Birlikte geçen zamanımız</p>
     <h2 class="mem-heading">Seninle geçen her <em>saniye</em> değerli</h2>
@@ -611,20 +1278,30 @@
   <div class="divider"><span>✦</span></div>
   <p class="photos-label">Birlikte geçirdiğimiz anlardan</p>
 
-  <!-- ══ FOTOĞRAFLAR ══ -->
+  <!-- ═════════════════════════════════════════════════════════
+       🎬 9. FOTOĞRAF SLİDESHOW
+       ✏️ JavaScript'teki TOTAL_IMAGES sayısını değiştir
+  ═════════════════════════════════════════════════════════ -->
   <div id="scene-container"></div>
 
-  <!-- ═══ YENİ: Son Mesaj ═══ -->
+  <!-- ═════════════════════════════════════════════════════════
+       💝 10. SON MESAJ - KAPANIŞ
+       ✏️ Buradaki metinleri kendi kelimelerinle değiştir
+  ═════════════════════════════════════════════════════════ -->
   <section class="final-message">
     <h2>Sen benim her şeyimsin 💕</h2>
     <p>Her sabah uyandığımda, seni düşünmek güne başlamanın en güzel yolu. Her gülüşün, her bakışın hayatıma anlam katıyor.</p>
     <p>Seninle geçirdiğim her an, bir sonraki anı dört gözle beklememe sebep oluyor. Biliyorum ki yanında olduğum sürece her şey güzel olacak.</p>
     <p>Bu site sadece küçük bir hediye, ama içindeki her kelime kalbimden geliyor. Seni sonsuza kadar seveceğim.</p>
     <p class="signature">Seni çok ama çok seviyorum ❤️</p>
+    <p style="margin-top: 2rem; font-size: 0.8rem; color: var(--muted);">— Senin için her şey, her zaman 💫</p>
   </section>
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       🔧 JAVASCRIPT KODLARI - BURADAN AYARLA
+  ═══════════════════════════════════════════════════════════════ -->
   <script>
-    /* ═══ YENİ: Yıldız oluşturma ═══ */
+    /* ═══ YILDIZLARI OLUŞTUR ═══ */
     function createStars() {
       const container = document.getElementById('stars');
       for (let i = 0; i < 50; i++) {
@@ -639,8 +1316,8 @@
     }
     createStars();
 
-    /* ═══ YENİ: Sayaç ═══ */
-    const startDate = new Date('2025-03-20T00:00:00'); // İlk tanışma tarihiniz
+    /* ═══ SAYAÇ - ✏️ TARİHİ BURADAN DEĞİŞTİR ═══ */
+    const startDate = new Date('2025-03-20T00:00:00'); // ← İLK TANIŞMA TARİHİNİZ
     
     function updateCounter() {
       const now = new Date();
@@ -660,7 +1337,7 @@
     updateCounter();
     setInterval(updateCounter, 1000);
 
-    /* ═══ YENİ: Müzik kontrolü ═══ */
+    /* ═══ MÜZİK KONTROLÜ ═══ */
     const music = document.getElementById("music");
     const musicToggle = document.getElementById("musicToggle");
     let isPlaying = false;
@@ -676,14 +1353,14 @@
       isPlaying = !isPlaying;
     });
 
-    /* mobil vh */
+    /* ═══ MOBİL VH FİX ═══ */
     function fixVH() {
       document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
     }
     fixVH();
     window.addEventListener("resize", fixVH);
 
-    /* müzik — sayfa açılınca başlat */
+    /* ═══ MÜZİK OTOMATİK BAŞLAT ═══ */
     let musicStarted = false;
     function tryMusic() {
       if (musicStarted) return;
@@ -700,9 +1377,9 @@
     window.addEventListener("scroll", tryMusic, { once: true });
     window.addEventListener("click", tryMusic, { once: true });
 
-    /* fotoğraflar */
-    const TOTAL_IMAGES = 140;
-    const GROUP_SIZE   = 10;
+    /* ═══ FOTOĞRAF SLİDESHOW - ✏️ FOTOĞRAF SAYISINI BURADAN DEĞİŞTİR ═══ */
+    const TOTAL_IMAGES = 25;   // ← KAÇ FOTOĞRAFIN VARSA BURAYA YAZ
+    const GROUP_SIZE   = 5;    // Her sahnede 5 fotoğraf gösterir
     const TOTAL_SCENES = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
     let slideTimers    = [];
     let currentVisible = -1;
@@ -717,7 +1394,7 @@
       "Kalbimde bir yerin var, hep 🌹","Seni seviyorum — dünden fazla 💝",
     ];
 
-    /* sahneleri oluştur */
+    /* Sahneleri oluştur */
     (function createScenes() {
       const c = document.getElementById("scene-container");
       for (let i = 0; i < TOTAL_SCENES; i++) {
@@ -732,7 +1409,7 @@
       }
     })();
 
-    /* scroll */
+    /* Scroll kontrol */
     function checkVisible() {
       document.querySelectorAll(".scene").forEach((scene, i) => {
         const r = scene.getBoundingClientRect();
@@ -740,7 +1417,7 @@
         scene.classList.toggle("active", vis);
         if (vis && currentVisible !== i) activateScene(i);
       });
-      document.querySelectorAll(".mem-item").forEach(el => {
+      document.querySelectorAll(".mem-item, .quote-card").forEach(el => {
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight * 0.85) el.classList.add("visible");
       });
@@ -773,7 +1450,7 @@
     window.addEventListener("scroll", checkVisible, { passive: true });
     checkVisible();
 
-    /* kalpler */
+    /* ═══ UÇAN KALPLER ═══ */
     const emojis = ["❤️","🤍","💕","🌸","✨","💗","🌹","💞","💝","🌺"];
     setInterval(() => {
       const h = document.createElement("div");
@@ -788,6 +1465,11 @@
       document.body.appendChild(h);
       setTimeout(() => h.remove(), parseFloat(dur) * 1000 + 200);
     }, 350);
+
+    /* ═══ MESAJ BALONLARI ANİMASYONU ═══ */
+    document.querySelectorAll('.message').forEach((msg, index) => {
+      msg.style.animationDelay = (index * 0.3) + 's';
+    });
   </script>
 </body>
 </html>
