@@ -335,7 +335,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       💝 5. SENDEN SEVDİĞİM ŞEYLER (Yeni bölüm!)
+       💝 5. SENDEN SEVDİĞİM ŞEYLER
     ═══════════════════════════════════════════════ */
     .love-section {
       padding: 6rem 2rem;
@@ -394,7 +394,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       💬 6. ÖZEL SÖZLER BÖLÜMÜ (Romantik alıntılar)
+       💬 6. ÖZEL SÖZLER BÖLÜMÜ
     ═══════════════════════════════════════════════ */
     .quotes-section {
       padding: 6rem 2rem;
@@ -447,7 +447,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       🎁 7. İNTERAKTİF KARTLAR (Tıkla-aç kartlar)
+       🎁 7. İNTERAKTİF KARTLAR
     ═══════════════════════════════════════════════ */
     .cards-section {
       padding: 6rem 2rem;
@@ -535,7 +535,59 @@
     }
 
     /* ═══════════════════════════════════════════════
-       💌 8. MESAJ BALONU (WhatsApp tarzı)
+       📸 8. POLAROİD FOTOĞRAFLAR
+    ═══════════════════════════════════════════════ */
+    .polaroid-section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 15px;
+      padding-bottom: 60px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      transform: rotate(-2deg);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .polaroid:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .polaroid-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #333;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 1rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       💌 9. MESAJ BALONU
     ═══════════════════════════════════════════════ */
     .messages-section {
       padding: 6rem 2rem;
@@ -607,7 +659,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       ⏱️ 9. SAYAÇ (Birlikte geçen süre)
+       ⏱️ 10. SAYAÇ
     ═══════════════════════════════════════════════ */
     .counter-section {
       padding: 6rem 2rem;
@@ -653,85 +705,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       🎬 10. FOTOĞRAF SLIDESHOW BÖLÜMÜ
-    ═══════════════════════════════════════════════ */
-    .divider {
-      display: flex; align-items: center; gap: 1.5rem;
-      max-width: 680px; margin: 2rem auto 0;
-      padding: 0 2rem;
-      color: rgba(255,255,255,0.08);
-    }
-    .divider::before, .divider::after {
-      content: ''; flex: 1; height: 1px;
-      background: rgba(255,255,255,0.07);
-    }
-
-    .photos-label {
-      padding: 3rem 2rem 1rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: var(--rose);
-    }
-
-    .scene {
-      height: 100dvh;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      opacity: 0;
-      transform: translateY(60px) scale(0.98);
-      transition: opacity 0.9s cubic-bezier(.4,0,.2,1), transform 0.9s cubic-bezier(.4,0,.2,1);
-      position: relative; overflow: hidden;
-    }
-    .scene::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, transparent 50%, rgba(13,10,11,0.6) 100%);
-      pointer-events: none; z-index: 1;
-    }
-    .scene.active { opacity: 1; transform: translateY(0) scale(1); }
-
-    .scene img {
-      width: 100vw; height: auto;
-      max-height: 100vh;
-      object-fit: contain;
-      box-shadow: 0 0 80px rgba(200,98,122,0.15), 0 0 20px rgba(0,0,0,0.8);
-      transition: opacity 0.8s ease, transform 0.3s ease;
-      display: block;
-    }
-    .scene img:hover {
-      transform: scale(1.02);
-    }
-
-    .scene p {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1rem, 3.5vw, 1.4rem);
-      color: rgba(232,160,176,0.9);
-      text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(200,98,122,0.3);
-      position: absolute;
-      bottom: 5vh; left: 50%;
-      transform: translateX(-50%);
-      width: 90%; z-index: 2;
-      letter-spacing: 0.02em; line-height: 1.5;
-      animation: fadeInCaption 1s ease;
-    }
-    @keyframes fadeInCaption {
-      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(0); }
-    }
-
-    .scene-num {
-      position: absolute;
-      top: 2rem; right: 2rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      color: rgba(232,160,176,0.35);
-      z-index: 2;
-    }
-
-    /* ═══════════════════════════════════════════════
-       💝 11. SON MESAJ (Kapanış bölümü)
+       💝 11. SON MESAJ
     ═══════════════════════════════════════════════ */
     .final-message {
       padding: 8rem 2rem 6rem;
@@ -764,7 +738,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       ❤️ 12. KALP ANİMASYONLARI (Uçan kalpler)
+       ❤️ 12. KALP ANİMASYONLARI
     ═══════════════════════════════════════════════ */
     .heart {
       position: fixed; bottom: -60px;
@@ -787,7 +761,7 @@
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
     /* ═══════════════════════════════════════════════
-       📱 13. RESPONSİVE (Mobil uyumlu)
+       📱 13. RESPONSİVE
     ═══════════════════════════════════════════════ */
     @media (max-width: 768px) {
       .mem-photo {
@@ -802,6 +776,9 @@
         grid-template-columns: 1fr;
       }
       .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .polaroid-grid {
         grid-template-columns: 1fr;
       }
       .message-bubble {
@@ -824,7 +801,7 @@
   <div id="hero">
     <div class="blob2"></div>
     <div class="big-heart">💕</div>
-    <p class="hero-eyebrow">Senin için bir şey hazırladım</p>
+    <p class="hero-eyebrow">Sana özel bir şey var</p>
     <h1 class="hero-title">Seni<br/><em>Seviyorum</em></h1>
     <p class="hero-sub">ve bunu hiç unutma…</p>
     <div class="scroll-hint" onclick="document.getElementById('memories').scrollIntoView({behavior:'smooth'})">
@@ -1089,7 +1066,40 @@
   </section>
 
   <!-- ═════════════════════════════════════════════════════════
-       💌 6. MESAJ BALONLARI
+       📸 6. POLAROİD FOTOĞRAFLAR
+       ✏️ Buraya fotoğraflarını ekle!
+  ═════════════════════════════════════════════════════════ -->
+  <section class="polaroid-section">
+    <p class="mem-label">Anılarımızdan kareler</p>
+    <h2 class="mem-heading">Birlikte <em>çektiğimiz</em><br/>fotoğraflar</h2>
+
+    <div class="polaroid-grid">
+      
+      <!-- ✏️ FOTOĞRAF 1 -->
+      <div class="polaroid">
+        <img src="foto1.jpeg" alt="">
+        <p class="polaroid-caption">İlk buluşmamız 💕</p>
+      </div>
+
+      <!-- ✏️ FOTOĞRAF 2 -->
+      <div class="polaroid">
+        <img src="foto2.jpeg" alt="">
+        <p class="polaroid-caption">O güzel günden bir kare ✨</p>
+      </div>
+
+      <!-- ✏️ FOTOĞRAF 3 -->
+      <div class="polaroid">
+        <img src="foto3.jpeg" alt="">
+        <p class="polaroid-caption">Seninle her an özel 🌸</p>
+      </div>
+
+      <!-- ✏️ İSTERSEN DAHA FAZLA EKLE - Aynı şablonu kopyala-yapıştır -->
+      
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════════════
+       💌 7. MESAJ BALONLARI
   ═════════════════════════════════════════════════════════ -->
   <section class="messages-section">
     <p class="mem-label">Aramızdaki mesajlar</p>
@@ -1098,34 +1108,50 @@
     <div class="chat-container">
       
       <div class="message received">
-        <div class="message-avatar">👱🏻‍♀️</div>
+        <div class="message-avatar">👩</div>
         <div class="message-bubble">
-          <p class="message-text">K*rtlerin amk</p>
+          <p class="message-text">Merhaba 😊</p>
           <span class="message-time">20 Mart, 20:15</span>
         </div>
       </div>
 
       <div class="message sent">
-        <div class="message-avatar">👱🏻‍♂️</div>
+        <div class="message-avatar">👨</div>
         <div class="message-bubble">
-          <p class="message-text">BEN DE</p>
+          <p class="message-text">Merhaba! Nasılsın? 💕</p>
           <span class="message-time">20 Mart, 20:16</span>
         </div>
       </div>
 
       <div class="message received">
-        <div class="message-avatar">👱🏻‍♀️</div>
+        <div class="message-avatar">👩</div>
         <div class="message-bubble">
-          <p class="message-text">Evlenelim mi 🌸</p>
+          <p class="message-text">İyiyim, sen nasılsın? 🌸</p>
           <span class="message-time">20 Mart, 20:17</span>
         </div>
       </div>
 
       <div class="message sent">
-        <div class="message-avatar">👱🏻‍♂️</div>
+        <div class="message-avatar">👨</div>
         <div class="message-bubble">
-          <p class="message-text">Oluur</p>
+          <p class="message-text">Şimdi daha iyiyim 😊 Seninle konuşmak çok güzel</p>
           <span class="message-time">20 Mart, 20:18</span>
+        </div>
+      </div>
+
+      <div class="message received">
+        <div class="message-avatar">👩</div>
+        <div class="message-bubble">
+          <p class="message-text">Benimle konuşmak mı? Neden? 😄</p>
+          <span class="message-time">20 Mart, 20:19</span>
+        </div>
+      </div>
+
+      <div class="message sent">
+        <div class="message-avatar">👨</div>
+        <div class="message-bubble">
+          <p class="message-text">Çünkü sen özelsin ❤️</p>
+          <span class="message-time">20 Mart, 20:21</span>
         </div>
       </div>
 
@@ -1133,7 +1159,7 @@
   </section>
 
   <!-- ═════════════════════════════════════════════════════════
-       ⏱️ 7. SAYAÇ
+       ⏱️ 8. SAYAÇ
   ═════════════════════════════════════════════════════════ -->
   <section class="counter-section">
     <p class="mem-label">Birlikte geçen zamanımız</p>
@@ -1158,14 +1184,6 @@
       </div>
     </div>
   </section>
-
-  <div class="divider"><span>✦</span></div>
-  <p class="photos-label">Birlikte geçirdiğimiz anlardan</p>
-
-  <!-- ═════════════════════════════════════════════════════════
-       🎬 8. FOTOĞRAF SLİDESHOW
-  ═════════════════════════════════════════════════════════ -->
-  <div id="scene-container"></div>
 
   <!-- ═════════════════════════════════════════════════════════
        💝 9. SON MESAJ
@@ -1256,75 +1274,13 @@
     window.addEventListener("scroll", tryMusic, { once: true });
     window.addEventListener("click", tryMusic, { once: true });
 
-    /* ═══ FOTOĞRAF SLİDESHOW - ✏️ FOTOĞRAF SAYISINI BURADAN DEĞİŞTİR ═══ */
-    const TOTAL_IMAGES = 25;   // ← KAÇ FOTOĞRAFIN VARSA BURAYA YAZ
-    const GROUP_SIZE   = 5;    // Her sahnede 5 fotoğraf gösterir
-    const TOTAL_SCENES = Math.ceil(TOTAL_IMAGES / GROUP_SIZE);
-    let slideTimers    = [];
-    let currentVisible = -1;
-
-    const captions = [
-      "Seninle her an özel… 💫","Bu gülüşünü hiç unutamam 🌸",
-      "En güzel anım, seninle olan 🤍","Seni görmek her şeyi güzelleştiriyor ✨",
-      "Seninle geçen her saniye değerli 💕","Bu bakışlar… kalbimi çalıyor 🥀",
-      "Seninle olmak ev gibi hissettiriyor 🏡","Her fotoğrafta daha çok seviyorum seni 💞",
-      "Anılarımızın en güzelleri bunlar 🌙","Seni sevmek en güzel şeyim 💗",
-      "Seninle geçen güzel anlardan biri 💫","Her gülüşün bir hediye 🎁",
-      "Kalbimde bir yerin var, hep 🌹","Seni seviyorum — dünden fazla 💝",
-    ];
-
-    /* Sahneleri oluştur */
-    (function createScenes() {
-      const c = document.getElementById("scene-container");
-      for (let i = 0; i < TOTAL_SCENES; i++) {
-        const start = i * GROUP_SIZE + 1;
-        const div = document.createElement("div");
-        div.className = "scene";
-        div.innerHTML = `
-          <span class="scene-num">${String(i+1).padStart(2,"0")} / ${String(TOTAL_SCENES).padStart(2,"0")}</span>
-          <img src="foto${start}.jpeg" id="img${i}" alt="" loading="lazy"/>
-          <p>${captions[i % captions.length]}</p>`;
-        c.appendChild(div);
-      }
-    })();
-
-    /* Scroll kontrol */
+    /* ═══ SCROLL ANİMASYONLARI ═══ */
     function checkVisible() {
-      document.querySelectorAll(".scene").forEach((scene, i) => {
-        const r = scene.getBoundingClientRect();
-        const vis = r.top < window.innerHeight * 0.65 && r.bottom > window.innerHeight * 0.35;
-        scene.classList.toggle("active", vis);
-        if (vis && currentVisible !== i) activateScene(i);
-      });
       document.querySelectorAll(".mem-item, .quote-card").forEach(el => {
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight * 0.85) el.classList.add("visible");
       });
     }
-
-    function activateScene(index) {
-      clearAllTimers();
-      currentVisible = index;
-      const img = document.getElementById(`img${index}`);
-      if (!img) return;
-      const start = index * GROUP_SIZE + 1;
-      const end   = Math.min(start + GROUP_SIZE - 1, TOTAL_IMAGES);
-      let cur = start;
-      const fadeNext = () => {
-        const src = `foto${cur}.jpeg`;
-        const ni = new Image(); ni.src = src;
-        ni.onload = () => {
-          img.style.transition = "opacity 0.8s ease";
-          img.style.opacity = "0";
-          setTimeout(() => { img.src = src; img.style.opacity = "1"; }, 400);
-        };
-        cur++; if (cur > end) cur = start;
-      };
-      fadeNext();
-      slideTimers[index] = setInterval(fadeNext, 2200);
-    }
-
-    function clearAllTimers() { slideTimers.forEach(t => clearInterval(t)); slideTimers = []; }
 
     window.addEventListener("scroll", checkVisible, { passive: true });
     checkVisible();
