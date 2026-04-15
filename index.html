@@ -72,31 +72,33 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  width: 300px;
-  background: rgba(13, 10, 11, 0.85);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(232, 160, 176, 0.2);
-  border-radius: 20px;
-  padding: 1.2rem;
-  z-index: 10000;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,98,122,0.1);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.music-player.minimized {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  padding: 0;
-  overflow: hidden;
+  background: rgba(13, 10, 11, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(232, 160, 176, 0.2);
+  z-index: 10000;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
+  overflow: hidden;
 }
 
-.music-player.minimized .player-body { display: none; }
-.music-player.minimized .player-mini { display: flex !important; }
+/* Açık hali */
+.music-player.open {
+  width: 300px;
+  height: auto;
+  border-radius: 20px;
+  padding: 1.2rem;
+  cursor: default;
+}
+
+.music-player .player-body { display: none; }
+.music-player.open .player-body { display: block; }
 
 .player-mini {
-  display: none;
+  display: flex;
   width: 60px;
   height: 60px;
   align-items: center;
@@ -104,6 +106,8 @@
   font-size: 1.8rem;
   animation: musicNote 1s ease-in-out infinite;
 }
+
+.music-player.open .player-mini { display: none; }
 
 @keyframes musicNote {
   0%, 100% { transform: translateY(0) scale(1); }
@@ -1777,10 +1781,11 @@ audio.addEventListener('ended', nextSong);
 
 function toggleMinimize() {
   isMinimized = !isMinimized;
-  document.getElementById('musicPlayer').classList.toggle('minimized', isMinimized);
+  document.getElementById('musicPlayer').classList.toggle('open', !isMinimized);
 }
 
 buildPlaylist();
+isMinimized = true; // başlangıçta ikon halinde
 document.getElementById('songName').textContent = playlist[0].name;
 document.getElementById('songArtist').textContent = playlist[0].artist;
 
