@@ -1148,8 +1148,8 @@
       color: white;
     }
 
-    /* ═══════════════════════════════════════════════
-       🎥 POLAROİD VİDEO STİLİ
+       /* ═══════════════════════════════════════════════
+       🎥 POLAROİD VİDEO STİLİ (GOOGLE DRIVE)
     ═══════════════════════════════════════════════ */
     .polaroid-video {
       background: white;
@@ -1172,51 +1172,53 @@
       z-index: 10;
     }
 
+    /* Play butonu */
     .polaroid-video::after {
       content: '▶️';
       position: absolute;
-      top: 50%;
+      top: 45%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 3rem;
-      opacity: 0;
+      opacity: 0.7;
       transition: opacity 0.3s ease;
       pointer-events: none;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
     .polaroid-video:hover::after {
-      opacity: 0.8;
+      opacity: 1;
+      font-size: 3.5rem;
     }
 
-    .polaroid-video iframe,
-    .polaroid-video video {
+    .polaroid-video iframe {
       width: 100%;
       height: 280px;
-      object-fit: cover;
       display: block;
-      pointer-events: none; /* Hover sırasında video çalmasın */
-    }
-
-    .polaroid-video.playing iframe,
-    .polaroid-video.playing video {
-      pointer-events: auto; /* Tıklayınca video açılsın */
-    }
-
-    .polaroid-caption {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: #333;
-      text-align: center;
-      margin-top: 15px;
-      font-size: 1rem;
+      pointer-events: none;
     }
 
     .video-container {
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 100%;
     }
-    
+
+    .video-container iframe {
+      width: 90vw;
+      height: 50.625vw; /* 16:9 aspect ratio */
+      max-height: 80vh;
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(200,98,122,0.5);
+    }
+
+    @media (max-width: 768px) {
+      .video-container iframe {
+        width: 95vw;
+        height: 53.4375vw;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1464,34 +1466,42 @@
        📸 POLAROİD FOTOĞRAFLAR - TIKLA BÜYÜT!
        ✏️ Fotoğrafları buraya ekle
   ═════════════════════════════════════════════════════════ -->
-  <section class="polaroid-section">
-    <p class="mem-label">Anılarımızdan kareler</p>
-    <h2 class="mem-heading">Birlikte <em>çektiğimiz</em><br/>fotoğraflar</h2>
+ <section class="polaroid-section">
+  <p class="mem-label">Anılarımızdan kareler</p>
+  <h2 class="mem-heading">Birlikte <em>çektiğimiz</em><br/>fotoğraflar</h2>
 
-    <div class="polaroid-grid">
-      
-      <!-- ✏️ FOTOĞRAF 1 -->
-      <div class="polaroid" onclick="openLightbox(0)">
-        <img src="foto1.jpeg" alt="İlk buluşmamız 💕">
-        <p class="polaroid-caption">İlk buluşmamız 💕</p>
-      </div>
-
-      <!-- ✏️ FOTOĞRAF 2 -->
-      <div class="polaroid" onclick="openLightbox(1)">
-        <img src="foto2.jpeg" alt="O güzel günden bir kare ✨">
-        <p class="polaroid-caption">O güzel günden bir kare ✨</p>
-      </div>
-
-      <!-- ✏️ FOTOĞRAF 3 -->
-      <div class="polaroid" onclick="openLightbox(2)">
-        <img src="foto3.jpeg" alt="Seninle her an özel 🌸">
-        <p class="polaroid-caption">Seninle her an özel 🌸</p>
-      </div>
-
-      <!-- ✏️ İSTERSEN DAHA FAZLA EKLE -->
-      
+  <div class="polaroid-grid">
+    
+    <!-- FOTOĞRAF 1 -->
+    <div class="polaroid" onclick="openLightbox(0)">
+      <img src="foto1.jpeg" alt="İlk buluşmamız 💕">
+      <p class="polaroid-caption">İlk buluşmamız 💕</p>
     </div>
-  </section>
+
+    <!-- 🎥 GOOGLE DRIVE VİDEO -->
+    <div class="polaroid-video" onclick="openVideoLightbox('1VBnJIZgSUKJgAxFVuV0Ul-qlorNjcjJk')">
+      <iframe 
+        src="https://drive.google.com/file/d/1VBnJIZgSUKJgAxFVuV0Ul-qlorNjcjJk/preview" 
+        frameborder="0" 
+        allowfullscreen>
+      </iframe>
+      <p class="polaroid-caption">O güzel günden bir video 🎬💕</p>
+    </div>
+
+    <!-- FOTOĞRAF 2 -->
+    <div class="polaroid" onclick="openLightbox(1)">
+      <img src="foto2.jpeg" alt="O güzel günden bir kare ✨">
+      <p class="polaroid-caption">O güzel günden bir kare ✨</p>
+    </div>
+
+    <!-- FOTOĞRAF 3 -->
+    <div class="polaroid" onclick="openLightbox(2)">
+      <img src="foto3.jpeg" alt="Seninle her an özel 🌸">
+      <p class="polaroid-caption">Seninle her an özel 🌸</p>
+    </div>
+    
+  </div>
+</section>
 
   <!-- ═════════════════════════════════════════════════════════
        🖼️ LIGHTBOX (Büyük Fotoğraf Görüntüleyici)
@@ -1967,6 +1977,59 @@
       });
       
       reasonsContainer.appendChild(item);
+    });
+
+    /* ═══ GOOGLE DRIVE VİDEO LIGHTBOX ═══ */
+    let videoLightbox = null;
+
+    function openVideoLightbox(videoId) {
+      // Eğer lightbox yoksa oluştur
+      if (!videoLightbox) {
+        videoLightbox = document.createElement('div');
+        videoLightbox.className = 'lightbox';
+        videoLightbox.id = 'videoLightbox';
+        videoLightbox.innerHTML = `
+          <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeVideoLightbox()">×</button>
+            <div class="video-container" id="videoContainer"></div>
+          </div>
+        `;
+        document.body.appendChild(videoLightbox);
+        videoLightbox.addEventListener('click', closeVideoLightbox);
+      }
+
+      const container = document.getElementById('videoContainer');
+      
+      // Google Drive iframe oluştur
+      container.innerHTML = `
+        <iframe 
+          src="https://drive.google.com/file/d/${videoId}/preview" 
+          frameborder="0" 
+          allow="autoplay; fullscreen"
+          allowfullscreen>
+        </iframe>
+      `;
+
+      videoLightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoLightbox() {
+      if (videoLightbox) {
+        videoLightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        // Video durdur
+        document.getElementById('videoContainer').innerHTML = '';
+      }
+    }
+
+    // ESC tuşu ile kapat (mevcut koda ekleme)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeLetter();
+        closeVideoLightbox(); // ← YENİ
+      }
     });
     
   </script>
