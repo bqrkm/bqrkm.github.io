@@ -453,95 +453,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       🎁 7. İNTERAKTİF KARTLAR
-    ═══════════════════════════════════════════════ */
-    .cards-section {
-      padding: 6rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    .flip-card {
-      perspective: 1000px;
-      height: 300px;
-      cursor: pointer;
-    }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-
-    .flip-card.flipped .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front,
-    .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    }
-
-    .flip-card-front {
-      background: linear-gradient(135deg, rgba(200,98,122,0.2) 0%, rgba(201,169,110,0.1) 100%);
-      border: 2px solid rgba(232,160,176,0.3);
-    }
-
-    .flip-card-back {
-      background: linear-gradient(135deg, var(--rose) 0%, #b85668 100%);
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front .card-emoji {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-    }
-
-    .flip-card-front .card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      color: var(--rose-light);
-      text-align: center;
-    }
-
-    .flip-card-front .card-hint {
-      font-size: 0.7rem;
-      color: var(--muted);
-      margin-top: 1rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .flip-card-back p {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: white;
-      text-align: center;
-    }
-
-    /* ═══════════════════════════════════════════════
-       📸 8. POLAROİD FOTOĞRAFLAR + LIGHTBOX
+       📸 7. POLAROİD FOTOĞRAFLAR + LIGHTBOX
     ═══════════════════════════════════════════════ */
     .polaroid-section {
       padding: 6rem 2rem;
@@ -577,7 +489,6 @@
       z-index: 10;
     }
 
-    /* ✨ YENİ: Tıklama işareti */
     .polaroid::after {
       content: '🔍';
       position: absolute;
@@ -609,7 +520,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       🖼️ LIGHTBOX (Büyüyen Fotoğraf Modali)
+       🖼️ LIGHTBOX
     ═══════════════════════════════════════════════ */
     .lightbox {
       position: fixed;
@@ -657,7 +568,6 @@
       box-shadow: 0 20px 80px rgba(200,98,122,0.5);
     }
 
-    /* Kapatma butonu */
     .lightbox-close {
       position: absolute;
       top: -50px;
@@ -682,7 +592,6 @@
       transform: rotate(90deg) scale(1.1);
     }
 
-    /* Alt yazı */
     .lightbox-caption {
       position: absolute;
       bottom: -60px;
@@ -695,7 +604,6 @@
       color: var(--rose-light);
     }
 
-    /* Ok tuşları (Önceki/Sonraki) */
     .lightbox-nav {
       position: absolute;
       top: 50%;
@@ -728,7 +636,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       💌 9. MESAJ BALONU
+       💌 8. MESAJ BALONU
     ═══════════════════════════════════════════════ */
     .messages-section {
       padding: 6rem 2rem;
@@ -800,7 +708,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       ⏱️ 10. SAYAÇ
+       ⏱️ 9. SAYAÇ
     ═══════════════════════════════════════════════ */
     .counter-section {
       padding: 6rem 2rem;
@@ -846,7 +754,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       💝 11. SON MESAJ
+       💝 10. SON MESAJ
     ═══════════════════════════════════════════════ */
     .final-message {
       padding: 8rem 2rem 6rem;
@@ -879,7 +787,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       ❤️ 12. KALP ANİMASYONLARI
+       ❤️ 11. KALP ANİMASYONLARI
     ═══════════════════════════════════════════════ */
     .heart {
       position: fixed; bottom: -60px;
@@ -902,7 +810,7 @@
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
     /* ═══════════════════════════════════════════════
-       📱 13. RESPONSİVE
+       📱 12. RESPONSİVE
     ═══════════════════════════════════════════════ */
     @media (max-width: 768px) {
       .mem-photo {
@@ -914,9 +822,6 @@
         gap: 1.5rem;
       }
       .love-grid {
-        grid-template-columns: 1fr;
-      }
-      .cards-grid {
         grid-template-columns: 1fr;
       }
       .polaroid-grid {
@@ -934,7 +839,7 @@
       .lightbox-next { right: 10px; }
     }
 
-        /* ═══════════════════════════════════════════════
+    /* ═══════════════════════════════════════════════
        💌 GİZLİ MEKTUP KUTUSU
     ═══════════════════════════════════════════════ */
     .secret-letter-section {
@@ -1066,7 +971,6 @@
       margin-top: 2rem;
     }
 
-    /* Mektup kağıdı efekti */
     .letter-content::before {
       content: '';
       position: absolute;
@@ -1082,9 +986,8 @@
       pointer-events: none;
     }
 
-
-       /* ═══════════════════════════════════════════════
-       🎥 POLAROİD VİDEO STİLİ (GOOGLE DRIVE)
+    /* ═══════════════════════════════════════════════
+       🎥 POLAROİD VİDEO STİLİ
     ═══════════════════════════════════════════════ */
     .polaroid-video {
       background: white;
@@ -1107,7 +1010,6 @@
       z-index: 10;
     }
 
-    /* Play butonu */
     .polaroid-video::after {
       content: '▶️';
       position: absolute;
@@ -1142,7 +1044,7 @@
 
     .video-container iframe {
       width: 90vw;
-      height: 50.625vw; /* 16:9 aspect ratio */
+      height: 50.625vw;
       max-height: 80vh;
       border-radius: 10px;
       box-shadow: 0 20px 60px rgba(200,98,122,0.5);
@@ -1309,129 +1211,32 @@
     </div>
   </section>
 
-  <!-- 🎁 İNTERAKTİF KARTLAR -->
-  <section class="cards-section">
-    <p class="mem-label">Sürpriz mesajlar</p>
-    <h2 class="mem-heading">Sana <em>özel</em><br/>sürprizler</h2>
+  <!-- 📸 POLAROİD FOTOĞRAFLAR -->
+  <section class="polaroid-section">
+    <p class="mem-label">Anılarımızdan kareler</p>
+    <h2 class="mem-heading">Birlikte <em>çektiğimiz</em><br/>fotoğraflar</h2>
 
-    <div class="cards-grid">
+    <div class="polaroid-grid">
+
+      <div class="polaroid">
+        <img src="ilk-bulusma.gif" alt="İlk Buluşmamız💕">
+        <p class="polaroid-caption">İlk Buluşmamız💕</p>
+      </div>
+
+      <div class="polaroid" onclick="openLightbox(1)">
+        <img src="foto2.jpeg" alt="O güzel günden bir kare ✨">
+        <p class="polaroid-caption">O güzel günden bir kare ✨</p>
+      </div>
+
+      <div class="polaroid" onclick="openLightbox(2)">
+        <img src="foto3.jpeg" alt="Seninle her an özel 🌸">
+        <p class="polaroid-caption">Seninle her an özel 🌸</p>
+      </div>
       
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-emoji">💌</div>
-            <h3 class="card-title">İlk Mesajın</h3>
-            <p class="card-hint">Tıkla & Oku</p>
-          </div>
-          <div class="flip-card-back">
-            <p>İlk mesajını attığında kalbim çarpmıştı. O günden beri her mesajın beni mutlu ediyor.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-emoji">🌙</div>
-            <h3 class="card-title">Gece Konuşmaları</h3>
-            <p class="card-hint">Tıkla & Oku</p>
-          </div>
-          <div class="flip-card-back">
-            <p>Seninle sabaha kadar konuşmak, uyumaktan daha güzeldi. Senin sesinle uyuyup, senin sesinle uyanmak çok huzurlu.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-emoji">☀️</div>
-            <h3 class="card-title">Sabah Mesajların</h3>
-            <p class="card-hint">Tıkla & Oku</p>
-          </div>
-          <div class="flip-card-back">
-            <p>Her uyandığımda telefona bakmak için tek sebebim.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-emoji">🎁</div>
-            <h3 class="card-title">Sürprizlerin</h3>
-            <p class="card-hint">Tıkla & Oku</p>
-          </div>
-          <div class="flip-card-back">
-            <p>Bana verdiğin küçük sürprizler, büyük mutluluklar yaratıyor kalbimde.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-emoji">🌹</div>
-            <h3 class="card-title">Gelecek Hayallerimiz</h3>
-            <p class="card-hint">Tıkla & Oku</p>
-          </div>
-          <div class="flip-card-back">
-            <p>Seninle hayal ettiğim gelecek çok güzel. Birlikte her şeyin üstesinden geleceğiz.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-emoji">♾️</div>
-            <h3 class="card-title">Sonsuz Sevgim</h3>
-            <p class="card-hint">Tıkla & Oku</p>
-          </div>
-          <div class="flip-card-back">
-            <p>Seni sonsuza kadar seveceğim. Benim için her zaman en değerli varlığımsın.</p>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- ═════════════════════════════════════════════════════════
-       📸 POLAROİD FOTOĞRAFLAR - TIKLA BÜYÜT!
-       ✏️ Fotoğrafları buraya ekle
-  ═════════════════════════════════════════════════════════ -->
-<section class="polaroid-section">
-  <p class="mem-label">Anılarımızdan kareler</p>
-  <h2 class="mem-heading">Birlikte <em>çektiğimiz</em><br/>fotoğraflar</h2>
-
-  <div class="polaroid-grid">
-    
-
-    <!-- 🎬 GIF OLARAK VİDEO (OTOMATİK OYNAR) -->
-    <div class="polaroid">
-      <img src="ilk-bulusma.gif" alt="İlk Buluşmamız💕">
-      <p class="polaroid-caption">İlk Buluşmamız💕</p>
-    </div>
-
-    <!-- FOTOĞRAF 1 -->
-    <div class="polaroid" onclick="openLightbox(1)">
-      <img src="foto2.jpeg" alt="O güzel günden bir kare ✨">
-      <p class="polaroid-caption">O güzel günden bir kare ✨</p>
-    </div>
-
-    <!-- FOTOĞRAF 2 -->
-    <div class="polaroid" onclick="openLightbox(2)">
-      <img src="foto3.jpeg" alt="Seninle her an özel 🌸">
-      <p class="polaroid-caption">Seninle her an özel 🌸</p>
-    </div>
-    
-  </div>
-</section>
-
-  <!-- ═════════════════════════════════════════════════════════
-       🖼️ LIGHTBOX (Büyük Fotoğraf Görüntüleyici)
-  ═════════════════════════════════════════════════════════ -->
+  <!-- 🖼️ LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <div class="lightbox-content" onclick="event.stopPropagation()">
       <button class="lightbox-close" onclick="closeLightbox()">×</button>
@@ -1509,9 +1314,7 @@
     </div>
   </section>
 
-  <!-- ═════════════════════════════════════════════════════════
-       💌 GİZLİ MEKTUP
-  ═════════════════════════════════════════════════════════ -->
+  <!-- 💌 GİZLİ MEKTUP -->
   <section class="secret-letter-section">
     <button class="letter-button" onclick="openLetter()">
       Sana son bir şey söylemek istiyorum...
@@ -1665,10 +1468,7 @@
     window.addEventListener("scroll", tryMusic, { once: true });
     window.addEventListener("click", tryMusic, { once: true });
 
-    /* ═══════════════════════════════════════════════════════════════
-       🖼️ LIGHTBOX FONKSİYONLARI
-    ═══════════════════════════════════════════════════════════════ */
-    
+    /* ═══ LIGHTBOX FONKSİYONLARI ═══ */
     const photos = [];
     document.querySelectorAll('.polaroid img').forEach(img => {
       photos.push({
@@ -1719,9 +1519,13 @@
     }
 
     document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeLetter();
+        closeVideoLightbox();
+      }
       const lightbox = document.getElementById('lightbox');
       if (lightbox.classList.contains('active')) {
-        if (e.key === 'Escape') closeLightbox();
         if (e.key === 'ArrowLeft') changePhoto(-1);
         if (e.key === 'ArrowRight') changePhoto(1);
       }
@@ -1776,7 +1580,6 @@
     let videoLightbox = null;
 
     function openVideoLightbox(videoId) {
-      // Eğer lightbox yoksa oluştur
       if (!videoLightbox) {
         videoLightbox = document.createElement('div');
         videoLightbox.className = 'lightbox';
@@ -1793,7 +1596,6 @@
 
       const container = document.getElementById('videoContainer');
       
-      // Google Drive iframe oluştur
       container.innerHTML = `
         <iframe 
           src="https://drive.google.com/file/d/${videoId}/preview" 
@@ -1811,19 +1613,9 @@
       if (videoLightbox) {
         videoLightbox.classList.remove('active');
         document.body.style.overflow = '';
-        // Video durdur
         document.getElementById('videoContainer').innerHTML = '';
       }
     }
-
-    // ESC tuşu ile kapat (mevcut koda ekleme)
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeLightbox();
-        closeLetter();
-        closeVideoLightbox(); // ← YENİ
-      }
-    });
     
   </script>
 </body>
