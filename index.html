@@ -1082,71 +1082,6 @@
       pointer-events: none;
     }
 
-    /* ═══════════════════════════════════════════════
-       💕 100 SEBEP LİSTESİ
-    ═══════════════════════════════════════════════ */
-    .reasons-section {
-      padding: 6rem 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .reasons-container {
-      margin-top: 3rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-
-    .reason-item {
-      background: linear-gradient(135deg, rgba(200,98,122,0.08) 0%, rgba(201,169,110,0.05) 100%);
-      border-left: 3px solid var(--rose);
-      border-radius: 10px;
-      padding: 1.2rem 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .reason-item:hover {
-      background: linear-gradient(135deg, rgba(200,98,122,0.15) 0%, rgba(201,169,110,0.08) 100%);
-      transform: translateX(8px);
-      box-shadow: 0 5px 20px rgba(200,98,122,0.2);
-    }
-
-    .reason-item::before {
-      content: attr(data-number);
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      color: rgba(200,98,122,0.1);
-      font-weight: 300;
-    }
-
-    .reason-text {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--cream);
-      position: relative;
-      z-index: 1;
-    }
-
-    .reason-emoji {
-      margin-right: 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    /* Accordion efekti */
-    .reason-item.expanded {
-      background: var(--rose);
-    }
-
-    .reason-item.expanded .reason-text {
-      color: white;
-    }
 
        /* ═══════════════════════════════════════════════
        🎥 POLAROİD VİDEO STİLİ (GOOGLE DRIVE)
@@ -1575,18 +1510,6 @@
   </section>
 
   <!-- ═════════════════════════════════════════════════════════
-       💕 100 SEBEP LİSTESİ
-  ═════════════════════════════════════════════════════════ -->
-  <section class="reasons-section">
-    <p class="mem-label">Seni sevmemin sebepleri</p>
-    <h2 class="mem-heading">Seni sevmemin <em>100 sebebi</em></h2>
-
-    <div class="reasons-container" id="reasonsContainer">
-      <!-- JavaScript ile doldurulacak -->
-    </div>
-  </section>
-  
-  <!-- ═════════════════════════════════════════════════════════
        💌 GİZLİ MEKTUP
   ═════════════════════════════════════════════════════════ -->
   <section class="secret-letter-section">
@@ -1601,14 +1524,14 @@
       <div class="letter-content">
         <button class="letter-close" onclick="closeLetter()">×</button>
         
-        <h2 class="letter-title">En Değerli Hazinem 💕</h2>
+        <h2 class="letter-title">En Değerli Hazinem, Hatunum 💕</h2>
         
         <p class="letter-text">
-          Hayatım,
+          Güzeller güzelim,
         </p>
         
         <p class="letter-text">
-          Bu satırları yazarken ellerim titriyor. Çünkü sana olan sevgimi kelimelerle anlatmak çok zor. Ama denemek istiyorum...
+          Bu satırları yazarken çok mutluyum. Çünkü yaptığım basit şeylere bile çok seviniyorsun. O yüzden içim rahat umarım bunu da beğenirsin.
         </p>
         
         <p class="letter-text">
@@ -1624,7 +1547,7 @@
         </p>
         
         <p class="letter-text">
-          Sana söz veriyorum: Her zaman yanında olacağım. Mutlu günlerinde gülümsemeni izleyeceğim, üzgün günlerinde omzum senin için hazır olacak. Hayallerinin peşinden koşarken seni destekleyeceğim, düştüğünde elimi uzatacağım.
+          Sana söz veriyorum: Her zaman yanında olacağım. Mutlu günlerinde gülümsemeni izleyeceğim, üzgün günlerinde ise omzum senin için hazır olacak. Hayallerinin peşinden koşarken seni destekleyeceğim, düştüğünde elimi uzatacağım.
         </p>
         
         <p class="letter-text">
@@ -1632,20 +1555,28 @@
         </p>
         
         <p class="letter-text">
-          Seni seviyorum. Bu üç kelime yetersiz kalıyor ama başka kelime bulamıyorum. Seni dünyadaki her şeyden çok seviyorum. Ve bu sevgi her geçen gün daha da büyüyor.
+          Seni seviyorum. Bu 2 kelime yetersiz kalıyor olabilir ama sana olan sevgimi anlatabilecek bir kelime de henüz bulunamadı. Seni kainattaki her şeyden çok seviyorum. Ve bu sevgi her geçen gün daha da büyüyor.
         </p>
         
+        <p class="letter-text">
+          Bu siteyi yaparken her anımızı hatırladım. Her fotoğrafa bakarken gülümsedim, her anıyı yazarken içim ısındı. Çünkü sen benim hayatımın en güzel şeyisin. 
+        </p>
+
         <p class="letter-text">
           Bu siteyi yaparken her anımızı hatırladım. Her fotoğrafa bakarken gülümsedim, her anıyı yazarken içim ısındı. Çünkü sen benim hayatımın en güzel şeyisin.
         </p>
+
+        <p class="letter-text">
+          Merak etme böyle basit şeyler yapıyorum diye her zaman böyle devam etmeyecek. Gün gelecek karımı bir dünya hediyelere, çiçeklere boğacağım. Benden bir şey isterken çekinme, kendini yük gibi hissetme. Unutma ki, kaplumbağanın sırtındaki yükü değil, evidir.
+        </p>
         
         <p class="letter-text">
-          Teşekkür ederim. Hayatıma girdiğin için, beni sevdiğin için, benimle olduğun için. Sen benim mucizemsın.
+          Teşekkür ederim. Hayatıma girdiğin için, beni sevdiğin için, benimle olduğun için. Sen benim mucizemsin.
         </p>
         
         <p class="letter-signature">
           Sonsuza kadar senin, 💕<br>
-          [Buraya adını yaz]
+          Buğra
         </p>
       </div>
     </div>
@@ -1656,7 +1587,7 @@
     <h2>Sen benim her şeyimsin 💕</h2>
     <p>Her sabah uyandığımda, seni düşünmek güne başlamanın en güzel yolu. Her gülüşün, her bakışın hayatıma anlam katıyor.</p>
     <p>Seninle geçirdiğim her an, bir sonraki anı dört gözle beklememe sebep oluyor. Biliyorum ki yanında olduğum sürece her şey güzel olacak.</p>
-    <p>Bu site sadece küçük bir hediye, ama içindeki her kelime kalbimden geliyor. Seni sonsuza kadar seveceğim.</p>
+    <p>Bu site sadece küçük bir hediye, ama içindeki her kelime kalbimden geliyor.</p>
     <p class="signature">Seni çok ama çok seviyorum ❤️</p>
     <p style="margin-top: 2rem; font-size: 0.8rem; color: var(--muted);">— Senin için her şey, her zaman 💫</p>
   </section>
@@ -1678,7 +1609,7 @@
     createStars();
 
     /* ═══ SAYAÇ ═══ */
-    const startDate = new Date('2025-03-20T00:00:00');
+    const startDate = new Date('2025-03-28T00:00:00');
     
     function updateCounter() {
       const now = new Date();
@@ -1844,131 +1775,6 @@
       modal.classList.remove('active');
       document.body.style.overflow = '';
     }
-
-    /* ═══ 100 SEBEP LİSTESİ ═══ */
-    const reasons = [
-      { emoji: "😊", text: "Gülüşün dünyamı aydınlatıyor" },
-      { emoji: "👁️", text: "Gözlerinin içinde kaybolmayı seviyorum" },
-      { emoji: "💭", text: "Beni her zaman düşünüyorsun" },
-      { emoji: "🤗", text: "Sarılışların bana huzur veriyor" },
-      { emoji: "💬", text: "Seninle konuşmak hiç bıkmıyorum" },
-      { emoji: "🌟", text: "Yanımda olduğunda her şey daha güzel" },
-      { emoji: "💕", text: "Beni olduğum gibi kabul ediyorsun" },
-      { emoji: "🎵", text: "Sesin benim için en güzel melodi" },
-      { emoji: "🌹", text: "Her günümü özel yapıyorsun" },
-      { emoji: "✨", text: "Hayatıma anlam katıyorsun" },
-      { emoji: "💝", text: "Küçük sürprizlerin çok tatlı" },
-      { emoji: "🌙", text: "Gece konuşmalarımız muhteşem" },
-      { emoji: "☀️", text: "Günaydın mesajların güne güzel başlatıyor" },
-      { emoji: "🎁", text: "Hediye vermeni seviyorsun" },
-      { emoji: "💪", text: "Güçlü oluşun beni etkiliyor" },
-      { emoji: "🧠", text: "Zekân harika" },
-      { emoji: "❤️", text: "Kalbinin güzelliği" },
-      { emoji: "🌸", text: "İçten oluşun" },
-      { emoji: "🎬", text: "Birlikte film izlemek çok keyifli" },
-      { emoji: "🍕", text: "Yemek yerken bile eğleniyoruz" },
-      { emoji: "📱", text: "Mesajlarını görmek mutlu ediyor" },
-      { emoji: "🚗", text: "Seninle yolculuk yapmak" },
-      { emoji: "🎶", text: "Aynı şarkıları seviyoruz" },
-      { emoji: "🌈", text: "Hayatıma renk kattın" },
-      { emoji: "💫", text: "Her anımız özel" },
-      { emoji: "🦋", text: "Yanımda olunca kelebekler uçuyor" },
-      { emoji: "🌺", text: "Kokun muhteşem" },
-      { emoji: "👗", text: "Her şey yakışıyor sana" },
-      { emoji: "💄", text: "Güzel giyinmen" },
-      { emoji: "🎀", text: "Tarzın çok hoşuma gidiyor" },
-      { emoji: "☕", text: "Kahve içerken sohbetlerimiz" },
-      { emoji: "🍰", text: "Tatlı yemeni izlemek" },
-      { emoji: "🌃", text: "Gece yürüyüşlerimiz" },
-      { emoji: "🏠", text: "Seninle olmak ev gibi hissettiriyor" },
-      { emoji: "🛋️", text: "Koltuğa uzanıp konuşmak" },
-      { emoji: "📚", text: "Kitap okurken görüşün" },
-      { emoji: "🎮", text: "Bazen çocuk gibi olman" },
-      { emoji: "😴", text: "Uyurken ne kadar tatlı olduğun" },
-      { emoji: "🌅", text: "Seninle gün doğumu izlemek" },
-      { emoji: "🌠", text: "Birlikte yıldızlara bakmak" },
-      { emoji: "💌", text: "Yazışmalarımız" },
-      { emoji: "📷", text: "Birlikte fotoğraf çekmek" },
-      { emoji: "🎤", text: "Şarkı söylemen" },
-      { emoji: "💃", text: "Dans etmen" },
-      { emoji: "🎨", text: "Yaratıcılığın" },
-      { emoji: "🌻", text: "Pozitif enerjin" },
-      { emoji: "😂", text: "Beni güldürmen" },
-      { emoji: "🤝", text: "Anlayışlı oluşun" },
-      { emoji: "🙏", text: "Sabırlı oluşun" },
-      { emoji: "💎", text: "Değerli oluşun" },
-      { emoji: "🦸", text: "Güçlü kadın oluşun" },
-      { emoji: "🧡", text: "Sıcaklığın" },
-      { emoji: "💚", text: "Doğallığın" },
-      { emoji: "💙", text: "Sadakatın" },
-      { emoji: "💜", text: "Tutkun" },
-      { emoji: "🖤", text: "Gizemli yanların" },
-      { emoji: "🤍", text: "Saflığın" },
-      { emoji: "🌷", text: "Zarafetinin" },
-      { emoji: "🥀", text: "Kırılganlığının bile güzel olması" },
-      { emoji: "🎯", text: "Hedef odaklı oluşun" },
-      { emoji: "🏆", text: "Başarılı olman" },
-      { emoji: "⭐", text: "Her zaman parlaman" },
-      { emoji: "🔥", text: "Tutkulu oluşun" },
-      { emoji: "❄️", text: "Soğuk görünüp sıcak oluşun" },
-      { emoji: "🌊", text: "Derin oluşun" },
-      { emoji: "🗻", text: "Sağlam duruşun" },
-      { emoji: "🌪️", text: "Bazen fırtına gibi olman" },
-      { emoji: "🌤️", text: "Günümü aydınlatman" },
-      { emoji: "🎈", text: "Neşeli oluşun" },
-      { emoji: "🎊", text: "Her anı kutlamayı sevmen" },
-      { emoji: "🎉", text: "Eğlenceli oluşun" },
-      { emoji: "🔮", text: "Sihirli bakışların" },
-      { emoji: "💫", text: "Parlak geleceğimiz" },
-      { emoji: "🌌", text: "Sonsuz sevgimiz" },
-      { emoji: "🎼", text: "Hayatımın melodisi olman" },
-      { emoji: "📖", text: "Hayatımın en güzel hikayesi olman" },
-      { emoji: "🗝️", text: "Kalbimin anahtarı olman" },
-      { emoji: "💍", text: "Gelecek hayallerimiz" },
-      { emoji: "👑", text: "Kraliçem olman" },
-      { emoji: "🦄", text: "Eşsiz olman" },
-      { emoji: "🌟", text: "Yıldızım olman" },
-      { emoji: "🎀", text: "Hayatımın hediyesi olman" },
-      { emoji: "🍀", text: "Şanslı yoncam olman" },
-      { emoji: "🌈", text: "Fırtınadan sonraki gökkuşağım olman" },
-      { emoji: "🏔️", text: "Her engeli aşmamız" },
-      { emoji: "🚀", text: "Birlikte yükselmemiz" },
-      { emoji: "🎯", text: "Aynı hedefe doğru gitmemiz" },
-      { emoji: "🤲", text: "Birbirimize destek olmamız" },
-      { emoji: "💏", text: "Mükemmel uyumumuz" },
-      { emoji: "👫", text: "En iyi arkadaş olmamız" },
-      { emoji: "💑", text: "Birbirimize ait olmamız" },
-      { emoji: "👨‍❤️‍👩", text: "Birlikte bir bütün olmamız" },
-      { emoji: "🏡", text: "Birlikte yuva kurmak istemem" },
-      { emoji: "👶", text: "Gelecek hayallerimiz" },
-      { emoji: "👴👵", text: "Seninle yaşlanmak istemem" },
-      { emoji: "♾️", text: "Sonsuz sevgim" },
-      { emoji: "💗", text: "Kalbimin tek sahibi olman" },
-      { emoji: "💖", text: "Her gün daha çok sevmem" },
-      { emoji: "💘", text: "İlk görüşte aşk olmamız" },
-      { emoji: "💓", text: "Kalbimin sadece senin için çarpması" },
-      { emoji: "💞", text: "İki kalbimizin bir olması" },
-      { emoji: "❣️", text: "Seni sonsuza kadar seveceğim" }
-    ];
-
-    const reasonsContainer = document.getElementById('reasonsContainer');
-    reasons.forEach((reason, index) => {
-      const item = document.createElement('div');
-      item.className = 'reason-item';
-      item.setAttribute('data-number', index + 1);
-      item.innerHTML = `
-        <p class="reason-text">
-          <span class="reason-emoji">${reason.emoji}</span>
-          ${reason.text}
-        </p>
-      `;
-      
-      item.addEventListener('click', function() {
-        this.classList.toggle('expanded');
-      });
-      
-      reasonsContainer.appendChild(item);
-    });
 
     /* ═══ GOOGLE DRIVE VİDEO LIGHTBOX ═══ */
     let videoLightbox = null;
