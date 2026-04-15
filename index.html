@@ -85,26 +85,26 @@
   overflow: hidden;
 }
 
-/* Açık hali */
 .music-player.open {
-  width: 300px;
+  width: 280px;
   height: auto;
+  max-width: calc(100vw - 2rem);
   border-radius: 20px;
   padding: 1.2rem;
   cursor: default;
+  overflow: visible;
 }
 
-.music-player .player-body { display: none; }
-.music-player.open .player-body { display: block; }
-
-.player-mini {
-  display: flex;
-  width: 60px;
-  height: 60px;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  animation: musicNote 1s ease-in-out infinite;
+@media (max-width: 768px) {
+  .music-player {
+    bottom: 1rem;
+    right: 1rem;
+  }
+  .music-player.open {
+    width: calc(100vw - 2rem);
+    right: 1rem;
+    left: 1rem;
+  }
 }
 
 .music-player.open .player-mini { display: none; }
