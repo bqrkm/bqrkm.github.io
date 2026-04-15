@@ -1147,6 +1147,69 @@
     .reason-item.expanded .reason-text {
       color: white;
     }
+
+    /* ═══════════════════════════════════════════════
+       🎥 POLAROİD VİDEO STİLİ
+    ═══════════════════════════════════════════════ */
+    .polaroid-video {
+      background: white;
+      padding: 15px;
+      padding-bottom: 60px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      transform: rotate(-2deg);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .polaroid-video:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .polaroid-video:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+
+    .polaroid-video::after {
+      content: '▶️';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .polaroid-video:hover::after {
+      opacity: 0.8;
+    }
+
+    .polaroid-video iframe,
+    .polaroid-video video {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      pointer-events: none; /* Hover sırasında video çalmasın */
+    }
+
+    .polaroid-video.playing iframe,
+    .polaroid-video.playing video {
+      pointer-events: auto; /* Tıklayınca video açılsın */
+    }
+
+    .polaroid-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #333;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 1rem;
+    }
     
   </style>
 </head>
@@ -1190,35 +1253,27 @@
         <p class="mem-date">28 Mart 2025</p>
         <h3 class="mem-title">İlk buluşmamız</h3>
         <p class="mem-desc">Normalde kendimden taviz vermezken, senin; hayatımın kadını için ağrılarımı umursamadan dışarı çıktım. Eğer bilseydim hayatımda böylesine yer edineceğini, tanıştığımız gece evine gelirdim. Hayatta asla pişman olmayacağım şeyi, seninle beraber olmayı seçtim. Dünyada daha güzel bir gün yaşamamıştım.</p>
-        <img src="foto1.jpeg" class="mem-photo" alt="">
       </div>
 
       <div class="mem-item">
         <span class="mem-emoji">💋</span>
-        <p class="mem-date">TARİHİ YAZ</p>
+        <p class="mem-date">28 Mart 2025</p>
         <h3 class="mem-title">İlk öpücüğümüz</h3>
-        <p class="mem-desc">Buraya o anı anlat... Kalbim o an nasıl çarptığını hala hatırlıyorum.</p>
+        <p class="mem-desc">Gözlerimizin içine baktık ve sanki daha yeni tanışmamışız gibi öpüştük. Muazzam bir andı.</p>
       </div>
 
       <div class="mem-item">
         <span class="mem-emoji">💕</span>
-        <p class="mem-date">TARİHİ YAZ</p>
+        <p class="mem-date">21 Mart 2025</p>
         <h3 class="mem-title">İlk "seni seviyorum" dediğim an</h3>
-        <p class="mem-desc">O kelimeleri söylemek en doğal şeydi...</p>
-      </div>
-
-      <div class="mem-item">
-        <span class="mem-emoji">🎁</span>
-        <p class="mem-date">TARİHİ YAZ</p>
-        <h3 class="mem-title">İlk hediye aldığım gün</h3>
-        <p class="mem-desc">Bana verdiğin o hediyeyi hala saklıyorum...</p>
+        <p class="mem-desc">Tanıştık ve aynı gün seni sevmeye başladım. Bir an bile düşünmeden söyledim bu cümleyi çünkü biliyordum hayatımda böylesine bir yer edineceğini.</p>
       </div>
 
       <div class="mem-item">
         <span class="mem-emoji">♾️</span>
         <p class="mem-date">Her gün</p>
         <h3 class="mem-title">Bugün ve her zaman</h3>
-        <p class="mem-desc">Seninle olmak hep böyle güzel kalacak. Bu hikayenin sonu yok.</p>
+        <p class="mem-desc">Bugün ve her zaman seni seveceğim. Bunun hiçbir zamanı sonu gelmeyecek.</p>
       </div>
 
     </div>
@@ -1234,7 +1289,7 @@
       <div class="love-card">
         <span class="love-emoji">😊</span>
         <h3 class="love-title">Gülüşün</h3>
-        <p class="love-desc">Gülüşün benim için güneş gibi, her şeyi aydınlatıyor.</p>
+        <p class="love-desc">Sen gülünce hayat duruyor. Gördüğüm en güzel şey.</p>
       </div>
 
       <div class="love-card">
@@ -1252,19 +1307,19 @@
       <div class="love-card">
         <span class="love-emoji">🎵</span>
         <h3 class="love-title">Sesin</h3>
-        <p class="love-desc">Sesini duymak günümü güzelleştiriyor.</p>
+        <p class="love-desc">Sesini duyunca sanki üstümdeki bütün kötü şeyler bir anda yok oluyor.</p>
       </div>
 
       <div class="love-card">
         <span class="love-emoji">🤗</span>
         <h3 class="love-title">Sarılışların</h3>
-        <p class="love-desc">Kollarında olmak ev gibi hissettiriyor.</p>
+        <p class="love-desc">Kollarındayken sanki evimde gibiyim.</p>
       </div>
 
       <div class="love-card">
         <span class="love-emoji">💪</span>
         <h3 class="love-title">Güçlü oluşun</h3>
-        <p class="love-desc">Hayatta her zaman yanımda duruyorsun.</p>
+        <p class="love-desc">Hayatta pes etmeden çabalaman, çalışman.</p>
       </div>
 
       <div class="love-card">
@@ -1276,21 +1331,8 @@
       <div class="love-card">
         <span class="love-emoji">💝</span>
         <h3 class="love-title">İçten oluşun</h3>
-        <p class="love-desc">Samimiyetin seni özel yapıyor.</p>
+        <p class="love-desc">Samimiyetin ve açık sözlülüğün ilişkiyi önemli seviyelere taşıyor.</p>
       </div>
-
-      <div class="love-card">
-        <span class="love-emoji">🧠</span>
-        <h3 class="love-title">Zekân</h3>
-        <p class="love-desc">Seninle konuşmak her zaman keyifli.</p>
-      </div>
-
-      <div class="love-card">
-        <span class="love-emoji">❤️</span>
-        <h3 class="love-title">Beni sevmen</h3>
-        <p class="love-desc">En çok da beni sevmen için seni seviyorum.</p>
-      </div>
-
     </div>
   </section>
 
@@ -1306,7 +1348,7 @@
       </div>
 
       <div class="quote-card">
-        <p class="quote-text">Seninle geçen her an, bir ömür değerinde. Zamanın nasıl geçtiğini anlamıyorum yanındayken.</p>
+        <p class="quote-text">Seninle geçen her an, bir ömür değerinde. Ve ben bunun kıymetini çok iyi biliyorum.</p>
       </div>
 
       <div class="quote-card">
@@ -1318,7 +1360,7 @@
       </div>
 
       <div class="quote-card">
-        <p class="quote-text">Sen benim eksik parçamsın. Seninle tamamlanmış hissediyorum kendimi.</p>
+        <p class="quote-text">Sen benim eksik parçammışsın. Seninle tamamlanmış hissediyorum kendimi.</p>
       </div>
 
     </div>
@@ -1352,7 +1394,7 @@
             <p class="card-hint">Tıkla & Oku</p>
           </div>
           <div class="flip-card-back">
-            <p>Seninle sabaha kadar konuşmak, uyumaktan daha güzeldi. Her gece seni düşünüyorum.</p>
+            <p>Seninle sabaha kadar konuşmak, uyumaktan daha güzeldi. Senin sesinle uyuyup, senin sesinle uyanmak çok huzurlu.</p>
           </div>
         </div>
       </div>
@@ -1365,7 +1407,7 @@
             <p class="card-hint">Tıkla & Oku</p>
           </div>
           <div class="flip-card-back">
-            <p>Günaydın mesajınla uyandığım her sabah, dünyanın en güzel sabahı oluyor.</p>
+            <p>Her uyandığımda telefona bakmak için tek sebebim.</p>
           </div>
         </div>
       </div>
@@ -1404,7 +1446,7 @@
             <p class="card-hint">Tıkla & Oku</p>
           </div>
           <div class="flip-card-back">
-            <p>Seni sonsuza kadar seveceğim. Bu bir söz değil, bir gerçek.</p>
+            <p>Seni sonsuza kadar seveceğim. Benim için her zaman en değerli varlığımsın.</p>
           </div>
         </div>
       </div>
