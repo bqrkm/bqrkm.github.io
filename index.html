@@ -2122,6 +2122,17 @@
     <p style="margin-top: 2rem; font-size: 0.8rem; color: var(--muted);">— Sen, her şeyin en güzellerine layıksın. 💫</p>
   </section>
 
+<!-- 🖼️ MEDYA CAROUSEL -->
+<div class="media-carousel" id="mediaCarousel" onclick="closeCarousel()">
+  <div class="carousel-content" onclick="event.stopPropagation()">
+    <button class="carousel-close" onclick="closeCarousel()">×</button>
+    <button class="carousel-nav carousel-prev" onclick="changeMedia(-1)">‹</button>
+    <div class="carousel-item" id="carouselItem"></div>
+    <button class="carousel-nav carousel-next" onclick="changeMedia(1)">›</button>
+  </div>
+</div>
+
+<script>
 let currentFolderFiles = [];
 let currentMediaIndex = 0;
 
@@ -2506,3 +2517,9 @@ document.addEventListener('keydown', e => {
     togglePlay();
   }
 });
+
+});
+
+</script>
+</body>
+</html>
