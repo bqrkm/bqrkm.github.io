@@ -2147,23 +2147,9 @@
 
       data.files.forEach((file, idx) => {
         const card = document.createElement('div');
-if (file.type === 'image') {
-  card.className = 'media-card';
-  card.innerHTML = `<img src="${file.src}" alt="" loading="lazy">`;
 } else {
   card.className = 'media-card video-card';
-  card.innerHTML = '<video preload="metadata" muted playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;"></video><div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.15);"><div style="width:48px;height:48px;background:rgba(200,98,122,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:white;box-shadow:0 4px 15px rgba(200,98,122,0.5);">▶</div></div>';
-  
-  var vid = card.querySelector('video');
-  vid.src = file.src + '#t=0.5';
-  vid.load();
-}
-  card.className = 'media-card video-card';
-  card.innerHTML = '<video preload="metadata" muted playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;"></video><div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.15);"><div style="width:48px;height:48px;background:rgba(200,98,122,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:white;box-shadow:0 4px 15px rgba(200,98,122,0.5);">▶</div></div>';
-  var vid = card.querySelector('video');
-  vid.src = file.src + '#t=0.5';
-  vid.load();
-}
+  card.innerHTML = '<div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(200,98,122,0.1);display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(200,98,122,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:white;">▶</div></div>';
         card.onclick = () => openMedia(idx);
         grid.appendChild(card);
       });
