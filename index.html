@@ -1472,11 +1472,12 @@
 .folder-modal-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  padding: 1.2rem;
+  gap: 0.5rem;
+  padding: 0.8rem;
   overflow-y: auto;
+  width: 100%;
 }
-
+    
 .folder-modal-grid::-webkit-scrollbar { width: 4px; }
 .folder-modal-grid::-webkit-scrollbar-thumb {
   background: rgba(200,98,122,0.3);
@@ -1493,6 +1494,8 @@
   background: rgba(200,98,122,0.05);
   border: 1px solid rgba(232,160,176,0.1);
   transition: all 0.3s ease;
+  width: 100%;
+  min-width: 0;
 }
 
 .media-card:hover {
