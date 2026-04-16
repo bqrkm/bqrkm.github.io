@@ -655,65 +655,6 @@
     }
 
     /* ═══════════════════════════════════════════════
-       💝 5. SENDEN SEVDİĞİM ŞEYLER
-    ═══════════════════════════════════════════════ */
-    .love-section {
-      padding: 6rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .love-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .love-card {
-      background: rgba(200,98,122,0.08);
-      border: 1px solid rgba(232,160,176,0.15);
-      border-radius: 16px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      transition: all 0.4s ease;
-      cursor: pointer;
-    }
-    .love-card:hover {
-      background: rgba(200,98,122,0.15);
-      transform: translateY(-8px) rotate(2deg);
-      box-shadow: 0 15px 40px rgba(200,98,122,0.3);
-    }
-
-    .love-emoji {
-      font-size: 2.5rem;
-      display: block;
-      margin-bottom: 1rem;
-      animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .love-card:nth-child(even) .love-emoji {
-      animation-delay: 0.5s;
-    }
-
-    .love-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      color: var(--rose-light);
-      margin-bottom: 0.5rem;
-    }
-
-    .love-desc {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ═══════════════════════════════════════════════
        💬 6. ÖZEL SÖZLER
     ═══════════════════════════════════════════════ */
     .quotes-section {
@@ -1134,9 +1075,6 @@
       .counter-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
-      }
-      .love-grid {
-        grid-template-columns: 1fr;
       }
       .polaroid-grid {
         grid-template-columns: 1fr;
@@ -1848,57 +1786,6 @@
     </video>
   </div>
 </div>
-
-  <!-- 💝 SENDEN SEVDİĞİM ŞEYLER -->
-  <section class="love-section">
-    <p class="mem-label">Seni tanımlayanlar</p>
-    <h2 class="mem-heading">Sende <em>sevdiğim</em><br/>10 şey</h2>
-
-    <div class="love-grid">
-      
-      <div class="love-card">
-        <span class="love-emoji">😊</span>
-        <h3 class="love-title">Gülüşün</h3>
-        <p class="love-desc">Oy kurban olayım gülünce öyle güzel oluyorsun ki tekrar tekrar aşık oluyorum maşallah.</p>
-      </div>
-
-      <div class="love-card">
-        <span class="love-emoji">👁️</span>
-        <h3 class="love-title">Bakışların</h3>
-        <p class="love-desc">Bazen sikecek gibi baksan da en çok gözlerinle yaptığın cilveler hoşuma gidiyo.</p>
-      </div>
-
-      <div class="love-card">
-        <span class="love-emoji">💭</span>
-        <h3 class="love-title">Düşünceliliğin</h3>
-        <p class="love-desc">Kendinden fazla düşünüyorsun beni o kadar aşığım ki sen kendini düşünme zaten boşver ben de kendim yerime seni düşünüyorum aşkııım.</p>
-      </div>
-
-      <div class="love-card">
-        <span class="love-emoji">🎵</span>
-        <h3 class="love-title">Sesin</h3>
-        <p class="love-desc">O güzel sesin bülbül gibi her duyduğumda erekte oluyorum.</p>
-      </div>
-
-      <div class="love-card">
-        <span class="love-emoji">🤗</span>
-        <h3 class="love-title">Sarılışların</h3>
-        <p class="love-desc">O minik kollarını açıp sarılıyosun ya böyle sanki evimdeyim.</p>
-      </div>
-
-      <div class="love-card">
-        <span class="love-emoji">💪</span>
-        <h3 class="love-title">Güçlü oluşun</h3>
-        <p class="love-desc">Migros' un sefiri gurur duyuyorum hatunumla kimsenin yapamayacağı şeyleri yapıyor hay maşallah.</p>
-      </div>
-
-      <div class="love-card">
-        <span class="love-emoji">🌟</span>
-        <h3 class="love-title">Pozitif enerjin</h3>
-        <p class="love-desc">NEYSE Kİİİİİİ KOCAN VARRRRR.</p>
-      </div>
-    </div>
-  </section>
 
   <!-- 💬 ÖZEL SÖZLER -->
   <section class="quotes-section">
