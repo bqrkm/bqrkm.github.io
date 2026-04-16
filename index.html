@@ -2504,12 +2504,23 @@ function closeVideo() {
 }
 
 function openImageFull(src) {
-  // Mevcut lightbox'ı kullan
-  const lightbox = document.getElementById('lightbox');
-  document.getElementById('lightbox-img').src = src;
-  document.getElementById('lightbox-caption').textContent = '';
-  lightbox.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  const existing = document.getElementById('imgFullModal');
+  if (existing) existing.remove();
+  
+  const modal = document.createElement('div');
+  modal.id = 'imgFullModal';
+  modal.style.cssText = `
+    position:fixed; top:0; left:0; width:100vw; height:100vh;
+    background:rgba(0,0,0,0.97); display:flex; align-items:center;
+    justify-content:center; z-index:300000; backdrop-filter:blur(10px);
+    padding:1rem;
+  `;
+  modal.innerHTML = `
+    <img src="${src}" style="max-width:90vw; max-height:90vh; object-fit:contain; border-radius:12px; box-shadow:0 20px 60px rgba(200,98,122,0.4);">
+    <button onclick="document.getElementById('imgFullModal').remove()" style="position:absolute; top:1rem; right:1rem; background:var(--rose); border:none; color:white; width:40px; height:40px; border-radius:50%; font-size:1.3rem; cursor:pointer;">×</button>
+  `;
+  modal.onclick = (e) => { if(e.target === modal) modal.remove(); };
+  document.body.appendChild(modal);
 }
 
 // ESC ile kapat
