@@ -1495,64 +1495,31 @@
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  aspect-ratio: 1 / 1;
+  width: 100%;
+  padding-bottom: 100%;
+  height: 0;
   background: rgba(200,98,122,0.05);
   border: 1px solid rgba(232,160,176,0.1);
   transition: all 0.3s ease;
-  width: 100%;
-  min-width: 0;
-  display: block;
-  z-index: 1;
 }
+
 .media-card:hover {
   transform: scale(1.03);
   border-color: rgba(232,160,176,0.4);
   box-shadow: 0 8px 25px rgba(200,98,122,0.3);
 }
 
-.media-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: all 0.3s ease;
-}
-
-.media-card:hover img {
-  transform: scale(1.05);
-}
-
-/* Video kartı */
-.media-card.video-card::after {
-  content: '▶';
+.media-card img,
+.media-card > div {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 44px; height: 44px;
-  background: rgba(200,98,122,0.85);
-  border-radius: 50%;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  color: white;
-  backdrop-filter: blur(4px);
-  transition: all 0.3s;
-}
-
-.media-card.video-card:hover::after {
-  background: var(--rose);
-  transform: translate(-50%, -50%) scale(1.15);
-}
-
-.media-card.video-card .video-thumb {
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background: rgba(200,98,122,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+.media-card.video-card::after {
+  display: none;
 }
 
 .video-thumb-icon {
