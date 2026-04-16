@@ -1044,13 +1044,14 @@
     /* ═══════════════════════════════════════════════
        ❤️ 11. KALP ANİMASYONLARI
     ═══════════════════════════════════════════════ */
-    .heart {
-      position: fixed; bottom: -60px;
-      pointer-events: none;
-      animation: floatUp 5.2s cubic-bezier(.2,.6,.4,1) forwards;
-      z-index: 99999;
-      filter: drop-shadow(0 0 6px rgba(200,98,122,0.5));
-    }
+.heart {
+  position: fixed; bottom: -60px;
+  left: 50%;
+  pointer-events: none;
+  animation: floatUp 5.2s cubic-bezier(.2,.6,.4,1) forwards;
+  z-index: 99999;
+  filter: drop-shadow(0 0 6px rgba(200,98,122,0.5));
+}
     @keyframes floatUp {
       0%   { transform: translateY(0) rotate(-10deg) scale(0.8); opacity:.9; left:var(--x); }
       20%  { transform: translateY(-20vh) rotate(8deg) scale(1); opacity:1; }
