@@ -1425,6 +1425,76 @@
     </div>
   </section>
 
+  <!-- 📁 ANI KLASÖRLER -->
+<section class="folders-section">
+  <p class="mem-label">Birlikte yaşadıklarımız</p>
+  <h2 class="mem-heading">Anı <em>klasörlerimiz</em></h2>
+
+  <div class="folders-grid">
+    
+    <div class="folder-card" onclick="openFolder('bungalov')">
+      <div class="folder-icon">
+        <div class="folder-top"></div>
+        <div class="folder-body">
+          <span class="folder-emoji">🏡</span>
+        </div>
+      </div>
+      <p class="folder-name">Bungalov</p>
+      <p class="folder-count">7 dosya</p>
+    </div>
+
+    <div class="folder-card" onclick="openFolder('aktivite')">
+      <div class="folder-icon">
+        <div class="folder-top"></div>
+        <div class="folder-body">
+          <span class="folder-emoji">🎉</span>
+        </div>
+      </div>
+      <p class="folder-name">Eğlenceli Aktivitelerimiz</p>
+      <p class="folder-count">12 dosya</p>
+    </div>
+
+    <div class="folder-card" onclick="openFolder('anlar')">
+      <div class="folder-icon">
+        <div class="folder-top"></div>
+        <div class="folder-body">
+          <span class="folder-emoji">💕</span>
+        </div>
+      </div>
+      <p class="folder-name">Önemli Anlarımız</p>
+      <p class="folder-count">10 dosya</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 📁 KLASÖR MODALİ -->
+<div class="folder-modal" id="folderModal" onclick="closeFolder()">
+  <div class="folder-modal-content" onclick="event.stopPropagation()">
+    
+    <div class="folder-modal-header">
+      <div class="folder-modal-title">
+        <span id="folderModalEmoji">🏡</span>
+        <h3 id="folderModalName">Bungalov</h3>
+      </div>
+      <button class="folder-modal-close" onclick="closeFolder()">×</button>
+    </div>
+
+    <div class="folder-modal-grid" id="folderModalGrid"></div>
+
+  </div>
+</div>
+
+<!-- 🎥 VİDEO MODALİ -->
+<div class="video-modal" id="videoModal" onclick="closeVideo()">
+  <div class="video-modal-content" onclick="event.stopPropagation()">
+    <button class="folder-modal-close" onclick="closeVideo()">×</button>
+    <video id="modalVideo" controls controlsList="nodownload">
+      <source id="modalVideoSrc" src="" type="video/mp4">
+    </video>
+  </div>
+</div>
+
   <!-- 💝 SENDEN SEVDİĞİM ŞEYLER -->
   <section class="love-section">
     <p class="mem-label">Seni tanımlayanlar</p>
