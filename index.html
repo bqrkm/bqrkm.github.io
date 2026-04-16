@@ -1322,6 +1322,312 @@
         height: 53.4375vw;
       }
     }
+
+/* ═══ ANI KLASÖRLER ═══ */
+.folders-section {
+  padding: 6rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.folders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.folder-card {
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.folder-card:hover {
+  transform: translateY(-8px);
+}
+
+.folder-icon {
+  position: relative;
+  width: 140px;
+  height: 110px;
+  margin: 0 auto 1rem;
+  transition: all 0.3s ease;
+}
+
+.folder-top {
+  position: absolute;
+  top: 0; left: 0;
+  width: 55%;
+  height: 20px;
+  background: linear-gradient(135deg, var(--rose), #b85668);
+  border-radius: 8px 8px 0 0;
+  z-index: 1;
+}
+
+.folder-body {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 90px;
+  background: linear-gradient(135deg, var(--rose) 0%, #b85668 100%);
+  border-radius: 4px 12px 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(200,98,122,0.4);
+  z-index: 0;
+}
+
+.folder-card:hover .folder-body {
+  box-shadow: 0 15px 40px rgba(200,98,122,0.6);
+  background: linear-gradient(135deg, #d4728a 0%, var(--rose) 100%);
+}
+
+.folder-emoji {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.folder-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--cream);
+  margin-bottom: 0.3rem;
+}
+
+.folder-count {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+}
+
+/* ═══ KLASÖR MODALİ ═══ */
+.folder-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000;
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+}
+
+.folder-modal.active {
+  display: flex;
+}
+
+.folder-modal-content {
+  background: rgba(20,15,16,0.98);
+  border: 1px solid rgba(232,160,176,0.2);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: folderOpen 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes folderOpen {
+  from { transform: scale(0.8) translateY(30px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.folder-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid rgba(232,160,176,0.1);
+  flex-shrink: 0;
+}
+
+.folder-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.folder-modal-title span {
+  font-size: 1.5rem;
+}
+
+.folder-modal-title h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--cream);
+}
+
+.folder-modal-close {
+  background: rgba(200,98,122,0.2);
+  border: none;
+  color: var(--cream);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.folder-modal-close:hover {
+  background: var(--rose);
+  transform: rotate(90deg);
+}
+
+.folder-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.8rem;
+  padding: 1.2rem;
+  overflow-y: auto;
+}
+
+.folder-modal-grid::-webkit-scrollbar { width: 4px; }
+.folder-modal-grid::-webkit-scrollbar-thumb {
+  background: rgba(200,98,122,0.3);
+  border-radius: 10px;
+}
+
+/* Fotoğraf kartı */
+.media-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1;
+  background: rgba(200,98,122,0.05);
+  border: 1px solid rgba(232,160,176,0.1);
+  transition: all 0.3s ease;
+}
+
+.media-card:hover {
+  transform: scale(1.03);
+  border-color: rgba(232,160,176,0.4);
+  box-shadow: 0 8px 25px rgba(200,98,122,0.3);
+}
+
+.media-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.media-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Video kartı */
+.media-card.video-card::after {
+  content: '▶';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px; height: 44px;
+  background: rgba(200,98,122,0.85);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: white;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s;
+}
+
+.media-card.video-card:hover::after {
+  background: var(--rose);
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.media-card.video-card .video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: rgba(200,98,122,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-thumb-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+/* ═══ VİDEO MODALİ ═══ */
+.video-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.97);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 200000;
+  backdrop-filter: blur(15px);
+}
+
+.video-modal.active {
+  display: flex;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 90vw;
+  max-width: 800px;
+  animation: zoomIn 0.3s ease;
+}
+
+.video-modal-content video {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(200,98,122,0.4);
+  max-height: 80vh;
+}
+
+.video-modal-content .folder-modal-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .folders-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .folder-icon {
+    width: 100px;
+    height: 80px;
+  }
+  .folder-top {
+    height: 16px;
+  }
+  .folder-body {
+    height: 65px;
+  }
+  .folder-emoji {
+    font-size: 1.8rem;
+  }
+  .folder-name {
+    font-size: 0.85rem;
+  }
+  .folder-modal-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+    
   </style>
 </head>
 <body>
@@ -2095,6 +2401,124 @@ document.addEventListener('keydown', e => {
         document.getElementById('videoContainer').innerHTML = '';
       }
     }
+
+/* ═══ ANI KLASÖRLER ═══ */
+const folderData = {
+  bungalov: {
+    name: 'Bungalov',
+    emoji: '🏡',
+    files: [
+      { type: 'image', src: 'bungalov1.jpeg' },
+      { type: 'video', src: 'bungalov1.mp4' },
+      { type: 'image', src: 'bungalov2.jpeg' },
+      { type: 'image', src: 'bungalov3.jpeg' },
+      { type: 'image', src: 'bungalov4.jpeg' },
+      { type: 'video', src: 'bungalov5.mp4' },
+      { type: 'image', src: 'bungalov6.jpeg' },
+    ]
+  },
+  aktivite: {
+    name: 'Eğlenceli Aktivitelerimiz',
+    emoji: '🎉',
+    files: [
+      { type: 'image', src: 'aktivite1.jpeg' },
+      { type: 'image', src: 'aktivite2.jpeg' },
+      { type: 'image', src: 'aktivite3.jpeg' },
+      { type: 'image', src: 'aktivite4.jpeg' },
+      { type: 'image', src: 'aktivite5.jpeg' },
+      { type: 'image', src: 'aktivite6.jpeg' },
+      { type: 'image', src: 'aktivite7.jpeg' },
+      { type: 'video', src: 'aktivite8.mp4' },
+      { type: 'image', src: 'aktivite9.jpeg' },
+      { type: 'image', src: 'aktivite10.jpeg' },
+      { type: 'image', src: 'aktivite11.jpeg' },
+      { type: 'video', src: 'aktivite12.mp4' },
+    ]
+  },
+  anlar: {
+    name: 'Önemli Anlarımız',
+    emoji: '💕',
+    files: [
+      { type: 'image', src: 'anlar1.jpeg' },
+      { type: 'image', src: 'anlar2.jpeg' },
+      { type: 'image', src: 'anlar3.jpeg' },
+      { type: 'video', src: 'anlar4.mp4' },
+      { type: 'video', src: 'anlar5.mp4' },
+      { type: 'image', src: 'anlar6.jpeg' },
+      { type: 'video', src: 'anlar7.mp4' },
+      { type: 'video', src: 'anlar8.mp4' },
+      { type: 'image', src: 'anlar9.jpeg' },
+      { type: 'video', src: 'anlar10.mp4' },
+    ]
+  }
+};
+
+function openFolder(key) {
+  const data = folderData[key];
+  document.getElementById('folderModalEmoji').textContent = data.emoji;
+  document.getElementById('folderModalName').textContent = data.name;
+  
+  const grid = document.getElementById('folderModalGrid');
+  grid.innerHTML = '';
+
+  data.files.forEach(file => {
+    const card = document.createElement('div');
+    
+    if (file.type === 'image') {
+      card.className = 'media-card';
+      card.innerHTML = `<img src="${file.src}" alt="" loading="lazy">`;
+      card.onclick = () => openImageFull(file.src);
+    } else {
+      card.className = 'media-card video-card';
+      card.innerHTML = `<div class="video-thumb"><span class="video-thumb-icon">🎬</span></div>`;
+      card.onclick = () => openVideo(file.src);
+    }
+    
+    grid.appendChild(card);
+  });
+
+  document.getElementById('folderModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFolder() {
+  document.getElementById('folderModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function openVideo(src) {
+  const modal = document.getElementById('videoModal');
+  const video = document.getElementById('modalVideo');
+  document.getElementById('modalVideoSrc').src = src;
+  video.load();
+  video.muted = false;
+  modal.classList.add('active');
+}
+
+function closeVideo() {
+  const video = document.getElementById('modalVideo');
+  video.pause();
+  video.src = '';
+  document.getElementById('modalVideoSrc').src = '';
+  document.getElementById('videoModal').classList.remove('active');
+}
+
+function openImageFull(src) {
+  // Mevcut lightbox'ı kullan
+  const lightbox = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = '';
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+// ESC ile kapat
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeFolder();
+    closeVideo();
+  }
+});
     
   </script>
 </body>
