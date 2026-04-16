@@ -2122,19 +2122,17 @@
     <p style="margin-top: 2rem; font-size: 0.8rem; color: var(--muted);">— Sen, her şeyin en güzellerine layıksın. 💫</p>
   </section>
 
-  <script>
-
 let currentFolderFiles = [];
 let currentMediaIndex = 0;
-    
-/* ════ PLAYLİST — şarkıları buradan düzenle ════ */
+
+/* ════ PLAYLİST ════ */
 const playlist = [
   { src: "sarki1.mp3", name: "Bana Ellerini Ver", artist: "Özdemir Erdoğan" },
   { src: "sarki2.mp3", name: "Aşkın En Güzel Hali", artist: "Batuhan Kordel" },
   { src: "sarki3.mp3", name: "Aç Kapıyı Gir İçeri", artist: "Özdemir Erdoğan" },
 ];
 
-let currentIndex = 0, isPlaying = false, isMuted = false, isMinimized = false, prevVolume = 50;
+let currentIndex = 0, isPlaying = false, isMuted = false, isMinimized = true, prevVolume = 50;
 const audio = new Audio();
 audio.volume = 0.5;
 
@@ -2240,7 +2238,6 @@ function toggleMinimize() {
 }
 
 buildPlaylist();
-isMinimized = true; // başlangıçta ikon halinde
 document.getElementById('songName').textContent = playlist[0].name;
 document.getElementById('songArtist').textContent = playlist[0].artist;
 
@@ -2253,199 +2250,115 @@ function tryAutoPlay() {
 window.addEventListener('scroll', tryAutoPlay, { once: true });
 window.addEventListener('click', tryAutoPlay, { once: true });
 
-/* boşluk tuşu = oynat/duraklat */
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeFolder();
-    closeCarousel();
+/* ════ YILDIZLAR ════ */
+function createStars() {
+  const container = document.getElementById('stars');
+  for (let i = 0; i < 50; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    container.appendChild(star);
   }
-  if (document.getElementById('mediaCarousel').classList.contains('active')) {
-    if (e.key === 'ArrowLeft') changeMedia(-1);
-    if (e.key === 'ArrowRight') changeMedia(1);
-  }
+}
+createStars();
+
+/* ════ SAYAÇ ════ */
+const startDate = new Date('2025-03-28T00:00:00');
+function updateCounter() {
+  const now = new Date();
+  const diff = now - startDate;
+  document.getElementById('days').textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById('hours').textContent = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  document.getElementById('minutes').textContent = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  document.getElementById('seconds').textContent = Math.floor((diff % (1000 * 60)) / 1000);
+}
+updateCounter();
+setInterval(updateCounter, 1000);
+
+/* ════ VH FİX ════ */
+function fixVH() {
+  document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+}
+fixVH();
+window.addEventListener("resize", fixVH);
+
+/* ════ LİGHTBOX ════ */
+const photos = [];
+document.querySelectorAll('.polaroid img').forEach(img => {
+  photos.push({ src: img.src, caption: img.alt });
 });
-    /* ═══ YILDIZLARI OLUŞTUR ═══ */
-    function createStars() {
-      const container = document.getElementById('stars');
-      for (let i = 0; i < 50; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.animationDelay = Math.random() * 3 + 's';
-        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        container.appendChild(star);
-      }
-    }
-    createStars();
+let currentPhotoIndex = 0;
 
-    /* ═══ SAYAÇ ═══ */
-    const startDate = new Date('2025-03-28T00:00:00');
-    
-    function updateCounter() {
-      const now = new Date();
-      const diff = now - startDate;
-      
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-      
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds;
-    }
-    
-    updateCounter();
-    setInterval(updateCounter, 1000);
+function openLightbox(index) {
+  currentPhotoIndex = index;
+  document.getElementById('lightbox-img').src = photos[index].src;
+  document.getElementById('lightbox-caption').textContent = photos[index].caption;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
 
-    /* ═══ MOBİL VH FİX ═══ */
-    function fixVH() {
-      document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
-    }
-    fixVH();
-    window.addEventListener("resize", fixVH);
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
 
-    /* ═══ LIGHTBOX FONKSİYONLARI ═══ */
-    const photos = [];
-    document.querySelectorAll('.polaroid img').forEach(img => {
-      photos.push({
-        src: img.src,
-        caption: img.alt
-      });
-    });
+function changePhoto(dir) {
+  currentPhotoIndex = (currentPhotoIndex + dir + photos.length) % photos.length;
+  const img = document.getElementById('lightbox-img');
+  img.style.opacity = '0';
+  setTimeout(() => {
+    img.src = photos[currentPhotoIndex].src;
+    document.getElementById('lightbox-caption').textContent = photos[currentPhotoIndex].caption;
+    img.style.opacity = '1';
+  }, 200);
+}
 
-    let currentPhotoIndex = 0;
+/* ════ SCROLL ANİMASYONLARI ════ */
+function checkVisible() {
+  document.querySelectorAll(".mem-item, .quote-card").forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.85) el.classList.add("visible");
+  });
+}
+window.addEventListener("scroll", checkVisible, { passive: true });
+checkVisible();
 
-    function openLightbox(index) {
-      currentPhotoIndex = index;
-      const lightbox = document.getElementById('lightbox');
-      const img = document.getElementById('lightbox-img');
-      const caption = document.getElementById('lightbox-caption');
-      
-      img.src = photos[index].src;
-      caption.textContent = photos[index].caption;
-      
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+/* ════ UÇAN KALPLER ════ */
+const emojis = ["❤️","🤍","💕","🌸","✨","💗","🌹","💞","💝","🌺"];
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  const x = Math.random() * 96;
+  h.style.left = x + "vw";
+  h.style.fontSize = (Math.random() * 18 + 14) + "px";
+  const dur = (Math.random() * 2 + 4).toFixed(1);
+  h.style.animationDuration = dur + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), parseFloat(dur) * 1000 + 200);
+}, 350);
 
-    function closeLightbox() {
-      const lightbox = document.getElementById('lightbox');
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+/* ════ MESAJ ANİMASYONLARI ════ */
+document.querySelectorAll('.message').forEach((msg, i) => {
+  msg.style.animationDelay = (i * 0.3) + 's';
+});
 
-    function changePhoto(direction) {
-      currentPhotoIndex += direction;
-      
-      if (currentPhotoIndex < 0) {
-        currentPhotoIndex = photos.length - 1;
-      } else if (currentPhotoIndex >= photos.length) {
-        currentPhotoIndex = 0;
-      }
-      
-      const img = document.getElementById('lightbox-img');
-      const caption = document.getElementById('lightbox-caption');
-      
-      img.style.opacity = '0';
-      setTimeout(() => {
-        img.src = photos[currentPhotoIndex].src;
-        caption.textContent = photos[currentPhotoIndex].caption;
-        img.style.opacity = '1';
-      }, 200);
-    }
+/* ════ GİZLİ MEKTUP ════ */
+function openLetter() {
+  document.getElementById('letterModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLetter() {
+  document.getElementById('letterModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeLightbox();
-        closeLetter();
-        closeVideoLightbox();
-      }
-      const lightbox = document.getElementById('lightbox');
-      if (lightbox.classList.contains('active')) {
-        if (e.key === 'ArrowLeft') changePhoto(-1);
-        if (e.key === 'ArrowRight') changePhoto(1);
-      }
-    });
-
-    /* ═══ SCROLL ANİMASYONLARI ═══ */
-    function checkVisible() {
-      document.querySelectorAll(".mem-item, .quote-card").forEach(el => {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.85) el.classList.add("visible");
-      });
-    }
-
-    window.addEventListener("scroll", checkVisible, { passive: true });
-    checkVisible();
-
-    /* ═══ UÇAN KALPLER ═══ */
-    const emojis = ["❤️","🤍","💕","🌸","✨","💗","🌹","💞","💝","🌺"];
-    setInterval(() => {
-      const h = document.createElement("div");
-      h.className = "heart";
-      h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      const x = Math.random() * 96;
-      h.style.setProperty("--x", x + "vw");
-      h.style.left = x + "vw";
-      h.style.fontSize = (Math.random() * 18 + 14) + "px";
-      const dur = (Math.random() * 2 + 4).toFixed(1);
-      h.style.animationDuration = dur + "s";
-      document.body.appendChild(h);
-      setTimeout(() => h.remove(), parseFloat(dur) * 1000 + 200);
-    }, 350);
-
-    /* ═══ MESAJ BALONLARI ANİMASYONU ═══ */
-    document.querySelectorAll('.message').forEach((msg, index) => {
-      msg.style.animationDelay = (index * 0.3) + 's';
-    });
-
-    /* ═══ GİZLİ MEKTUP FONKSİYONLARI ═══ */
-    function openLetter() {
-      const modal = document.getElementById('letterModal');
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLetter() {
-      const modal = document.getElementById('letterModal');
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    /* ═══ GOOGLE DRIVE VİDEO LIGHTBOX ═══ */
-    let videoLightbox = null;
-
-      const container = document.getElementById('videoContainer');
-      
-      container.innerHTML = `
-        <iframe 
-          src="https://drive.google.com/file/d/${videoId}/preview" 
-          frameborder="0" 
-          allow="autoplay; fullscreen"
-          allowfullscreen>
-        </iframe>
-      `;
-
-      videoLightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeVideoLightbox() {
-      if (videoLightbox) {
-        videoLightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        document.getElementById('videoContainer').innerHTML = '';
-      }
-    }
-
-/* ═══ ANI KLASÖRLER ═══ */
+/* ════ ANI KLASÖRLER ════ */
 const folderData = {
   bungalov: {
-    name: 'Bungalov',
-    emoji: '🏡',
+    name: 'Bungalov', emoji: '🏡',
     files: [
       { type: 'image', src: 'bungalov1.jpeg' },
       { type: 'video', src: 'bungalov1.mp4' },
@@ -2457,8 +2370,7 @@ const folderData = {
     ]
   },
   aktivite: {
-    name: 'Eğlenceli Aktivitelerimiz',
-    emoji: '🎉',
+    name: 'Eğlenceli Aktivitelerimiz', emoji: '🎉',
     files: [
       { type: 'image', src: 'aktivite1.jpeg' },
       { type: 'image', src: 'aktivite2.jpeg' },
@@ -2475,8 +2387,7 @@ const folderData = {
     ]
   },
   anlar: {
-    name: 'Önemli Anlarımız',
-    emoji: '💕',
+    name: 'Önemli Anlarımız', emoji: '💕',
     files: [
       { type: 'image', src: 'anlar1.jpeg' },
       { type: 'image', src: 'anlar2.jpeg' },
@@ -2494,15 +2405,15 @@ const folderData = {
 
 function openFolder(key) {
   const data = folderData[key];
+  currentFolderFiles = data.files;
   document.getElementById('folderModalEmoji').textContent = data.emoji;
   document.getElementById('folderModalName').textContent = data.name;
-  
+
   const grid = document.getElementById('folderModalGrid');
   grid.innerHTML = '';
 
   data.files.forEach((file, idx) => {
     const card = document.createElement('div');
-    
     if (file.type === 'image') {
       card.className = 'media-card';
       card.innerHTML = `<img src="${file.src}" alt="" loading="lazy">`;
@@ -2512,22 +2423,11 @@ function openFolder(key) {
         <video src="${file.src}" style="width:100%;height:100%;object-fit:cover;" preload="metadata" muted playsinline></video>
         <div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.2);">
           <div style="width:44px;height:44px;background:rgba(200,98,122,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:white;">▶</div>
-        </div>
-      `;
+        </div>`;
       const vid = card.querySelector('video');
       vid.currentTime = 0.1;
     }
-    card.onclick = () => openMedia(idx); // ← Tıklayınca carousel aç
-    grid.appendChild(card);
-  });
-  
-  // Videonun ilk karesini göster
-  const vid = card.querySelector('video');
-  vid.currentTime = 0.1;
-  
-  card.onclick = () => openVideo(file.src);
-}
-    
+    card.onclick = () => openMedia(idx);
     grid.appendChild(card);
   });
 
@@ -2540,50 +2440,7 @@ function closeFolder() {
   document.body.style.overflow = '';
 }
 
-function openVideo(src) {
-  const modal = document.getElementById('videoModal');
-  const video = document.getElementById('modalVideo');
-  document.getElementById('modalVideoSrc').src = src;
-  video.load();
-  video.muted = false;
-  modal.classList.add('active');
-}
-
-} else {
-  card.className = 'media-card video-card';
-  card.innerHTML = `
-    <video 
-      src="${file.src}" 
-      style="width:100%;height:100%;object-fit:cover;"
-      preload="metadata"
-      muted
-      playsinline
-    ></video>
-    <div style="
-      position:absolute; top:0; left:0; width:100%; height:100%;
-      display:flex; align-items:center; justify-content:center;
-      background:rgba(0,0,0,0.2);
-    ">
-      <div style="
-        width:44px; height:44px;
-        background:rgba(200,98,122,0.85);
-        border-radius:50%;
-        display:flex; align-items:center; justify-content:center;
-        font-size:1rem; color:white;
-        backdrop-filter:blur(4px);
-        transition:all 0.3s;
-      ">▶</div>
-    </div>
-  `;
-  
-  // Videonun ilk karesini göster
-  const vid = card.querySelector('video');
-  vid.currentTime = 0.1;
-  
-  card.onclick = () => openVideo(file.src);
-}
-
-/* ═══ CAROUSEL FONKSİYONLARI ═══ */
+/* ════ CAROUSEL ════ */
 function openMedia(index) {
   currentMediaIndex = index;
   renderMedia();
@@ -2594,8 +2451,6 @@ function openMedia(index) {
 function renderMedia() {
   const item = document.getElementById('carouselItem');
   const file = currentFolderFiles[currentMediaIndex];
-  
-  // Önceki video varsa durdur
   const oldVid = item.querySelector('video');
   if (oldVid) { oldVid.pause(); oldVid.src = ''; }
 
@@ -2615,27 +2470,39 @@ function closeCarousel() {
   const item = document.getElementById('carouselItem');
   const vid = item.querySelector('video');
   if (vid) { vid.pause(); vid.src = ''; }
-  
   document.getElementById('mediaCarousel').classList.remove('active');
   document.body.style.overflow = '';
 }
 
-/* ═══ SWIPE DESTEĞİ (TELEFON) ═══ */
+/* ════ SWIPE ════ */
 let touchStartX = 0;
 const carouselEl = document.getElementById('mediaCarousel');
-
 carouselEl.addEventListener('touchstart', e => {
   touchStartX = e.changedTouches[0].screenX;
 }, { passive: true });
-
 carouselEl.addEventListener('touchend', e => {
-  const touchEndX = e.changedTouches[0].screenX;
-  const diff = touchStartX - touchEndX;
-  if (Math.abs(diff) > 50) { // 50px eşik
-    changeMedia(diff > 0 ? 1 : -1);
-  }
+  const diff = touchStartX - e.changedTouches[0].screenX;
+  if (Math.abs(diff) > 50) changeMedia(diff > 0 ? 1 : -1);
 }, { passive: true });
-    
-  </script>
-</body>
-</html>
+
+/* ════ KLAVYE ════ */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeLightbox();
+    closeLetter();
+    closeFolder();
+    closeCarousel();
+  }
+  if (document.getElementById('lightbox').classList.contains('active')) {
+    if (e.key === 'ArrowLeft') changePhoto(-1);
+    if (e.key === 'ArrowRight') changePhoto(1);
+  }
+  if (document.getElementById('mediaCarousel').classList.contains('active')) {
+    if (e.key === 'ArrowLeft') changeMedia(-1);
+    if (e.key === 'ArrowRight') changeMedia(1);
+  }
+  if (e.key === ' ' && e.target.tagName !== 'INPUT') {
+    e.preventDefault();
+    togglePlay();
+  }
+});
