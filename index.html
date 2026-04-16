@@ -655,59 +655,6 @@
     }
 
     /* ═══════════════════════════════════════════════
-       💬 6. ÖZEL SÖZLER
-    ═══════════════════════════════════════════════ */
-    .quotes-section {
-      padding: 6rem 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .quote-container {
-      margin-top: 4rem;
-    }
-
-    .quote-card {
-      background: linear-gradient(135deg, rgba(200,98,122,0.1) 0%, rgba(201,169,110,0.05) 100%);
-      border-left: 3px solid var(--rose);
-      border-radius: 12px;
-      padding: 2.5rem 2rem;
-      margin-bottom: 2.5rem;
-      position: relative;
-      opacity: 0;
-      transform: translateX(-30px);
-      transition: all 0.6s ease;
-    }
-    .quote-card.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .quote-card:hover {
-      background: linear-gradient(135deg, rgba(200,98,122,0.15) 0%, rgba(201,169,110,0.08) 100%);
-      transform: translateX(10px);
-    }
-
-    .quote-card::before {
-      content: '"';
-      position: absolute;
-      top: -10px;
-      left: 20px;
-      font-size: 5rem;
-      color: rgba(232,160,176,0.2);
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    .quote-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      line-height: 1.7;
-      color: var(--cream);
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ═══════════════════════════════════════════════
        📸 7. POLAROİD FOTOĞRAFLAR + LIGHTBOX
     ═══════════════════════════════════════════════ */
     .polaroid-section {
@@ -1764,40 +1711,6 @@
     </video>
   </div>
 </div>
-
-  <!-- 💬 ÖZEL SÖZLER -->
-  <section class="quotes-section">
-    <p class="mem-label">Sana söylediklerim</p>
-    <h2 class="mem-heading">Kalbimdeki <em>kelimeler</em></h2>
-
-    <div class="quote-container">
-      
-      <div class="quote-card">
-        <p class="quote-text">Sen benim için sadece bir insan değilsin, evimsin. Nerede olursak olalım, yanında olduğumda daha huzur verici başka bir yer yok.</p>
-      </div>
-
-      <div class="quote-card">
-        <p class="quote-text">Seni sevmek, hayatımda aldığım en doğru karar. Her gün daha çok seviyorum seni.</p>
-      </div>
-
-      <div class="quote-card">
-        <p class="quote-text">Gözlerinin içine baktığımda tekrar tekrar aşık oluyorum. Hele ki o göz altlarına kurban olurum.</p>
-      </div>
-
-      <div class="quote-card">
-        <p class="quote-text">Sen benim eksik parçammışsın. Seninle tamamlanmış hissediyorum kendimi.</p>
-      </div>
-
-      <div class="quote-card">
-        <p class="quote-text">Sana baktıkça geleceği görüyorum. O kadar eminim ki hayatımın geri kalanını seninle geçireceğime. İnşallah bir ömür beraber oluruz karımmmmmmmm.</p>
-      </div>
-      
-      <div class="quote-card">
-        <p class="quote-text">SEN BENİM HER ŞEYİM BİRİCİK SEVGİLİM. GELECEK PLANLARIM, KARIM, ÇOCUKLARIMIN ANNİŞİ.</p>
-      </div>
-
-    </div>
-  </section>
 
   <!-- 📸 POLAROİD FOTOĞRAFLAR -->
   <section class="polaroid-section">
