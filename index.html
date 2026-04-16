@@ -354,11 +354,18 @@
 .music-player.paused .pl-wave span { animation-play-state: paused; }
 
 @media (max-width: 768px) {
-  .music-player { bottom: 1rem; right: 1rem; width: 260px; }
+  .music-player {
+    bottom: 1rem;
+    right: 1rem;
+    width: 60px;
+    height: 60px;
+  }
+  .music-player.open {
+    width: calc(100vw - 2rem);
+    height: auto;
+  }
 }
-@media (max-width: 400px) {
-  .music-player { width: calc(100vw - 2rem); right: 1rem; left: 1rem; }
-}
+    
     /* ═══════════════════════════════════════════════
        💕 3. HERO BÖLÜMÜ
     ═══════════════════════════════════════════════ */
